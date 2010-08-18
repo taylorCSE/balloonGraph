@@ -15,6 +15,10 @@ MainFrame::MainFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
     *   Constructor for the Main frame.
     */
     CreateGUIControls();
+    
+    DB_query("select * from gps where DeviceId=5001 order by Timestamp desc limit 1;");
+    
+    wxMessageBox(DB_resultAsText());
 }
 
 MainFrame::~MainFrame() {

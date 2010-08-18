@@ -29,7 +29,8 @@
 #include <wx/progdlg.h>
 #include <wx/dcbuffer.h>
                            
-#include "mathplot.h"                         
+#include "mathplot.h"
+#include "database.h"
 
 #undef MainFrame_STYLE
 #define MainFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
