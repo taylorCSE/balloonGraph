@@ -4,3 +4,4 @@ Software Acknowledgements:
 
 - wxWidgets
 - wxMathPlot
+- STL
