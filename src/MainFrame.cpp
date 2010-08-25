@@ -18,14 +18,6 @@ MainFrame::MainFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
     deviceId = "Please select a device from the menu.";
     
     CreateGUIControls();
-    
-    //wxMessageBox(devices[0]);
-
-    /*
-    DB_query("select * from gps where DeviceId=5001 order by Timestamp desc limit 1;");
-    
-    wxMessageBox(DB_resultAsText());
-    */
 }
 
 MainFrame::~MainFrame() {
