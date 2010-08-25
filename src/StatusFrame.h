@@ -46,6 +46,7 @@ class StatusFrame : public wxFrame
         // Event handlers
         DECLARE_EVENT_TABLE();
         void SelectDevice(wxCommandEvent& event);
+        void NewStatusWindow(wxCommandEvent& event);
         void OnClose(wxCloseEvent& event);
 
         // Functions
@@ -68,7 +69,7 @@ class StatusFrame : public wxFrame
         enum {
             ////GUI Enum Control ID Start
             ID_TEXT = 1000,
-            ID_STATUSBAR
+            ID_NEWWINDOW
         };
 };
 

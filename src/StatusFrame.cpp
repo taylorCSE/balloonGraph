@@ -6,6 +6,7 @@
 #include "StatusFrame.h"
 
 BEGIN_EVENT_TABLE(StatusFrame,wxFrame)
+    EVT_MENU(ID_NEWWINDOW, StatusFrame::NewStatusWindow)
     EVT_MENU(-1, StatusFrame::SelectDevice)
     EVT_CLOSE(StatusFrame::OnClose)
 END_EVENT_TABLE()
@@ -32,6 +33,7 @@ void StatusFrame::Update() {
      */
     wxMenuBar *menubar = new wxMenuBar;
     wxMenu *devices = new wxMenu;
+    wxMenu *view = new wxMenu;
     
     deviceIds = DB_getAllDevices();
     
@@ -40,6 +42,11 @@ void StatusFrame::Update() {
     for(unsigned int i = 0; i < deviceIds.size(); i++) {
         devices->Append(10000+i, deviceIds[i]);
     }
+
+    menubar->Append(view, wxT("&View"));
+    
+    view->Append(ID_NEWWINDOW, "New Window");
+
     SetMenuBar(menubar);
     
     map<string, string> gps_info; 
@@ -167,3 +174,14 @@ void StatusFrame::SelectDevice( wxCommandEvent& event ) {
     
     Update();
 }
+
+
+void StatusFrame::NewStatusWindow( wxCommandEvent& event ) {
+    /** 
+     * Launches a new status window
+     */
+     
+    StatusFrame* frame = new StatusFrame(NULL);
+    frame->Show();     
+}
+
