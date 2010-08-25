@@ -56,15 +56,15 @@ void MainFrame::Update() {
     wxString info = wxString::Format(wxT(""
         "Device: %s\n"
         "Location\n"
-        "Latitude: \n"
-        "Longitude: \n"
+        "Latitude: %s\n"
+        "Longitude: %s\n"
         "Altitude (M): %s\n"
         "Altitude (Ft): \n"
-        "Speed (Knots): \n"
+        "Speed (Knots): %s\n"
         "Speed (M/S): \n"
-        "Bearing: \n"
+        "Bearing: %s\n"
         "Climb: \n"
-        "GPS Status: \n"
+        "GPS Status: %s\n"
         "\n"
         "Status \n"
         "Battery 1 (V): \n"
@@ -78,7 +78,13 @@ void MainFrame::Update() {
         "\n"
         ),
         deviceId.c_str(),
-        gps_info["Altitude"].c_str());
+        gps_info["Latitude"].c_str(),
+        gps_info["Longitude"].c_str(),
+        gps_info["Altitude"].c_str(),
+        gps_info["Spd"].c_str(),
+        gps_info["Hdg"].c_str(),
+        gps_info["Status"].c_str()
+        );
     
     deviceInfo->SetLabel(info);
 }

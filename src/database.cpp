@@ -112,7 +112,7 @@ vector<string> DB_getAllDevices() {
 
 map<string, string> DB_getMostRecentGPS(int device_id) {
     //DB_query("select * from gps where Lat != 0 order by Timestamp desc limit 1;");
-    DB_query("select Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg from gps where DeviceID=%d and Lat != 0 order by Timestamp desc limit 1;",device_id);
+    DB_query("select Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg, Status from gps where DeviceID=%d and Lat != 0 order by Timestamp desc limit 1;",device_id);
 
     MYSQL_ROW row;
     int num_fields;
@@ -123,6 +123,16 @@ map<string, string> DB_getMostRecentGPS(int device_id) {
     
     if (row = mysql_fetch_row(DB_result)) {
         result["Altitude"] = string(row[0]);
+        result["Rate"] = string(row[1]);
+        result["Lat"] = string(row[2]);
+        result["LatRef"] = string(row[3]);
+        result["Latitude"] = string(row[2]) + string(row[3]);
+        result["Lon"] = string(row[4]);
+        result["LonRef"] = string(row[5]);
+        result["Longitude"] = string(row[4]) + string(row[5]);
+        result["Spd"] = string(row[6]);
+        result["Hdg"] = string(row[7]);
+        result["Status"] = string(row[8]);
     }
     
     mysql_free_result(DB_result);
