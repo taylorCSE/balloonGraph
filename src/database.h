@@ -5,8 +5,13 @@
 
 #define DBUG_OFF
 
+#include <string>
+#include <vector>
+
 #include <my_global.h>
 #include <mysql.h>
+
+using namespace std;
 
 #define DB_USER "root"
 #define DB_PASS "root"
@@ -16,5 +21,6 @@
 void DB_connect();
 void DB_query(char * item ...);
 char* DB_resultAsText();
+vector<string> DB_getAllDevices();
 
 #endif

@@ -87,6 +87,29 @@ char* DB_resultAsText() {
     return DB_buf;
 }
 
+vector<string> DB_getAllDevices() {
+    DB_query("select distinct DeviceID from aip order by DeviceID ASC;");
+
+    int i = 0;
+    MYSQL_ROW row;
+    int num_fields;
+    
+    vector<string> result;
+
+    num_fields = mysql_num_fields(DB_result);
+    
+    while ((row = mysql_fetch_row(DB_result))) {
+          DB_buf[0] = 0x00;
+          sprintf(DB_buf,"%s%s ",DB_buf, row[i] ? row[i] : "NULL");
+          string tmp = string(DB_buf);
+          result.push_back(tmp);
+    }
+    
+    mysql_free_result(DB_result);    
+
+    return result;
+}
+
 char* DB_getPositon(int device_id) {
     // select * from gps where DeviceId=5001 order by Timestamp desc limit 1;
     return NULL;
