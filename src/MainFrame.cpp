@@ -50,12 +50,8 @@ void MainFrame::Update() {
     }
     SetMenuBar(menubar);
     
-    map<const char*, string> gps_info; 
+    map<string, string> gps_info; 
     gps_info = DB_getMostRecentGPS(atoi(deviceId.c_str()));
-    
-    fprintf(DB_log,"\nAltitude:%s\n", gps_info["Altitude"].c_str());
-    fprintf(DB_log,"\n1:%s\n", pair<const char*, string>(*gps_info.begin()).first);
-    fprintf(DB_log,"\n2:%s\n", pair<const char*, string>(*gps_info.begin()).second.c_str());
     
     wxString info = wxString::Format(wxT(""
         "Device: %s\n"

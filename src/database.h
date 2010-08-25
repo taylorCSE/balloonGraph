@@ -25,6 +25,6 @@ void DB_connect();
 void DB_query(char * item ...);
 char* DB_resultAsText();
 vector<string> DB_getAllDevices();
-map<const char*, string> DB_getMostRecentGPS(int device_id);
+map<string, string> DB_getMostRecentGPS(int device_id);
 
 #endif
