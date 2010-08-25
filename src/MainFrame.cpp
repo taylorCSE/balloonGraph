@@ -6,6 +6,7 @@
 #include "MainFrame.h"
 
 BEGIN_EVENT_TABLE(MainFrame,wxFrame)
+    EVT_MENU(-1, MainFrame::SelectDevice)
     EVT_CLOSE(MainFrame::OnClose)
 END_EVENT_TABLE()
 
@@ -35,10 +36,21 @@ void MainFrame::Update() {
     /**
      * Updates the GUI with new database information
      */
+    wxMenuBar *menubar = new wxMenuBar;
+    wxMenu *devices = new wxMenu;
+    
+    deviceIds = DB_getAllDevices();
+    
+    menubar->Append(devices, wxT("&Devices"));
+
+    for(unsigned int i = 0; i < deviceIds.size(); i++) {
+        devices->Append(10000+i, deviceIds[i]);
+    }
+    SetMenuBar(menubar);
 }
 
 void MainFrame::CreateGUIControls() {
-    /**
+   /**
     *   Creates all of the GUI controls on the main form.
     */
     
@@ -46,21 +58,11 @@ void MainFrame::CreateGUIControls() {
     SetTitle(wxT("HawkEye"));
     SetIcon(wxNullIcon);
     
-    wxMenuBar *menubar = new wxMenuBar;
-    wxMenu *devices = new wxMenu;
-    
-    vector<string> device_ids = DB_getAllDevices();
-    
-    menubar->Append(devices, wxT("&Devices"));
-
-    for(unsigned int i = 0; i < device_ids.size(); i++) {
-        devices->Append(wxID_ANY, device_ids[i]);
-    }
-    SetMenuBar(menubar);
-    
     wxPanel *panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     panel->SetSizer(sizer);
+    
+    Update();
     
     //wxComboBox *device_dropdown = new wxComboBox(panel, wxID_ANY, wxT("Device"), wxDefaultPosition, wxDefaultSize);
     //sizer->Add(device_dropdown, 1, wxEXPAND | wxALL);
@@ -111,4 +113,24 @@ void MainFrame::OnClose(wxCloseEvent& event) {
     *   Exit the ChaosConnect Program
     */
     exit(0);
+}
+
+void MainFrame::SelectDevice( wxCommandEvent& event ) {
+    /** 
+     * Selects a device from the menu
+     *
+     * This is a catchall menu event handler becasue I couldn't think 
+     * of a better way to do this because the menu is dynamic
+     */
+     
+    int id = event.GetId();
+    
+    if(id > 10000) {
+        /// We're selecting a device
+        deviceId = deviceIds[id - 10000];
+        
+        wxMessageBox(deviceId);
+    }
+    
+    Update();
 }

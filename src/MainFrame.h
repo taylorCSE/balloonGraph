@@ -44,6 +44,7 @@ class MainFrame : public wxFrame
     private:
         // Event handlers
         DECLARE_EVENT_TABLE();
+        void SelectDevice(wxCommandEvent& event);
         void OnClose(wxCloseEvent& event);
 
         // Functions
@@ -57,6 +58,9 @@ class MainFrame : public wxFrame
         
         mpWindow* m_plot;
         mpInfoLayer* nfo;
+        
+        vector<string> deviceIds;
+        string deviceId;
         
     private:
         // Enumeration for GUI controls
