@@ -28,6 +28,7 @@
 #include <wx/sizer.h>
 #include <wx/progdlg.h>
 #include <wx/dcbuffer.h>
+#include <wx/html/htmlwin.h>
                            
 #include "mathplot.h"
 #include "database.h"
@@ -54,7 +55,7 @@ class MainFrame : public wxFrame
         // wxWidgets gui objects
         wxPanel *mainPanel; 
         wxBoxSizer *mainSizer;
-        wxStaticText *deviceInfo;
+        wxHtmlWindow *deviceInfo;
         
         mpWindow* m_plot;
         mpInfoLayer* nfo;

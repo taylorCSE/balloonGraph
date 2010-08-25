@@ -54,28 +54,28 @@ void MainFrame::Update() {
     gps_info = DB_getMostRecentGPS(atoi(deviceId.c_str()));
     
     wxString info = wxString::Format(wxT(""
-        "Device: %s\n"
-        "Location\n"
-        "Latitude: %s\n"
-        "Longitude: %s\n"
-        "Altitude (M): %s\n"
-        "Altitude (Ft): \n"
-        "Speed (Knots): %s\n"
-        "Speed (M/S): \n"
-        "Bearing: %s\n"
-        "Climb: \n"
+        "<b>Device: %s</b>\n"
+        "<hr>\n"
+        "<b>Location</b>\n<br />"
+        "Latitude: %s\n<br />"
+        "Longitude: %s\n<br />"
+        "Altitude (M): %s\n<br />"
+        "Altitude (Ft): \n<br />"
+        "Speed (Knots): %s\n<br />"
+        "Speed (M/S): \n<br />"
+        "Bearing: %s\n<br />"
+        "Climb: \n<br />"
         "GPS Status: %s\n"
-        "\n"
-        "Status \n"
-        "Battery 1 (V): \n"
-        "Battery 2 (V): \n"
-        "Buss (V): \n"
-        "Signal (%%): \n"
-        "Temperature Int. (c): \n"
-        "Temperature Ext. (c): \n"
-        "Pressure (HPA): \n"
+        "\n<hr>"
+        "<b>Status</b>\n<br />"
+        "Battery 1 (V): \n<br />"
+        "Battery 2 (V): \n<br />"
+        "Buss (V): \n<br />"
+        "Signal (%%): \n<br />"
+        "Temperature Int. (c): \n<br />"
+        "Temperature Ext. (c): \n<br />"
+        "Pressure (HPA): \n<br />"
         "RH (%%): \n"
-        "\n"
         ),
         deviceId.c_str(),
         gps_info["Latitude"].c_str(),
@@ -86,7 +86,7 @@ void MainFrame::Update() {
         gps_info["Status"].c_str()
         );
     
-    deviceInfo->SetLabel(info);
+    deviceInfo->SetPage(info);
 }
 
 void MainFrame::CreateGUIControls() {
@@ -102,7 +102,7 @@ void MainFrame::CreateGUIControls() {
     mainSizer = new wxBoxSizer(wxVERTICAL);
     mainPanel->SetSizer(mainSizer);
     
-    deviceInfo = new wxStaticText(mainPanel, wxID_ANY, deviceId);
+    deviceInfo = new wxHtmlWindow(mainPanel);
     mainSizer->Add(deviceInfo, 1, wxEXPAND | wxALL);
     
     Update();
