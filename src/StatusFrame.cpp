@@ -147,7 +147,7 @@ void StatusFrame::OnClose(wxCloseEvent& event) {
     *   Event handler for the form closing event
     *   Exit the ChaosConnect Program
     */
-    exit(0);
+    Close();
 }
 
 void StatusFrame::SelectDevice( wxCommandEvent& event ) {
