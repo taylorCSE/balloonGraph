@@ -1,16 +1,16 @@
 /**
- * \file MainFrame.cpp
+ * \file StatusFrame.cpp
  * \brief Main Windows Class
  */
  
-#include "MainFrame.h"
+#include "StatusFrame.h"
 
-BEGIN_EVENT_TABLE(MainFrame,wxFrame)
-    EVT_MENU(-1, MainFrame::SelectDevice)
-    EVT_CLOSE(MainFrame::OnClose)
+BEGIN_EVENT_TABLE(StatusFrame,wxFrame)
+    EVT_MENU(-1, StatusFrame::SelectDevice)
+    EVT_CLOSE(StatusFrame::OnClose)
 END_EVENT_TABLE()
 
-MainFrame::MainFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
+StatusFrame::StatusFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
 : wxFrame(parent, id, title, position, size, style) {
     /**
     *   Constructor for the Main frame.
@@ -20,13 +20,13 @@ MainFrame::MainFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
     CreateGUIControls();
 }
 
-MainFrame::~MainFrame() {
+StatusFrame::~StatusFrame() {
     /** 
     *   Destructor for the Main form.
     */
 }
 
-void MainFrame::Update() {
+void StatusFrame::Update() {
     /**
      * Updates the GUI with new database information
      */
@@ -81,7 +81,7 @@ void MainFrame::Update() {
     deviceInfo->SetPage(info);
 }
 
-void MainFrame::CreateGUIControls() {
+void StatusFrame::CreateGUIControls() {
    /**
     *   Creates all of the GUI controls on the main form.
     */
@@ -142,7 +142,7 @@ void MainFrame::CreateGUIControls() {
     */
 }
 
-void MainFrame::OnClose(wxCloseEvent& event) {
+void StatusFrame::OnClose(wxCloseEvent& event) {
     /**
     *   Event handler for the form closing event
     *   Exit the ChaosConnect Program
@@ -150,7 +150,7 @@ void MainFrame::OnClose(wxCloseEvent& event) {
     exit(0);
 }
 
-void MainFrame::SelectDevice( wxCommandEvent& event ) {
+void StatusFrame::SelectDevice( wxCommandEvent& event ) {
     /** 
      * Selects a device from the menu
      *

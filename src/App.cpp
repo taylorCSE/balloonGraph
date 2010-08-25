@@ -4,7 +4,7 @@
  */
 
 #include "App.h"
-#include "MainFrame.h"
+#include "StatusFrame.h"
 
 IMPLEMENT_APP(App)
 
@@ -13,7 +13,7 @@ bool App::OnInit()
     /**
     *   Creates the main frame and shows it
     */
-    MainFrame* frame = new MainFrame(NULL);
+    StatusFrame* frame = new StatusFrame(NULL);
     SetTopWindow(frame);
     frame->Show();
     return true;

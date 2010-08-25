@@ -1,10 +1,10 @@
 /**
- * \file MainFrame.h
+ * \file StatusFrame.h
  * \brief Main window header file
  */
 
-#ifndef __MAINFRAME_h__
-#define __MAINFRAME_h__
+#ifndef __STATUSFRAME_h__
+#define __STATUSFRAME_h__
 
 #ifdef __BORLANDC__
     #pragma hdrstop
@@ -33,14 +33,14 @@
 #include "mathplot.h"
 #include "database.h"
 
-#undef MainFrame_STYLE
-#define MainFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
+#undef StatusFrame_STYLE
+#define StatusFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
 
-class MainFrame : public wxFrame
+class StatusFrame : public wxFrame
 {
     public:
-        MainFrame(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("AppName"), const wxPoint& pos = wxDefaultPosition, const wxSize &size = wxSize(360,600), long style = MainFrame_STYLE);
-        virtual ~MainFrame();
+        StatusFrame(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("AppName"), const wxPoint& pos = wxDefaultPosition, const wxSize &size = wxSize(360,600), long style = StatusFrame_STYLE);
+        virtual ~StatusFrame();
 
     private:
         // Event handlers

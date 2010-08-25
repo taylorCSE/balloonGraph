@@ -8,7 +8,7 @@ WINDRES   = windres.exe
 BIN	   = App.exe
 
 OBJ	   = $(BUILD)/App.o \
-			$(BUILD)/MainFrame.o \
+			$(BUILD)/StatusFrame.o \
 			$(BUILD)/MathPlot.o \
 			$(BUILD)/database.o \
 			
@@ -59,14 +59,14 @@ all-before:
 $(BIN): $(OBJ)
 	$(LINK) $(OBJ) -o "$(BIN)" $(LIBS) $(LDFLAGS)
 
-$(BUILD)/App.o: $(SRC)/App.cpp $(SRC)/App.h $(SRC)/MainFrame.h  
+$(BUILD)/App.o: $(SRC)/App.cpp $(SRC)/App.h $(SRC)/StatusFrame.h  
 	$(CPP) -c $(SRC)/App.cpp -o $(BUILD)/App.o $(CXXFLAGS)
 
 $(BUILD)/Resource.o: $(SRC)/Resource.rc icons/main.ico
 	$(WINDRES) $(SRC)/Resource.rc $(BUILD)/Resource.o
 
-$(BUILD)/MainFrame.o: $(SRC)/MainFrame.cpp $(SRC)/MainFrame.h  
-	$(CPP) -c $(SRC)/MainFrame.cpp -o $(BUILD)/MainFrame.o $(CXXFLAGS)
+$(BUILD)/StatusFrame.o: $(SRC)/StatusFrame.cpp $(SRC)/StatusFrame.h  
+	$(CPP) -c $(SRC)/StatusFrame.cpp -o $(BUILD)/StatusFrame.o $(CXXFLAGS)
 	
 $(BUILD)/MathPlot.o: $(SRC)/MathPlot.cpp $(SRC)/MathPlot.h  
 	$(CPP) -c $(SRC)/MathPlot.cpp -o $(BUILD)/MathPlot.o $(CXXFLAGS)
