@@ -52,9 +52,9 @@ class MainFrame : public wxFrame
         void CreateGUIControls();
         
         // wxWidgets gui objects
-        wxStatusBar* statusBar;
-        wxMenuBar* menuBar;
-        
+        wxPanel *mainPanel; 
+        wxBoxSizer *mainSizer;
+        wxStaticText *deviceInfo;
         
         mpWindow* m_plot;
         mpInfoLayer* nfo;

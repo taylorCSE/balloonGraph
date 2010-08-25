@@ -110,7 +110,28 @@ vector<string> DB_getAllDevices() {
     return result;
 }
 
-char* DB_getPositon(int device_id) {
-    // select * from gps where DeviceId=5001 order by Timestamp desc limit 1;
-    return NULL;
+map<const char*, string> DB_getMostRecentGPS(int device_id) {
+    //DB_query("select * from gps where Lat != 0 order by Timestamp desc limit 1;");
+    DB_query("select Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg from gps where DeviceID=%d and Lat != 0 order by Timestamp desc limit 1;",device_id);
+
+    MYSQL_ROW row;
+    int num_fields;
+    
+    map<const char*, string> result;
+
+    num_fields = mysql_num_fields(DB_result);
+    
+    if (row = mysql_fetch_row(DB_result)) {
+        result["Altitude"] = string(row[0]);
+        
+        fprintf(DB_log,"\nAltitude:%s\n", result["Altitude"].c_str());
+    }
+    
+    row = mysql_fetch_row(DB_result);
+    
+    mysql_free_result(DB_result);
+
+    fprintf(DB_log,"\nAltitude:%s\n", result["Altitude"].c_str());
+    
+    return result;
 }

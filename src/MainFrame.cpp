@@ -15,6 +15,8 @@ MainFrame::MainFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
     /**
     *   Constructor for the Main frame.
     */
+    deviceId = "Please select a device from the menu.";
+    
     CreateGUIControls();
     
     //wxMessageBox(devices[0]);
@@ -47,6 +49,42 @@ void MainFrame::Update() {
         devices->Append(10000+i, deviceIds[i]);
     }
     SetMenuBar(menubar);
+    
+    map<const char*, string> gps_info; 
+    gps_info = DB_getMostRecentGPS(atoi(deviceId.c_str()));
+    
+    fprintf(DB_log,"\nAltitude:%s\n", gps_info["Altitude"].c_str());
+    fprintf(DB_log,"\n1:%s\n", pair<const char*, string>(*gps_info.begin()).first);
+    fprintf(DB_log,"\n2:%s\n", pair<const char*, string>(*gps_info.begin()).second.c_str());
+    
+    wxString info = wxString::Format(wxT(""
+        "Device: %s\n"
+        "Location\n"
+        "Latitude: \n"
+        "Longitude: \n"
+        "Altitude (M): %s\n"
+        "Altitude (Ft): \n"
+        "Speed (Knots): \n"
+        "Speed (M/S): \n"
+        "Bearing: \n"
+        "Climb: \n"
+        "GPS Status: \n"
+        "\n"
+        "Status \n"
+        "Battery 1 (V): \n"
+        "Battery 2 (V): \n"
+        "Buss (V): \n"
+        "Signal (%%): \n"
+        "Temperature Int. (c): \n"
+        "Temperature Ext. (c): \n"
+        "Pressure (HPA): \n"
+        "RH (%%): \n"
+        "\n"
+        ),
+        deviceId.c_str(),
+        gps_info["Altitude"].c_str());
+    
+    deviceInfo->SetLabel(info);
 }
 
 void MainFrame::CreateGUIControls() {
@@ -58,9 +96,12 @@ void MainFrame::CreateGUIControls() {
     SetTitle(wxT("HawkEye"));
     SetIcon(wxNullIcon);
     
-    wxPanel *panel = new wxPanel(this, wxID_ANY);
-    wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-    panel->SetSizer(sizer);
+    mainPanel = new wxPanel(this, wxID_ANY);
+    mainSizer = new wxBoxSizer(wxVERTICAL);
+    mainPanel->SetSizer(mainSizer);
+    
+    deviceInfo = new wxStaticText(mainPanel, wxID_ANY, deviceId);
+    mainSizer->Add(deviceInfo, 1, wxEXPAND | wxALL);
     
     Update();
     
@@ -128,8 +169,6 @@ void MainFrame::SelectDevice( wxCommandEvent& event ) {
     if(id > 10000) {
         /// We're selecting a device
         deviceId = deviceIds[id - 10000];
-        
-        wxMessageBox(deviceId);
     }
     
     Update();
