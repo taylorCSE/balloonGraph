@@ -16,19 +16,25 @@ MainFrame::MainFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
     */
     CreateGUIControls();
     
-    vector<string> devices = DB_getAllDevices();
-    
-    wxMessageBox(devices[0]);
+    //wxMessageBox(devices[0]);
 
+    /*
     DB_query("select * from gps where DeviceId=5001 order by Timestamp desc limit 1;");
     
     wxMessageBox(DB_resultAsText());
+    */
 }
 
 MainFrame::~MainFrame() {
     /** 
     *   Destructor for the Main form.
     */
+}
+
+void MainFrame::Update() {
+    /**
+     * Updates the GUI with new database information
+     */
 }
 
 void MainFrame::CreateGUIControls() {
@@ -40,6 +46,26 @@ void MainFrame::CreateGUIControls() {
     SetTitle(wxT("HawkEye"));
     SetIcon(wxNullIcon);
     
+    wxMenuBar *menubar = new wxMenuBar;
+    wxMenu *devices = new wxMenu;
+    
+    vector<string> device_ids = DB_getAllDevices();
+    
+    menubar->Append(devices, wxT("&Devices"));
+
+    for(unsigned int i = 0; i < device_ids.size(); i++) {
+        devices->Append(wxID_ANY, device_ids[i]);
+    }
+    SetMenuBar(menubar);
+    
+    wxPanel *panel = new wxPanel(this, wxID_ANY);
+    wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+    panel->SetSizer(sizer);
+    
+    //wxComboBox *device_dropdown = new wxComboBox(panel, wxID_ANY, wxT("Device"), wxDefaultPosition, wxDefaultSize);
+    //sizer->Add(device_dropdown, 1, wxEXPAND | wxALL);
+
+    /*
 	// Create a mpFXYVector layer
 	mpFXYVector* vectorLayer = new mpFXYVector(_(""));
 	// Create two vectors for x,y and fill them with data
@@ -76,6 +102,7 @@ void MainFrame::CreateGUIControls() {
     leg->SetVisible(true);
     
     m_plot->Fit();
+    */
 }
 
 void MainFrame::OnClose(wxCloseEvent& event) {

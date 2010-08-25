@@ -47,6 +47,7 @@ class MainFrame : public wxFrame
         void OnClose(wxCloseEvent& event);
 
         // Functions
+        void Update();
         void CreateGUIControls();
         
         // wxWidgets gui objects
