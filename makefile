@@ -42,6 +42,7 @@ CXXFLAGS  = -ffunction-sections \
 			-D__WXMSW__ \
 			-D__GNUWIN32__ \
 			-D__WIN95__ \
+			-Wno-deprecated \
 			-s
 
 LDFLAGS   = -s -Wl,--gc-sections
