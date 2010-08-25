@@ -87,7 +87,7 @@ void StatusFrame::CreateGUIControls() {
     */
     
     // Set window properties and title bar
-    SetTitle(wxT("HawkEye"));
+    SetTitle(wxT("Device Status"));
     SetIcon(wxNullIcon);
     
     mainPanel = new wxPanel(this, wxID_ANY);
