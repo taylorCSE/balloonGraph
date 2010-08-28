@@ -45,43 +45,6 @@ void GraphFrame::Update() {
 
     SetMenuBar(menubar);
     
-    map<string, string> gps_info; 
-    gps_info = DB_getMostRecentGPS(atoi(deviceId.c_str()));
-    
-    wxString info = wxString::Format(wxT(""
-        "<b>Device: %s</b>\n"
-        "<hr>\n"
-        "<b>Location</b>\n<br />"
-        "Latitude: %s\n<br />"
-        "Longitude: %s\n<br />"
-        "Altitude (M): %s\n<br />"
-        "Altitude (Ft): \n<br />"
-        "Speed (Knots): %s\n<br />"
-        "Speed (M/S): \n<br />"
-        "Bearing: %s\n<br />"
-        "Climb: \n<br />"
-        "GPS Status: %s\n"
-        "\n<hr>"
-        "<b>Status</b>\n<br />"
-        "Battery 1 (V): \n<br />"
-        "Battery 2 (V): \n<br />"
-        "Buss (V): \n<br />"
-        "Signal (%%): \n<br />"
-        "Temperature Int. (c): \n<br />"
-        "Temperature Ext. (c): \n<br />"
-        "Pressure (HPA): \n<br />"
-        "RH (%%): \n"
-        ),
-        deviceId.c_str(),
-        gps_info["Latitude"].c_str(),
-        gps_info["Longitude"].c_str(),
-        gps_info["Altitude"].c_str(),
-        gps_info["Spd"].c_str(),
-        gps_info["Hdg"].c_str(),
-        gps_info["Status"].c_str()
-        );
-    
-    deviceInfo->SetPage(info);
 }
 
 void GraphFrame::CreateGUIControls() {
@@ -97,15 +60,6 @@ void GraphFrame::CreateGUIControls() {
     mainSizer = new wxBoxSizer(wxVERTICAL);
     mainPanel->SetSizer(mainSizer);
     
-    deviceInfo = new wxHtmlWindow(mainPanel);
-    mainSizer->Add(deviceInfo, 1, wxEXPAND | wxALL);
-    
-    Update();
-    
-    //wxComboBox *device_dropdown = new wxComboBox(panel, wxID_ANY, wxT("Device"), wxDefaultPosition, wxDefaultSize);
-    //sizer->Add(device_dropdown, 1, wxEXPAND | wxALL);
-
-    /*
 	// Create a mpFXYVector layer
 	mpFXYVector* vectorLayer = new mpFXYVector(_(""));
 	// Create two vectors for x,y and fill them with data
@@ -123,7 +77,10 @@ void GraphFrame::CreateGUIControls() {
 	vectorLayer->SetDrawOutsideMargins(false);
 
 	wxFont graphFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    m_plot = new mpWindow( this, -1, wxPoint(0,0), wxSize(100,100), wxSUNKEN_BORDER );
+	
+    m_plot = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(100,100), wxSUNKEN_BORDER );
+    mainSizer->Add(m_plot, 1, wxEXPAND | wxALL);
+    
     mpScaleX* xaxis = new mpScaleX(wxT("Temperature"), mpALIGN_BOTTOM, true, mpX_NORMAL);
     mpScaleY* yaxis = new mpScaleY(wxT("Altitude"), mpALIGN_LEFT, true);
     xaxis->SetFont(graphFont);
@@ -142,7 +99,9 @@ void GraphFrame::CreateGUIControls() {
     leg->SetVisible(true);
     
     m_plot->Fit();
-    */
+
+    Update();
+    
 }
 
 void GraphFrame::OnClose(wxCloseEvent& event) {
