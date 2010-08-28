@@ -516,7 +516,10 @@ void mpFXY::Plot(wxDC & dc, mpWindow & w)
 		double x, y;
 		// Do this to reset the counters to evaluate bounding box for label positioning
 		Rewind(); GetNextXY(x, y);
-		maxDrawX = x; minDrawX = x; maxDrawY = y; minDrawY = y;
+		maxDrawX = (wxCoord)x; 
+		minDrawX = (wxCoord)x; 
+		maxDrawY = (wxCoord)y; 
+		minDrawY = (wxCoord)y;
 		//drawnPoints = 0;
 		Rewind();
 
