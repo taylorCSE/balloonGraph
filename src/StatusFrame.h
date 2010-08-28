@@ -60,9 +60,6 @@ class StatusFrame : public wxFrame
         wxBoxSizer *mainSizer;
         wxHtmlWindow *deviceInfo;
         
-        mpWindow* m_plot;
-        mpInfoLayer* nfo;
-        
         vector<string> deviceIds;
         string deviceId;
         

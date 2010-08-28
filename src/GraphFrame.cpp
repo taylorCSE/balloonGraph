@@ -33,7 +33,6 @@ void GraphFrame::Update() {
      */
     wxMenuBar *menubar = new wxMenuBar;
     wxMenu *devices = new wxMenu;
-    wxMenu *view = new wxMenu;
     
     deviceIds = DB_getAllDevices();
     
