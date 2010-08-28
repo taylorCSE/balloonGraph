@@ -30,6 +30,7 @@
 #include <wx/dcbuffer.h>
 #include <wx/html/htmlwin.h>
                            
+#include "GraphFrame.h"
 #include "mathplot.h"
 #include "database.h"
 
@@ -47,6 +48,7 @@ class StatusFrame : public wxFrame
         DECLARE_EVENT_TABLE();
         void SelectDevice(wxCommandEvent& event);
         void NewStatusWindow(wxCommandEvent& event);
+        void NewGraphWindow(wxCommandEvent& event);
         void OnClose(wxCloseEvent& event);
 
         // Functions
@@ -69,7 +71,8 @@ class StatusFrame : public wxFrame
         enum {
             ////GUI Enum Control ID Start
             ID_TEXT = 1000,
-            ID_NEWWINDOW
+            ID_NEWSTATUS,
+            ID_NEWGRAPH
         };
 };
 

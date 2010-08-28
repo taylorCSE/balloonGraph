@@ -43,10 +43,6 @@ void GraphFrame::Update() {
         devices->Append(10000+i, deviceIds[i]);
     }
 
-    menubar->Append(view, wxT("&View"));
-    
-    view->Append(ID_NEWWINDOW, "New Window");
-
     SetMenuBar(menubar);
     
     map<string, string> gps_info; 
@@ -154,7 +150,7 @@ void GraphFrame::OnClose(wxCloseEvent& event) {
     *   Event handler for the form closing event
     *   Exit the ChaosConnect Program
     */
-    Close();
+    Destroy();
 }
 
 void GraphFrame::SelectDevice( wxCommandEvent& event ) {

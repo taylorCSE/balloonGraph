@@ -6,7 +6,8 @@
 #include "StatusFrame.h"
 
 BEGIN_EVENT_TABLE(StatusFrame,wxFrame)
-    EVT_MENU(ID_NEWWINDOW, StatusFrame::NewStatusWindow)
+    EVT_MENU(ID_NEWSTATUS, StatusFrame::NewStatusWindow)
+    EVT_MENU(ID_NEWGRAPH, StatusFrame::NewGraphWindow)
     EVT_MENU(-1, StatusFrame::SelectDevice)
     EVT_CLOSE(StatusFrame::OnClose)
 END_EVENT_TABLE()
@@ -45,7 +46,8 @@ void StatusFrame::Update() {
 
     menubar->Append(view, wxT("&View"));
     
-    view->Append(ID_NEWWINDOW, "New Window");
+    view->Append(ID_NEWSTATUS, "New Status Window");
+    view->Append(ID_NEWGRAPH, "New Graph Window");
 
     SetMenuBar(menubar);
     
@@ -154,7 +156,7 @@ void StatusFrame::OnClose(wxCloseEvent& event) {
     *   Event handler for the form closing event
     *   Exit the ChaosConnect Program
     */
-    Close();
+    Destroy();
 }
 
 void StatusFrame::SelectDevice( wxCommandEvent& event ) {
@@ -185,3 +187,11 @@ void StatusFrame::NewStatusWindow( wxCommandEvent& event ) {
     frame->Show();     
 }
 
+void StatusFrame::NewGraphWindow( wxCommandEvent& event ) {
+    /** 
+     * Launches a new graph window
+     */
+     
+    GraphFrame* frame = new GraphFrame(NULL);
+    frame->Show();     
+}
