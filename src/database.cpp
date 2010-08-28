@@ -111,7 +111,6 @@ vector<string> DB_getAllDevices() {
 }
 
 map<string, string> DB_getMostRecentGPS(int device_id) {
-    //DB_query("select * from gps where Lat != 0 order by Timestamp desc limit 1;");
     DB_query("select Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg, Status from gps where DeviceID=%d and Lat != 0 order by Timestamp desc limit 1;",device_id);
 
     MYSQL_ROW row;
