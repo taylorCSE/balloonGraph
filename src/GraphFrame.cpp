@@ -45,14 +45,16 @@ void GraphFrame::Update() {
     SetMenuBar(menubar);
     
 	Plot speed = DB_getPlotData("gps","Spd",atoi(deviceId.c_str()));
+	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
 	
-	mpWindow * new_altitude_graph = createGraphFromData(wxT("Time"),speed.time,
-	                                    wxT("Speed"),speed.data);
-	delete altitudeGraph;
-	altitudeGraph = new_altitude_graph;
-	
-	mainSizer->Replace(altitudeGraph, new_altitude_graph);
-	
+	ReplaceGraph(&altitudeGraph, createGraphFromData(wxT("Time"),speed.time,
+	                                    wxT("Speed"),speed.data));
+}
+
+void GraphFrame::ReplaceGraph(mpWindow** old_graph, mpWindow* new_graph) {
+	mainSizer->Replace(*old_graph, new_graph);
+	delete *old_graph;
+	*old_graph = new_graph;
 }
 
 void GraphFrame::CreateGUIControls() {
