@@ -59,8 +59,6 @@ void GraphFrame::CreateGUIControls() {
     mainSizer = new wxBoxSizer(wxVERTICAL);
     mainPanel->SetSizer(mainSizer);
     
-	// Create a mpFXYVector layer
-	mpFXYVector* vectorLayer = new mpFXYVector(_(""));
 	// Create two vectors for x,y and fill them with data
 	std::vector<double> vectorx, vectory;
 	double xcoord;
@@ -69,17 +67,28 @@ void GraphFrame::CreateGUIControls() {
 		vectorx.push_back(25-0.001*pow(xcoord/1000, 2));
 		vectory.push_back(xcoord);
 	}
-	vectorLayer->SetData(vectorx, vectory);
+	
+	altitudeGraph = createGraph(wxT("Temperature"),vectorx,wxT("Altitude"),vectory);   
+    mainSizer->Add(altitudeGraph, 1, wxEXPAND | wxALL);
+    
+    Update();
+}
+
+mpWindow* GraphFrame::createGraph(wxString x_label, vector<double> x_data,
+                                  wxString y_label, vector<double> y_data) {
+    mpWindow* graph;
+	wxFont graphFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+
+    graph = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(100,100), wxSUNKEN_BORDER );
+
+	// Create a mpFXYVector layer
+	mpFXYVector* vectorLayer = new mpFXYVector(_(""));
+	vectorLayer->SetData(x_data, y_data);
 	vectorLayer->SetContinuity(true);
 	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
 	vectorLayer->SetPen(vectorpen);
 	vectorLayer->SetDrawOutsideMargins(false);
 
-	wxFont graphFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-	
-    m_plot = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(100,100), wxSUNKEN_BORDER );
-    mainSizer->Add(m_plot, 1, wxEXPAND | wxALL);
-    
     mpScaleX* xaxis = new mpScaleX(wxT("Temperature"), mpALIGN_BOTTOM, true, mpX_NORMAL);
     mpScaleY* yaxis = new mpScaleY(wxT("Altitude"), mpALIGN_LEFT, true);
     xaxis->SetFont(graphFont);
@@ -88,19 +97,17 @@ void GraphFrame::CreateGUIControls() {
     yaxis->SetDrawOutsideMargins(false);
 	xaxis->SetLabelFormat(wxT("%.2f"));
 	yaxis->SetLabelFormat(wxT("%.1f"));
-    m_plot->SetMargins(30, 30, 50, 100);
-    m_plot->AddLayer(     xaxis );
-    m_plot->AddLayer(     yaxis );
-	m_plot->AddLayer(     vectorLayer );
-    m_plot->AddLayer(     new mpText(wxT("Altitude vs Temperature"), 60, 5) );
+    graph->SetMargins(30, 30, 50, 100);
+    graph->AddLayer(     xaxis );
+    graph->AddLayer(     yaxis );
+	graph->AddLayer(     vectorLayer );
+    graph->AddLayer(     new mpText(wxT("Altitude vs Temperature"), 60, 5) );
     mpInfoLegend* leg;
-    m_plot->AddLayer( leg = new mpInfoLegend(wxRect(200,20,40,40), wxTRANSPARENT_BRUSH)); //&hatch2));
+    graph->AddLayer( leg = new mpInfoLegend(wxRect(200,20,40,40), wxTRANSPARENT_BRUSH)); //&hatch2));
     leg->SetVisible(true);
     
-    m_plot->Fit();
-
-    Update();
-    
+    graph->Fit();
+    return graph;
 }
 
 void GraphFrame::OnClose(wxCloseEvent& event) {

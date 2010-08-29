@@ -47,6 +47,7 @@ class GraphFrame : public wxFrame
         DECLARE_EVENT_TABLE();
         void SelectDevice(wxCommandEvent& event);
         void NewStatusWindow(wxCommandEvent& event);
+        mpWindow* createGraph(wxString x_label, vector<double> x_data,wxString y_label, vector<double> y_data);
         void OnClose(wxCloseEvent& event);
 
         // Functions
@@ -58,8 +59,18 @@ class GraphFrame : public wxFrame
         wxBoxSizer *mainSizer;
         wxHtmlWindow *deviceInfo;
         
-        mpWindow* m_plot;
-        mpInfoLayer* nfo;
+        mpWindow* altitudeGraph;
+        mpWindow* speedGraph;
+        mpWindow* climbGraph;
+        
+        mpWindow* bat1Graph;
+        mpWindow* bat2Graph;
+        mpWindow* busGraph;
+        mpWindow* signalGraph;
+        mpWindow* temp_intGraph;
+        mpWindow* temp_extGraph;
+        mpWindow* pressureGraph;
+        mpWindow* rhGraph;
         
         vector<string> deviceIds;
         string deviceId;
