@@ -92,7 +92,7 @@ void GraphFrame::CreateGUIControls() {
     m_plot->AddLayer(     xaxis );
     m_plot->AddLayer(     yaxis );
 	m_plot->AddLayer(     vectorLayer );
-    //m_plot->AddLayer(     new mpText(wxT("Altitude vs Temperature"), 10, 10) );
+    m_plot->AddLayer(     new mpText(wxT("Altitude vs Temperature"), 60, 5) );
     mpInfoLegend* leg;
     m_plot->AddLayer( leg = new mpInfoLegend(wxRect(200,20,40,40), wxTRANSPARENT_BRUSH)); //&hatch2));
     leg->SetVisible(true);
