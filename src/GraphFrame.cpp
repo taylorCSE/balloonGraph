@@ -89,19 +89,19 @@ mpWindow* GraphFrame::createGraph(wxString x_label, vector<double> x_data,
 	vectorLayer->SetPen(vectorpen);
 	vectorLayer->SetDrawOutsideMargins(false);
 
-    mpScaleX* xaxis = new mpScaleX(wxT("Temperature"), mpALIGN_BOTTOM, true, mpX_NORMAL);
-    mpScaleY* yaxis = new mpScaleY(wxT("Altitude"), mpALIGN_LEFT, true);
+    mpScaleX* xaxis = new mpScaleX(x_label, mpALIGN_BOTTOM, true, mpX_NORMAL);
+    mpScaleY* yaxis = new mpScaleY(y_label, mpALIGN_LEFT, true);
     xaxis->SetFont(graphFont);
     yaxis->SetFont(graphFont);
     xaxis->SetDrawOutsideMargins(false);
     yaxis->SetDrawOutsideMargins(false);
-	xaxis->SetLabelFormat(wxT("%.2f"));
+	xaxis->SetLabelFormat(wxT("%.1f"));
 	yaxis->SetLabelFormat(wxT("%.1f"));
     graph->SetMargins(30, 30, 50, 100);
     graph->AddLayer(     xaxis );
     graph->AddLayer(     yaxis );
 	graph->AddLayer(     vectorLayer );
-    graph->AddLayer(     new mpText(wxT("Altitude vs Temperature"), 60, 5) );
+    graph->AddLayer(     new mpText(y_label + wxT(" vs ") + x_label, 60, 5) );
     mpInfoLegend* leg;
     graph->AddLayer( leg = new mpInfoLegend(wxRect(200,20,40,40), wxTRANSPARENT_BRUSH)); //&hatch2));
     leg->SetVisible(true);
