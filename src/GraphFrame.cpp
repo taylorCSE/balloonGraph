@@ -68,13 +68,13 @@ void GraphFrame::CreateGUIControls() {
 		vectory.push_back(xcoord);
 	}
 	
-	altitudeGraph = createGraph(wxT("Temperature"),vectorx,wxT("Altitude"),vectory);   
+	altitudeGraph = createGraphFromData(wxT("Temperature"),vectorx,wxT("Altitude"),vectory);   
     mainSizer->Add(altitudeGraph, 1, wxEXPAND | wxALL);
     
     Update();
 }
 
-mpWindow* GraphFrame::createGraph(wxString x_label, vector<double> x_data,
+mpWindow* GraphFrame::createGraphFromData(wxString x_label, vector<double> x_data,
                                   wxString y_label, vector<double> y_data) {
     mpWindow* graph;
 	wxFont graphFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
