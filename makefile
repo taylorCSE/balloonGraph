@@ -34,9 +34,7 @@ LIBS	  = -mwindows \
 			-lodbc32 \
 			-llibmysql
 			
-CXXFLAGS  = -ffunction-sections \
-			-fdata-sections \
-			-fno-exceptions \
+CXXFLAGS  = -fno-exceptions \
 			-fno-pcc-struct-return \
 			-fstrict-aliasing \
 			-Wall \
@@ -44,9 +42,10 @@ CXXFLAGS  = -ffunction-sections \
 			-D__GNUWIN32__ \
 			-D__WIN95__ \
 			-Wno-deprecated \
-			-s
+			-ggdb \
+			-O2 
 
-LDFLAGS   = -s -Wl,--gc-sections
+LDFLAGS   = -Wl
 RM		= rm -f
 
 .PHONY: all all-before all-after clean clean-custom
