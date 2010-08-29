@@ -44,6 +44,15 @@ void GraphFrame::Update() {
 
     SetMenuBar(menubar);
     
+	Plot speed = DB_getPlotData("gps","Spd",atoi(deviceId.c_str()));
+	
+	mpWindow * new_altitude_graph = createGraphFromData(wxT("Time"),speed.time,
+	                                    wxT("Speed"),speed.data);
+	delete altitudeGraph;
+	altitudeGraph = new_altitude_graph;
+	
+	mainSizer->Replace(altitudeGraph, new_altitude_graph);
+	
 }
 
 void GraphFrame::CreateGUIControls() {
@@ -59,18 +68,10 @@ void GraphFrame::CreateGUIControls() {
     mainSizer = new wxBoxSizer(wxVERTICAL);
     mainPanel->SetSizer(mainSizer);
     
-	// Create two vectors for x,y and fill them with data
-	std::vector<double> vectorx, vectory;
-	double xcoord;
-	for (unsigned int p = 0; p < 100; p++) {
-		xcoord = (double)(p*1000.0);
-		vectorx.push_back(25-0.001*pow(xcoord/1000, 2));
-		vectory.push_back(xcoord);
-	}
-	
-	altitudeGraph = createGraphFromData(wxT("Temperature"),vectorx,wxT("Altitude"),vectory);   
+	altitudeGraph = createGraphFromData(wxT("Time"),vector<double>(),
+	                                    wxT("Speed"),vector<double>());   
     mainSizer->Add(altitudeGraph, 1, wxEXPAND | wxALL);
-    
+
     Update();
 }
 
@@ -79,7 +80,7 @@ mpWindow* GraphFrame::createGraphFromData(wxString x_label, vector<double> x_dat
     mpWindow* graph;
 	wxFont graphFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 
-    graph = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(100,100), wxSUNKEN_BORDER );
+    graph = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(500,500), wxSUNKEN_BORDER );
 
 	// Create a mpFXYVector layer
 	mpFXYVector* vectorLayer = new mpFXYVector(_(""));

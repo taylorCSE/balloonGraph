@@ -56,12 +56,14 @@ void DB_query(char* item ...) {
     }
     
     va_end(v);
-    fprintf(DB_log, "Executing Query: %s",query);
+    fprintf(DB_log, "Executing Query: %s\n",query);
 
     /// Execute the query
     
     mysql_query(DB_conn, query);
     DB_result = mysql_store_result(DB_conn);
+    
+    fprintf(DB_log, "Rows Returned: %d\n",mysql_num_rows(DB_result));
 }
 
 char* DB_resultAsText() {
@@ -136,5 +138,25 @@ map<string, string> DB_getMostRecentGPS(int device_id) {
     
     mysql_free_result(DB_result);
 
+    return result;
+}
+
+Plot DB_getPlotData(char* table, char* data_column, int device_id) {
+    DB_query("select UNIX_TIMESTAMP(Timestamp)-UNIX_TIMESTAMP(), Altitude, %s from %s " 
+             "where DeviceId=%d "
+             "order by Timestamp asc;",
+             data_column, table, device_id);
+    Plot result;
+
+    MYSQL_ROW row;
+
+    while (row = mysql_fetch_row(DB_result)) {
+        result.time.push_back(strtod(row[0],NULL));
+        result.altitude.push_back(strtod(row[1],NULL));
+        result.data.push_back(strtod(row[2],NULL));
+    }
+
+    mysql_free_result(DB_result);    
+    
     return result;
 }

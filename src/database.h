@@ -12,6 +12,8 @@
 #include <my_global.h>
 #include <mysql.h>
 
+#include "Plot.h"
+
 using namespace std;
 
 #define DB_USER "root"
@@ -26,5 +28,6 @@ void DB_query(char * item ...);
 char* DB_resultAsText();
 vector<string> DB_getAllDevices();
 map<string, string> DB_getMostRecentGPS(int device_id);
+Plot DB_getPlotData(char* table, char* data_column, int device_id);
 
 #endif
