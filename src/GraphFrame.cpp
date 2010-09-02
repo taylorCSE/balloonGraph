@@ -46,9 +46,18 @@ void GraphFrame::Update() {
     
 	Plot speed = DB_getPlotData("gps","Spd",atoi(deviceId.c_str()));
 	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
+	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
 	
-	ReplaceGraph(&altitudeGraph, createGraphFromData(wxT("Time"),speed.time,
+	ReplaceGraph(&altitudeGraph, createGraphFromData(wxT("Time"),altitude.time,
+	                                    wxT("Altitude"),altitude.data));
+
+	ReplaceGraph(&speedGraph, createGraphFromData(wxT("Time"),speed.time,
 	                                    wxT("Speed"),speed.data));
+
+	ReplaceGraph(&climbGraph, createGraphFromData(wxT("Time"),climb.time,
+	                                    wxT("Climb"),climb.data));
+
+    mainSizer->Layout();
 }
 
 void GraphFrame::ReplaceGraph(mpWindow** old_graph, mpWindow* new_graph) {
@@ -71,8 +80,16 @@ void GraphFrame::CreateGUIControls() {
     mainPanel->SetSizer(mainSizer);
     
 	altitudeGraph = createGraphFromData(wxT("Time"),vector<double>(),
-	                                    wxT("Speed"),vector<double>());   
+	                                    wxT("Altitude"),vector<double>());   
     mainSizer->Add(altitudeGraph, 1, wxEXPAND | wxALL);
+
+	speedGraph = createGraphFromData(wxT("Time"),vector<double>(),
+	                                    wxT("Speed"),vector<double>());   
+    mainSizer->Add(speedGraph, 1, wxEXPAND | wxALL);
+
+	climbGraph = createGraphFromData(wxT("Time"),vector<double>(),
+	                                    wxT("Climb"),vector<double>());   
+    mainSizer->Add(climbGraph, 1, wxEXPAND | wxALL);
 
     Update();
 }
