@@ -72,7 +72,7 @@ void GraphFrame::CreateGUIControls() {
     */
     
     // Set window properties and title bar
-    SetTitle(wxT("Device Status"));
+    SetTitle(wxT("Device Graphs"));
     SetIcon(wxNullIcon);
     
     mainPanel = new wxPanel(this, wxID_ANY);
