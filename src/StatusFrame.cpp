@@ -85,8 +85,8 @@ void StatusFrame::Update() {
         gps_info["Altitude_ft"].c_str(),
         gps_info["Spd_knots"].c_str(),
         gps_info["Spd_mps"].c_str(),
-        gps_info["Rate_mps"].c_str(),
         gps_info["Hdg"].c_str(),
+        gps_info["Rate_mps"].c_str(),
         gps_info["Status"].c_str()
         );
     

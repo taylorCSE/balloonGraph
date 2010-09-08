@@ -134,9 +134,9 @@ map<string, string> DB_getMostRecentGPS(int device_id) {
         result["Altitude_ft"] = string(buf);
         result["Rate"] = string(row[1]);
         sprintf(buf,"%d",atoi(row[1]) - 10000);
-        result["Rate_m"] = string(buf);
+        result["Rate_mps"] = string(buf);
         sprintf(buf,"%d",(int)((atoi(row[1]) - 10000)*M_TO_FT));
-        result["Rate_ft"] = string(buf);
+        result["Rate_fps"] = string(buf);
         result["Lat"] = string(row[2]);
         result["LatRef"] = string(row[3]);
         result["Latitude"] = string(row[2]) + string(row[3]);
@@ -145,7 +145,7 @@ map<string, string> DB_getMostRecentGPS(int device_id) {
         result["Longitude"] = string(row[4]) + string(row[5]);
         result["Spd"] = string(row[6]);
         result["Spd_knots"] = string(row[6]);
-        sprintf(buf,"%d",(int)(atoi(row[6])*KNOT_TO_MPS));
+        sprintf(buf,"%f",(float)(atof(row[6])*KNOT_TO_MPS));
         result["Spd_mps"] = string(buf);
         result["Hdg"] = string(row[7]);
         result["Status"] = string(row[8]);
