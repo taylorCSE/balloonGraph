@@ -61,11 +61,11 @@ void StatusFrame::Update() {
         "Latitude: %s\n<br />"
         "Longitude: %s\n<br />"
         "Altitude (M): %s\n<br />"
-        "Altitude (Ft): \n<br />"
+        "Altitude (Ft): %s\n<br />"
         "Speed (Knots): %s\n<br />"
-        "Speed (M/S): \n<br />"
+        "Speed (M/S): %s\n<br />"
         "Bearing: %s\n<br />"
-        "Climb: \n<br />"
+        "Climb: %s\n<br />"
         "GPS Status: %s\n"
         "\n<hr>"
         "<b>Status</b>\n<br />"
@@ -81,8 +81,11 @@ void StatusFrame::Update() {
         deviceId.c_str(),
         gps_info["Latitude"].c_str(),
         gps_info["Longitude"].c_str(),
-        gps_info["Altitude"].c_str(),
-        gps_info["Spd"].c_str(),
+        gps_info["Altitude_m"].c_str(),
+        gps_info["Altitude_ft"].c_str(),
+        gps_info["Spd_knots"].c_str(),
+        gps_info["Spd_mps"].c_str(),
+        gps_info["Rate_mps"].c_str(),
         gps_info["Hdg"].c_str(),
         gps_info["Status"].c_str()
         );
