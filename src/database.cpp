@@ -118,13 +118,25 @@ map<string, string> DB_getMostRecentGPS(int device_id) {
     MYSQL_ROW row;
     int num_fields;
     
+    char buf[64];
+    
+    const float M_TO_FT = 3.2808399;
+    const float KNOT_TO_MPS = 0.514444444;
+    
     map<string, string> result;
 
     num_fields = mysql_num_fields(DB_result);
     
     if (row = mysql_fetch_row(DB_result)) {
         result["Altitude"] = string(row[0]);
+        result["Altitude_m"] = string(row[0]);
+        sprintf(buf,"%d",(int)(atoi(row[0])*M_TO_FT));
+        result["Altitude_ft"] = string(buf);
         result["Rate"] = string(row[1]);
+        sprintf(buf,"%d",atoi(row[1]) - 10000);
+        result["Rate_m"] = string(buf);
+        sprintf(buf,"%d",(int)((atoi(row[1]) - 10000)*M_TO_FT));
+        result["Rate_ft"] = string(buf);
         result["Lat"] = string(row[2]);
         result["LatRef"] = string(row[3]);
         result["Latitude"] = string(row[2]) + string(row[3]);
@@ -132,6 +144,9 @@ map<string, string> DB_getMostRecentGPS(int device_id) {
         result["LonRef"] = string(row[5]);
         result["Longitude"] = string(row[4]) + string(row[5]);
         result["Spd"] = string(row[6]);
+        result["Spd_knots"] = string(row[6]);
+        sprintf(buf,"%d",(int)(atoi(row[6])*KNOT_TO_MPS));
+        result["Spd_mps"] = string(buf);
         result["Hdg"] = string(row[7]);
         result["Status"] = string(row[8]);
     }
