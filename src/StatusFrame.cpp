@@ -12,26 +12,29 @@ BEGIN_EVENT_TABLE(StatusFrame,wxFrame)
     EVT_CLOSE(StatusFrame::OnClose)
 END_EVENT_TABLE()
 
+/**
+   Constructor for the Main frame.
+*/
+
 StatusFrame::StatusFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
 : wxFrame(parent, id, title, position, size, style) {
-    /**
-    *   Constructor for the Main frame.
-    */
     deviceId = "Please select a device from the menu.";
     
     CreateGUIControls();
 }
 
+/** 
+   Destructor for the Main form.
+*/
+
 StatusFrame::~StatusFrame() {
-    /** 
-    *   Destructor for the Main form.
-    */
 }
 
+/**
+    Updates the GUI with new database information
+*/
+
 void StatusFrame::Update() {
-    /**
-     * Updates the GUI with new database information
-     */
     wxMenuBar *menubar = new wxMenuBar;
     wxMenu *devices = new wxMenu;
     wxMenu *view = new wxMenu;
@@ -95,10 +98,12 @@ void StatusFrame::Update() {
     deviceInfo->SetPage(info);
 }
 
+/**
+   Creates all of the GUI controls on the main form.
+*/
+    
 void StatusFrame::CreateGUIControls() {
-   /**
-    *   Creates all of the GUI controls on the main form.
-    */
+
     
     // Set window properties and title bar
     SetTitle(wxT("Device Status"));
@@ -115,21 +120,24 @@ void StatusFrame::CreateGUIControls() {
 
 }
 
+/**
+    Event handler for the form closing event
+    Exit the ChaosConnect Program
+*/
+
 void StatusFrame::OnClose(wxCloseEvent& event) {
-    /**
-    *   Event handler for the form closing event
-    *   Exit the ChaosConnect Program
-    */
     Destroy();
 }
 
+/** 
+    Selects a device from the menu
+    
+    This is a catchall menu event handler becasue I couldn't think 
+    of a better way to do this because the menu is dynamic
+*/
+     
 void StatusFrame::SelectDevice( wxCommandEvent& event ) {
-    /** 
-     * Selects a device from the menu
-     *
-     * This is a catchall menu event handler becasue I couldn't think 
-     * of a better way to do this because the menu is dynamic
-     */
+
      
     int id = event.GetId();
     
@@ -141,20 +149,23 @@ void StatusFrame::SelectDevice( wxCommandEvent& event ) {
     Update();
 }
 
-
+/** 
+    Launches a new status window
+*/
+     
 void StatusFrame::NewStatusWindow( wxCommandEvent& event ) {
-    /** 
-     * Launches a new status window
-     */
+
      
     StatusFrame* frame = new StatusFrame(NULL);
     frame->Show();     
 }
 
+/** 
+    Launches a new graph window
+*/
+     
 void StatusFrame::NewGraphWindow( wxCommandEvent& event ) {
-    /** 
-     * Launches a new graph window
-     */
+
      
     GraphFrame* frame = new GraphFrame(NULL);
     frame->Show();     
