@@ -55,18 +55,19 @@ void StatusFrame::Update() {
     gps_info = DB_getMostRecentGPS(atoi(deviceId.c_str()));
     
     wxString info = wxString::Format(wxT(""
-        "<b>Device: %s</b>\n"
+        "<body bgcolor=black text=white>"
+        "<b>Device: <font color=#33ff33>%s</font></b>\n"
         "<hr>\n"
         "<b>Location</b>\n<br />"
-        "Latitude: %s\n<br />"
-        "Longitude: %s\n<br />"
-        "Altitude (M): %s\n<br />"
-        "Altitude (Ft): %s\n<br />"
-        "Speed (Knots): %s\n<br />"
-        "Speed (M/S): %s\n<br />"
-        "Bearing: %s\n<br />"
-        "Climb: %s\n<br />"
-        "GPS Status: %s\n"
+        "Latitude: <font color=#33ff33>%s</font>\n<br />"
+        "Longitude: <font color=#33ff33>%s</font>\n<br />"
+        "Altitude (M): <font color=#33ff33>%s</font>\n<br />"
+        "Altitude (Ft): <font color=#33ff33>%s</font>\n<br />"
+        "Speed (Knots): <font color=#33ff33>%s</font>\n<br />"
+        "Speed (M/S): <font color=#33ff33>%s</font>\n<br />"
+        "Bearing: <font color=#33ff33>%s</font>\n<br />"
+        "Climb: <font color=#33ff33>%s</font>\n<br />"
+        "GPS Status: <font color=#33ff33>%s</font>\n"
         "\n<hr>"
         "<b>Status</b>\n<br />"
         "Battery 1 (V): \n<br />"
@@ -77,6 +78,7 @@ void StatusFrame::Update() {
         "Temperature Ext. (c): \n<br />"
         "Pressure (HPA): \n<br />"
         "RH (%%): \n"
+        "</body>"
         ),
         deviceId.c_str(),
         gps_info["Latitude"].c_str(),
