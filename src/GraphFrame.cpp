@@ -106,7 +106,7 @@ void GraphFrame::UpdateAnalogGraphs() {
 	        graphs[i] = new Graph(mainPanel,name,"aip",atoi(deviceId.c_str()),name);
 	        mainSizer->Add(graphs[i]->window, 1, wxEXPAND | wxALL);
 	    }
-	    graphs[i]->Update();
+	    graphs[i]->Update(atoi(deviceId.c_str()));
 	}
 
     mainSizer->Layout();

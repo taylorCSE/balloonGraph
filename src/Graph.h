@@ -27,14 +27,14 @@ class Graph {
     public:
         Graph(wxPanel* panel, char* name, char* table, int device_id, char* col);
         virtual ~Graph();
-        void Update();
+        void Update(int device_id = 0);
         Plot GetData();
         mpWindow* window;
         
     private:
-        char* name;
-        char* db_table;
-        char* db_col;
+        string name;
+        string db_table;
+        string db_col;
         int deviceId;
 };
 

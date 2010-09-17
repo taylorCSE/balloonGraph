@@ -56,7 +56,9 @@ Graph::~Graph() {
     */
 }
 
-void Graph::Update() {
+void Graph::Update(int device_id) {
+    if(device_id > 0) deviceId = device_id;
+    
     mpFXYVector * vectorLayer = (mpFXYVector*)window->GetLayer(2);
     Plot data = GetData();
 
@@ -72,5 +74,5 @@ void Graph::Update() {
 }
 
 Plot Graph::GetData() {
-    return DB_getPlotData(db_table,db_col,deviceId);
+    return DB_getPlotData((char*)db_table.c_str(),(char*)db_col.c_str(),deviceId);
 }
