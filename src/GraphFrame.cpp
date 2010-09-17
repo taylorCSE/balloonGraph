@@ -78,6 +78,7 @@ void GraphFrame::UpdateGraph(int num, Graph* graph) {
 	    graphs[num] = graph;
         mainSizer->Add(graphs[num]->window, 1, wxEXPAND | wxALL);
     }
+    graphs[num]->Update(atoi(deviceId.c_str()));
 }
 
 void GraphFrame::UpdateBasicGraphs() {
@@ -107,17 +108,11 @@ void GraphFrame::UpdateBasicGraphs() {
 void GraphFrame::UpdateAnalogGraphs() {
 	char name[4];
 	
-    mainSizer->Layout();
-
 	for(int i = 0; i<18; i++) {
-	    if(!graphs[i]) {
-	        name[0] = 'A';
-	        name[1] = 0x00;
-	        sprintf(name,"%s%d",name,i+1);
-	        graphs[i] = new Graph(mainPanel,name,"aip",atoi(deviceId.c_str()),name);
-	        mainSizer->Add(graphs[i]->window, 1, wxEXPAND | wxALL);
-	    }
-	    graphs[i]->Update(atoi(deviceId.c_str()));
+        name[0] = 'A';
+        name[1] = 0x00;
+        sprintf(name,"%s%d",name,i+1);
+        UpdateGraph(i, new Graph(mainPanel,name,"aip",atoi(deviceId.c_str()),name));
 	}
 
     mainSizer->Layout();
