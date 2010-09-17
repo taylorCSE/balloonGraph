@@ -94,10 +94,6 @@ void GraphFrame::UpdateBasicGraphs() {
 }
 
 void GraphFrame::UpdateAnalogGraphs() {
-    
-	Plot speed = DB_getPlotData("gps","Spd",atoi(deviceId.c_str()));
-	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
-	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
 	char name[4];
 	
     mainSizer->Layout();
