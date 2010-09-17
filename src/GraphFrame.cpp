@@ -83,11 +83,11 @@ void GraphFrame::UpdateBasicGraphs() {
 	ReplaceGraph(0, createGraphFromData(wxT("Time"),altitude.time,
 	                                    wxT("Altitude"),altitude.data));
 
-	ReplaceGraph(1, createGraphFromData(wxT("Altitude"),speed.altitude,
-	                                    wxT("Speed"),speed.data));
+	ReplaceGraph(1, createGraphFromData(wxT("Speed"),speed.data,
+	                                    wxT("Altitude"),speed.altitude));
 
-	ReplaceGraph(2, createGraphFromData(wxT("Altitude"),climb.altitude,
-	                                    wxT("Climb"),climb.data));
+	ReplaceGraph(2, createGraphFromData(wxT("Climb"),climb.data,
+	                                    wxT("Altitude"),climb.altitude));
 
     mainSizer->Layout();
 }
