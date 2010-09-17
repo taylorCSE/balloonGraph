@@ -83,10 +83,10 @@ void GraphFrame::UpdateBasicGraphs() {
 	ReplaceGraph(0, createGraphFromData(wxT("Time"),altitude.time,
 	                                    wxT("Altitude"),altitude.data));
 
-	ReplaceGraph(1, createGraphFromData(wxT("Time"),speed.time,
+	ReplaceGraph(1, createGraphFromData(wxT("Altitude"),speed.altitude,
 	                                    wxT("Speed"),speed.data));
 
-	ReplaceGraph(2, createGraphFromData(wxT("Time"),climb.time,
+	ReplaceGraph(2, createGraphFromData(wxT("Altitude"),climb.altitude,
 	                                    wxT("Climb"),climb.data));
 
     mainSizer->Layout();
@@ -97,14 +97,19 @@ void GraphFrame::UpdateAnalogGraphs() {
 	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
 	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
 	mpWindow* tmp_graph[18];
+	char name[4];
 	
 	SetNumGraphs(18);
 
     mainSizer->Layout();
 
 	for(int i = 0; i<18; i++) {
-	    tmp_graph[i] = createGraphFromData(wxT("Time"),altitude.time,
-	                                       wxT("Altitude"),altitude.data);
+	    name[0] = 'A';
+	    name[1] = 0x00;
+	    sprintf(name,"%s%d",name,i+1);
+	    Plot plot = DB_getPlotData("aip",name,atoi(deviceId.c_str()));
+	    tmp_graph[i] = createGraphFromData(wxT("Altitude"),plot.altitude,
+	                                       wxT(name),plot.data);
         ReplaceGraph(i, tmp_graph[i]);
         mainSizer->Layout();
 	}
