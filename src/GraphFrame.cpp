@@ -18,6 +18,8 @@ GraphFrame::GraphFrame(wxWindow *parent, wxWindowID id, const wxString &title, c
     */
     deviceId = "Please select a device from the menu.";
     
+    view = VIEW_BASIC;
+    
     CreateGUIControls();
 }
 
@@ -33,6 +35,7 @@ void GraphFrame::Update() {
      */
     wxMenuBar *menubar = new wxMenuBar;
     wxMenu *devices = new wxMenu;
+    wxMenu *view = new wxMenu;
     
     deviceIds = DB_getAllDevices();
     
@@ -42,28 +45,73 @@ void GraphFrame::Update() {
         devices->Append(10000+i, deviceIds[i]);
     }
 
+    menubar->Append(view, wxT("&View"));
+    
+    view->Append(VIEW_BASIC, wxT("Basic"));
+    view->Append(VIEW_ANALOG, wxT("Analog Channels"));
+
     SetMenuBar(menubar);
     
+    //UpdateBasicGraphs();
+    UpdateAnalogGraphs();
+}
+
+void GraphFrame::UpdateBasicGraphs() {
 	Plot speed = DB_getPlotData("gps","Spd",atoi(deviceId.c_str()));
 	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
 	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
 	
-	ReplaceGraph(&altitudeGraph, createGraphFromData(wxT("Time"),altitude.time,
+	for(int i = 0; i < 3; i++) {
+        if(!graphs[i]) {
+            graphs[i] = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(500,500), wxSUNKEN_BORDER );
+            mainSizer->Add(graphs[i], 1, wxEXPAND | wxALL);
+        }
+	}
+
+	ReplaceGraph(0, createGraphFromData(wxT("Time"),altitude.time,
 	                                    wxT("Altitude"),altitude.data));
 
-	ReplaceGraph(&speedGraph, createGraphFromData(wxT("Time"),speed.time,
+	ReplaceGraph(1, createGraphFromData(wxT("Time"),speed.time,
 	                                    wxT("Speed"),speed.data));
 
-	ReplaceGraph(&climbGraph, createGraphFromData(wxT("Time"),climb.time,
+	ReplaceGraph(2, createGraphFromData(wxT("Time"),climb.time,
 	                                    wxT("Climb"),climb.data));
+
+	for(int i = 3; i < 18; i++) {
+	    if(graphs[i]) {
+	        delete graphs[i];
+	        mainSizer->Remove(graphs[i]);
+	    }
+	}
 
     mainSizer->Layout();
 }
 
-void GraphFrame::ReplaceGraph(mpWindow** old_graph, mpWindow* new_graph) {
-	mainSizer->Replace(*old_graph, new_graph);
-	delete *old_graph;
-	*old_graph = new_graph;
+void GraphFrame::UpdateAnalogGraphs() {
+	Plot speed = DB_getPlotData("gps","Spd",atoi(deviceId.c_str()));
+	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
+	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
+	
+	for(int i = 0; i < 18; i++) {
+        if(!graphs[i]) {
+            graphs[i] = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(500,500), wxSUNKEN_BORDER );
+            mainSizer->Add(graphs[i], 1, wxEXPAND | wxALL);
+        }
+	}
+
+	for(int i = 0; i<18; i++) {
+	    ReplaceGraph(i, createGraphFromData(wxT("Time"),altitude.time,
+	                                        wxT("Altitude"),altitude.data));
+	}
+
+    mainSizer->Layout();
+}
+
+void GraphFrame::ReplaceGraph(int graph_num, mpWindow* new_graph) {
+    mpWindow* old_graph = graphs[graph_num];
+	mainSizer->Replace(graphs[graph_num], new_graph);
+	delete old_graph;
+	graphs[graph_num] = new_graph;
 }
 
 void GraphFrame::CreateGUIControls() {
@@ -76,20 +124,12 @@ void GraphFrame::CreateGUIControls() {
     SetIcon(wxNullIcon);
     
     mainPanel = new wxPanel(this, wxID_ANY);
-    mainSizer = new wxBoxSizer(wxVERTICAL);
+    mainSizer = new wxGridSizer(3);
     mainPanel->SetSizer(mainSizer);
     
-	altitudeGraph = createGraphFromData(wxT("Time"),vector<double>(),
-	                                    wxT("Altitude"),vector<double>());   
-    mainSizer->Add(altitudeGraph, 1, wxEXPAND | wxALL);
-
-	speedGraph = createGraphFromData(wxT("Time"),vector<double>(),
-	                                    wxT("Speed"),vector<double>());   
-    mainSizer->Add(speedGraph, 1, wxEXPAND | wxALL);
-
-	climbGraph = createGraphFromData(wxT("Time"),vector<double>(),
-	                                    wxT("Climb"),vector<double>());   
-    mainSizer->Add(climbGraph, 1, wxEXPAND | wxALL);
+    for(int i = 0; i < 18; i++) {
+        graphs[i] = 0x00;
+    }
 
     Update();
 }
@@ -151,6 +191,13 @@ void GraphFrame::SelectDevice( wxCommandEvent& event ) {
     if(id > 10000) {
         /// We're selecting a device
         deviceId = deviceIds[id - 10000];
+    }
+    
+    if(id = VIEW_BASIC) { 
+        view = VIEW_BASIC;
+    }
+    if(id = VIEW_ANALOG) {
+        view = VIEW_ANALOG;
     }
     
     Update();

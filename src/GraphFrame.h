@@ -48,7 +48,9 @@ class GraphFrame : public wxFrame
         void SelectDevice(wxCommandEvent& event);
         void NewStatusWindow(wxCommandEvent& event);
         mpWindow* createGraphFromData(wxString x_label, vector<double> x_data,wxString y_label, vector<double> y_data);
-        void ReplaceGraph(mpWindow** old_graph, mpWindow* new_graph);
+        void ReplaceGraph(int graph_num, mpWindow* new_graph);
+        void UpdateBasicGraphs();
+        void UpdateAnalogGraphs();
         void OnClose(wxCloseEvent& event);
 
         // Functions
@@ -57,9 +59,12 @@ class GraphFrame : public wxFrame
         
         // wxWidgets gui objects
         wxPanel *mainPanel; 
-        wxBoxSizer *mainSizer;
+        wxPanel *colPanel[3]; 
+        wxGridSizer *mainSizer;
+        wxBoxSizer *colSizer[3];
         wxHtmlWindow *deviceInfo;
         
+        mpWindow* graphs[18];
         mpWindow* altitudeGraph;
         mpWindow* speedGraph;
         mpWindow* climbGraph;
@@ -73,6 +78,8 @@ class GraphFrame : public wxFrame
         mpWindow* pressureGraph;
         mpWindow* rhGraph;
         
+        int view;
+        
         vector<string> deviceIds;
         string deviceId;
         
@@ -81,6 +88,8 @@ class GraphFrame : public wxFrame
         enum {
             ////GUI Enum Control ID Start
             ID_TEXT = 1000,
+            VIEW_BASIC,
+            VIEW_ANALOG,
             ID_NEWWINDOW
         };
 };
