@@ -38,6 +38,7 @@ class BaseFrame : public wxFrame
         void CreateMenu();
 
         wxMenuBar *menubar;
+        vector<string> deviceIds;
     private:
         DECLARE_EVENT_TABLE();
         // Enumeration for GUI controls

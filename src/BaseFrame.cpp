@@ -23,7 +23,7 @@ void BaseFrame::CreateMenu() {
     wxMenu *view_menu = new wxMenu;
     wxMenu *window_menu = new wxMenu;
     
-    vector<string> deviceIds = DB_getAllDevices();
+    deviceIds = DB_getAllDevices();
     
     menubar->Append(devices_menu, wxT("&Devices"));
 

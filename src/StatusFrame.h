@@ -59,7 +59,6 @@ class StatusFrame : public BaseFrame
         wxBoxSizer *mainSizer;
         wxHtmlWindow *deviceInfo;
         
-        vector<string> deviceIds;
         string deviceId;
         
     private:

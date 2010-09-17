@@ -85,7 +85,6 @@ class GraphFrame : public BaseFrame
         
         int view;
         
-        vector<string> deviceIds;
         string deviceId;
         
     private:

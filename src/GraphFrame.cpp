@@ -98,6 +98,8 @@ void GraphFrame::CreateGUIControls() {
     mainSizer = new wxGridSizer(3);
     mainPanel->SetSizer(mainSizer);
     
+    for(int i = 0; i < 18; i++) graphs[i] = 0x00;
+    
     ClearGraphs();
 
     Update();
