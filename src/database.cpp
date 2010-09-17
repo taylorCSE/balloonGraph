@@ -157,9 +157,16 @@ map<string, string> DB_getMostRecentGPS(int device_id) {
 }
 
 Plot DB_getPlotData(char* table, char* data_column, int device_id) {
-    DB_query("select UNIX_TIMESTAMP(Timestamp)-UNIX_TIMESTAMP(), Altitude, %s from %s " 
+    // Small hack to fix a typo in the database    
+    string timestamp = "Timestamp";
+    if(!strcmp(table,"aip")){
+        timestamp = "TimesStamp";
+    }
+    
+    DB_query("select UNIX_TIMESTAMP(%s)-UNIX_TIMESTAMP(), Altitude, %s from %s " 
              "where DeviceId=%d "
              "order by Timestamp asc;",
+             timestamp.c_str(),
              data_column, table, device_id);
     Plot result;
 
