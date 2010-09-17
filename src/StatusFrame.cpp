@@ -17,7 +17,7 @@ END_EVENT_TABLE()
 */
 
 StatusFrame::StatusFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
-: wxFrame(parent, id, title, position, size, style) {
+: BaseFrame(parent, id, title, position, size, style) {
     deviceId = "Please select a device from the menu.";
     
     CreateGUIControls();

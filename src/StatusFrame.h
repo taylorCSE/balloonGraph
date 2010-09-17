@@ -33,11 +33,12 @@
 #include "GraphFrame.h"
 #include "mathplot.h"
 #include "database.h"
+#include "BaseFrame.h"
 
 #undef StatusFrame_STYLE
 #define StatusFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
 
-class StatusFrame : public wxFrame
+class StatusFrame : public BaseFrame
 {
     public:
         StatusFrame(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("AppName"), const wxPoint& pos = wxDefaultPosition, const wxSize &size = wxSize(360,600), long style = StatusFrame_STYLE);
