@@ -99,18 +99,17 @@ void GraphFrame::UpdateAnalogGraphs() {
 	mpWindow* tmp_graph[18];
 	char name[4];
 	
-	SetNumGraphs(18);
-
     mainSizer->Layout();
 
 	for(int i = 0; i<18; i++) {
-	    name[0] = 'A';
-	    name[1] = 0x00;
-	    sprintf(name,"%s%d",name,i+1);
-	    Plot plot = DB_getPlotData("aip",name,atoi(deviceId.c_str()));
-	    tmp_graph[i] = createGraphFromData(wxT("Altitude"),plot.altitude,
-	                                       wxT(name),plot.data);
-        ReplaceGraph(i, tmp_graph[i]);
+	    if(!graphs[i]) {
+	        name[0] = 'A';
+	        name[1] = 0x00;
+	        sprintf(name,"%s%d",name,i+1);
+	        graphs[i] = new Graph(name,"aip",atoi(deviceId.c_str()),name);
+	        mainSizer->Add(graphs[i]->window, 1, wxEXPAND | wxALL);
+	    }
+	    //graphs[i]->Update();
         mainSizer->Layout();
 	}
 
@@ -198,6 +197,16 @@ mpWindow* GraphFrame::createGraphFromData(wxString x_label, vector<double> x_dat
     return graph;
 }
 
+void GraphFrame::UpdateGraphFromData(int num, vector<double> x_data, vector<double> y_data) {
+	mpFXYVector* vectorLayer = (mpFXYVector*)graphs[num]->GetLayer(3);
+	
+	vectorLayer->SetData(x_data, y_data);
+	vectorLayer->SetContinuity(true);
+	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
+	vectorLayer->SetPen(vectorpen);
+	vectorLayer->SetDrawOutsideMargins(false);
+}
+
 void GraphFrame::OnClose(wxCloseEvent& event) {
     /**
     *   Event handler for the form closing event
@@ -222,9 +231,11 @@ void GraphFrame::SelectDevice( wxCommandEvent& event ) {
     }
     
     if(id == VIEW_BASIC) { 
+        SetNumGraphs(0);
         view = VIEW_BASIC;
     }
     if(id == VIEW_ANALOG) {
+        SetNumGraphs(0);
         view = VIEW_ANALOG;
     }
     

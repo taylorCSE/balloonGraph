@@ -30,8 +30,10 @@
 #include <wx/dcbuffer.h>
 #include <wx/html/htmlwin.h>
                            
-#include "mathplot.h"
+#include "MathPlot.h"
 #include "database.h"
+#include "Graph.h"
+#include "Plot.h"
 
 #undef GraphFrame_STYLE
 #define GraphFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
@@ -48,6 +50,7 @@ class GraphFrame : public wxFrame
         void SelectDevice(wxCommandEvent& event);
         void NewStatusWindow(wxCommandEvent& event);
         mpWindow* createGraphFromData(wxString x_label, vector<double> x_data,wxString y_label, vector<double> y_data);
+        void UpdateGraphFromData(int num, vector<double> x_data, vector<double> y_data);
         void ReplaceGraph(int graph_num, mpWindow* new_graph);
         void SetNumGraphs(int num);
         void UpdateBasicGraphs();
@@ -66,7 +69,7 @@ class GraphFrame : public wxFrame
         wxBoxSizer *colSizer[3];
         wxHtmlWindow *deviceInfo;
         
-        mpWindow* graphs[18];
+        Graph* graphs[18];
         mpWindow* altitudeGraph;
         mpWindow* speedGraph;
         mpWindow* climbGraph;

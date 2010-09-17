@@ -9,6 +9,7 @@ BIN	   = App.exe
 
 OBJ	   = $(BUILD)/App.o \
 			$(BUILD)/StatusFrame.o \
+			$(BUILD)/Graph.o \
 			$(BUILD)/GraphFrame.o \
 			$(BUILD)/MathPlot.o \
 			$(BUILD)/database.o \
@@ -67,6 +68,9 @@ $(BUILD)/Resource.o: $(SRC)/Resource.rc icons/main.ico
 
 $(BUILD)/StatusFrame.o: $(SRC)/StatusFrame.cpp $(SRC)/StatusFrame.h  
 	$(CPP) -c $(SRC)/StatusFrame.cpp -o $(BUILD)/StatusFrame.o $(CXXFLAGS)
+	
+$(BUILD)/Graph.o: $(SRC)/Graph.cpp $(SRC)/Graph.h
+	$(CPP) -c $(SRC)/Graph.cpp -o $(BUILD)/Graph.o $(CXXFLAGS)
 	
 $(BUILD)/GraphFrame.o: $(SRC)/GraphFrame.cpp $(SRC)/GraphFrame.h
 	$(CPP) -c $(SRC)/GraphFrame.cpp -o $(BUILD)/GraphFrame.o $(CXXFLAGS)
