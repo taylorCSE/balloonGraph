@@ -78,8 +78,8 @@ void GraphFrame::UpdateBasicGraphs() {
 	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
 	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
 	
-	SetNumGraphs(3);
-	
+	//SetNumGraphs(3);
+	/*
 	ReplaceGraph(0, createGraphFromData(wxT("Time"),altitude.time,
 	                                    wxT("Altitude"),altitude.data));
 
@@ -90,13 +90,14 @@ void GraphFrame::UpdateBasicGraphs() {
 	                                    wxT("Altitude"),climb.altitude));
 
     mainSizer->Layout();
+    */
 }
 
 void GraphFrame::UpdateAnalogGraphs() {
+    
 	Plot speed = DB_getPlotData("gps","Spd",atoi(deviceId.c_str()));
 	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
 	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
-	mpWindow* tmp_graph[18];
 	char name[4];
 	
     mainSizer->Layout();
@@ -106,7 +107,7 @@ void GraphFrame::UpdateAnalogGraphs() {
 	        name[0] = 'A';
 	        name[1] = 0x00;
 	        sprintf(name,"%s%d",name,i+1);
-	        graphs[i] = new Graph(name,"aip",atoi(deviceId.c_str()),name);
+	        graphs[i] = new Graph(mainPanel,name,"aip",atoi(deviceId.c_str()),name);
 	        mainSizer->Add(graphs[i]->window, 1, wxEXPAND | wxALL);
 	    }
 	    //graphs[i]->Update();
@@ -114,31 +115,6 @@ void GraphFrame::UpdateAnalogGraphs() {
 	}
 
     mainSizer->Layout();
-}
-
-void GraphFrame::ReplaceGraph(int graph_num, mpWindow* new_graph) {
-	mainSizer->Replace(graphs[graph_num], new_graph);
-	delete graphs[graph_num];
-	graphs[graph_num] = new_graph;
-}
-
-void GraphFrame::SetNumGraphs(int num) {
-    mainSizer->SetCols((num-1)/6 + 1);
-
-	for(int i = 0; i < num; i++) {
-        if(!graphs[i]) {
-            graphs[i] = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER );
-            mainSizer->Add(graphs[i], 1, wxEXPAND | wxALL);
-        }
-	}
-
-	for(int i = num; i < 18; i++) {
-	    if(graphs[i]) {
-	        delete graphs[i];
-	        mainSizer->Remove(graphs[i]);
-	        graphs[i] = 0x00;
-	    }
-	}
 }
 
 void GraphFrame::CreateGUIControls() {
@@ -197,16 +173,6 @@ mpWindow* GraphFrame::createGraphFromData(wxString x_label, vector<double> x_dat
     return graph;
 }
 
-void GraphFrame::UpdateGraphFromData(int num, vector<double> x_data, vector<double> y_data) {
-	mpFXYVector* vectorLayer = (mpFXYVector*)graphs[num]->GetLayer(3);
-	
-	vectorLayer->SetData(x_data, y_data);
-	vectorLayer->SetContinuity(true);
-	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
-	vectorLayer->SetPen(vectorpen);
-	vectorLayer->SetDrawOutsideMargins(false);
-}
-
 void GraphFrame::OnClose(wxCloseEvent& event) {
     /**
     *   Event handler for the form closing event
@@ -230,18 +196,24 @@ void GraphFrame::SelectDevice( wxCommandEvent& event ) {
         deviceId = deviceIds[id - 10000];
     }
     
-    if(id == VIEW_BASIC) { 
-        SetNumGraphs(0);
+    if(id == VIEW_BASIC) {
+        ClearGraphs();
         view = VIEW_BASIC;
     }
     if(id == VIEW_ANALOG) {
-        SetNumGraphs(0);
+        ClearGraphs();
         view = VIEW_ANALOG;
     }
     
     Update();
 }
 
+void GraphFrame::ClearGraphs() {
+    for(int i = 0; i<18; i++) {
+        delete graphs[i];
+        graphs[i] = 0x00;
+    }
+}
 
 void GraphFrame::NewStatusWindow( wxCommandEvent& event ) {
     /** 
