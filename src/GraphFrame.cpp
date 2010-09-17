@@ -132,42 +132,6 @@ void GraphFrame::CreateGUIControls() {
     Update();
 }
 
-mpWindow* GraphFrame::createGraphFromData(wxString x_label, vector<double> x_data,
-                                  wxString y_label, vector<double> y_data) {
-    mpWindow* graph;
-	wxFont graphFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-
-    graph = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER );
-
-	// Create a mpFXYVector layer
-	mpFXYVector* vectorLayer = new mpFXYVector(_(""));
-	vectorLayer->SetData(x_data, y_data);
-	vectorLayer->SetContinuity(true);
-	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
-	vectorLayer->SetPen(vectorpen);
-	vectorLayer->SetDrawOutsideMargins(false);
-
-    mpScaleX* xaxis = new mpScaleX(x_label, mpALIGN_BOTTOM, true, mpX_NORMAL);
-    mpScaleY* yaxis = new mpScaleY(y_label, mpALIGN_LEFT, true);
-    xaxis->SetFont(graphFont);
-    yaxis->SetFont(graphFont);
-    xaxis->SetDrawOutsideMargins(false);
-    yaxis->SetDrawOutsideMargins(false);
-	xaxis->SetLabelFormat(wxT("%.1f"));
-	yaxis->SetLabelFormat(wxT("%.1f"));
-    graph->SetMargins(30, 30, 50, 100);
-    graph->AddLayer(     xaxis );
-    graph->AddLayer(     yaxis );
-	graph->AddLayer(     vectorLayer );
-    graph->AddLayer(     new mpText(y_label + wxT(" vs ") + x_label, 60, 5) );
-    mpInfoLegend* leg;
-    graph->AddLayer( leg = new mpInfoLegend(wxRect(200,20,40,40), wxTRANSPARENT_BRUSH)); //&hatch2));
-    leg->SetVisible(true);
-    
-    graph->Fit();
-    return graph;
-}
-
 void GraphFrame::OnClose(wxCloseEvent& event) {
     /**
     *   Event handler for the form closing event

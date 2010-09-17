@@ -49,7 +49,6 @@ class GraphFrame : public wxFrame
         DECLARE_EVENT_TABLE();
         void SelectDevice(wxCommandEvent& event);
         void NewStatusWindow(wxCommandEvent& event);
-        mpWindow* createGraphFromData(wxString x_label, vector<double> x_data,wxString y_label, vector<double> y_data);
         void UpdateBasicGraphs();
         void UpdateAnalogGraphs();
         void ClearGraphs();
