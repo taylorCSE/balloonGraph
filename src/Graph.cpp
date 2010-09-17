@@ -56,6 +56,21 @@ Graph::~Graph() {
     */
 }
 
+void Graph::Update() {
+    mpFXYVector * vectorLayer = (mpFXYVector*)window->GetLayer(3);
+    Plot data = GetData();
+
+    string y_label = wxT("Altitude");
+    string x_label = wxT(name);
+    
+	// Create a mpFXYVector layer
+	vectorLayer->SetData(data.altitude, data.data);
+	vectorLayer->SetContinuity(true);
+	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
+	vectorLayer->SetPen(vectorpen);
+	vectorLayer->SetDrawOutsideMargins(false);
+}
+
 Plot Graph::GetData() {
     return DB_getPlotData(db_table,db_col,deviceId);
 }

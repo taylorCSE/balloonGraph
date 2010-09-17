@@ -27,6 +27,7 @@ class Graph {
     public:
         Graph(wxPanel* panel, char* name, char* table, int device_id, char* col);
         virtual ~Graph();
+        void Update();
         Plot GetData();
         mpWindow* window;
         
