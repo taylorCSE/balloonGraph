@@ -205,6 +205,7 @@ void GraphFrame::SelectDevice( wxCommandEvent& event ) {
 
 void GraphFrame::ClearGraphs() {
     for(int i = 0; i<18; i++) {
+        if(graphs[i]) mainSizer->Remove(graphs[i]->window);
         delete graphs[i];
         graphs[i] = 0x00;
     }

@@ -57,7 +57,7 @@ Graph::~Graph() {
 }
 
 void Graph::Update() {
-    mpFXYVector * vectorLayer = (mpFXYVector*)window->GetLayer(3);
+    mpFXYVector * vectorLayer = (mpFXYVector*)window->GetLayer(2);
     Plot data = GetData();
 
     string y_label = wxT("Altitude");
