@@ -189,6 +189,7 @@ void GraphFrame::SelectDevice( wxCommandEvent& event ) {
     if(id > 10000) {
         /// We're selecting a device
         deviceId = deviceIds[id - 10000];
+        ClearGraphs();
     }
     
     if(id == VIEW_BASIC) {

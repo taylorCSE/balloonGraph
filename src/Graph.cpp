@@ -54,6 +54,8 @@ Graph::~Graph() {
     /** 
     *   Destructor for the Main form.
     */
+    
+    delete window;
 }
 
 void Graph::Update(int device_id) {
