@@ -81,6 +81,7 @@ void GraphFrame::UpdateBasicGraphs() {
 	    if(graphs[i]) {
 	        delete graphs[i];
 	        mainSizer->Remove(graphs[i]);
+	        graphs[i] = 0x00;
 	    }
 	}
 
