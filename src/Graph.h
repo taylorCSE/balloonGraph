@@ -28,13 +28,13 @@ class Graph {
         Graph(wxPanel* panel, char* name, char* table, int device_id, char* col);
         virtual ~Graph();
         Plot GetData();
+        mpWindow* window;
         
     private:
         char* name;
         char* db_table;
         char* db_col;
         int deviceId;
-        mpWindow* window;
 };
 
 #endif
