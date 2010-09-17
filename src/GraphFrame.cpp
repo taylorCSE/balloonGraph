@@ -105,7 +105,6 @@ void GraphFrame::CreateGUIControls() {
     *   Creates all of the GUI controls on the main form.
     */
     
-    // Set window properties and title bar
     SetTitle(wxT("Device Graphs"));
     SetIcon(wxNullIcon);
     
@@ -113,9 +112,7 @@ void GraphFrame::CreateGUIControls() {
     mainSizer = new wxGridSizer(3);
     mainPanel->SetSizer(mainSizer);
     
-    for(int i = 0; i < 18; i++) {
-        graphs[i] = 0x00;
-    }
+    ClearGraphs();
 
     Update();
 }
