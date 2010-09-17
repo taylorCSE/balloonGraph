@@ -1,5 +1,7 @@
 #include "database.h"
 
+using namespace std;
+
 MYSQL *DB_conn = NULL;
 MYSQL_RES *DB_result = NULL;
 FILE * DB_log = NULL;

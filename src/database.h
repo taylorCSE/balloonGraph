@@ -14,8 +14,6 @@
 
 #include "Plot.h"
 
-using namespace std;
-
 #define DB_USER "root"
 #define DB_PASS "root"
 #define DB_HOST "127.0.0.1"

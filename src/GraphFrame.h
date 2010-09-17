@@ -31,6 +31,7 @@
 #include <wx/html/htmlwin.h>
                            
 #include "MathPlot.h"
+#include "BaseFrame.h"
 #include "database.h"
 #include "Graph.h"
 #include "Plot.h"
@@ -38,7 +39,7 @@
 #undef GraphFrame_STYLE
 #define GraphFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
 
-class GraphFrame : public wxFrame
+class GraphFrame : public BaseFrame
 {
     public:
         GraphFrame(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("AppName"), const wxPoint& pos = wxDefaultPosition, const wxSize &size = wxSize(360,600), long style = GraphFrame_STYLE);

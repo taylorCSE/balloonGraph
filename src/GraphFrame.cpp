@@ -13,7 +13,7 @@ BEGIN_EVENT_TABLE(GraphFrame,wxFrame)
 END_EVENT_TABLE()
 
 GraphFrame::GraphFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
-: wxFrame(parent, id, title, position, size, style) {
+: BaseFrame(parent, id, title, position, size, style) {
     /**
     *   Constructor for the Main frame.
     */

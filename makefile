@@ -8,6 +8,7 @@ WINDRES   = windres.exe
 BIN	   = App.exe
 
 OBJ	   = $(BUILD)/App.o \
+			$(BUILD)/BaseFrame.o \
 			$(BUILD)/StatusFrame.o \
 			$(BUILD)/Graph.o \
 			$(BUILD)/GraphFrame.o \
@@ -62,6 +63,9 @@ $(BIN): $(OBJ)
 
 $(BUILD)/App.o: $(SRC)/App.cpp $(SRC)/App.h $(SRC)/StatusFrame.h  
 	$(CPP) -c $(SRC)/App.cpp -o $(BUILD)/App.o $(CXXFLAGS)
+
+$(BUILD)/BaseFrame.o: $(SRC)/BaseFrame.cpp $(SRC)/BaseFrame.h $(SRC)/StatusFrame.h  
+	$(CPP) -c $(SRC)/BaseFrame.cpp -o $(BUILD)/BaseFrame.o $(CXXFLAGS)
 
 $(BUILD)/Resource.o: $(SRC)/Resource.rc icons/main.ico
 	$(WINDRES) $(SRC)/Resource.rc $(BUILD)/Resource.o
