@@ -84,6 +84,7 @@ void GraphFrame::UpdateGraph(int num, Graph* graph) {
 }
 
 void GraphFrame::UpdateBasicGraphs() {
+    mainSizer->SetCols(1);
 	UpdateGraph(0, new Graph(mainPanel,"Altitude","gps",atoi(deviceId.c_str()),"Altitude"));
 	UpdateGraph(1, new Graph(mainPanel,"Speed","gps",atoi(deviceId.c_str()),"Spd"));
 	UpdateGraph(2, new Graph(mainPanel,"Climb","gps",atoi(deviceId.c_str()),"Rate"));
@@ -92,6 +93,7 @@ void GraphFrame::UpdateBasicGraphs() {
 void GraphFrame::UpdateAnalogGraphs() {
 	char name[4];
 	
+    mainSizer->SetCols(3);
 	for(int i = 0; i<18; i++) {
         name[0] = 'A';
         name[1] = 0x00;
