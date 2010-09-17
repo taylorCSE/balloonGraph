@@ -73,13 +73,24 @@ void GraphFrame::Update() {
     }
 }
 
+void GraphFrame::UpdateGraph(int num, Graph* graph) {
+    if(!graphs[num]) {
+	    graphs[num] = graph;
+        mainSizer->Add(graphs[num]->window, 1, wxEXPAND | wxALL);
+    }
+}
+
 void GraphFrame::UpdateBasicGraphs() {
+    /*
 	Plot speed = DB_getPlotData("gps","Spd",atoi(deviceId.c_str()));
 	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
 	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
 	
-	//SetNumGraphs(3);
-	/*
+	if(!graphs[0]) {
+	    graphs[i] = new Graph(mainPanel,name,"aip",atoi(deviceId.c_str()),name);
+        mainSizer->Add(graphs[i]->window, 1, wxEXPAND | wxALL);
+	}
+	
 	ReplaceGraph(0, createGraphFromData(wxT("Time"),altitude.time,
 	                                    wxT("Altitude"),altitude.data));
 

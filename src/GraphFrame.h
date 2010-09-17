@@ -52,6 +52,7 @@ class GraphFrame : public wxFrame
         void UpdateBasicGraphs();
         void UpdateAnalogGraphs();
         void ClearGraphs();
+        void UpdateGraph(int num, Graph* graph);
         void OnClose(wxCloseEvent& event);
 
         // Functions
