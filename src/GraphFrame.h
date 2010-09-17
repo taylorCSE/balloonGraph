@@ -55,6 +55,7 @@ class GraphFrame : public wxFrame
         void OnClose(wxCloseEvent& event);
 
         // Functions
+        void OnTimer(wxTimerEvent& event);
         void Update();
         void CreateGUIControls();
         
@@ -79,6 +80,8 @@ class GraphFrame : public wxFrame
         mpWindow* pressureGraph;
         mpWindow* rhGraph;
         
+        wxTimer* updateTimer;
+        
         int view;
         
         vector<string> deviceIds;
@@ -91,6 +94,7 @@ class GraphFrame : public wxFrame
             ID_TEXT = 1000,
             VIEW_BASIC,
             VIEW_ANALOG,
+            UPDATE_TIMER,
             ID_NEWWINDOW
         };
 };

@@ -9,6 +9,7 @@ BEGIN_EVENT_TABLE(GraphFrame,wxFrame)
     EVT_MENU(ID_NEWWINDOW, GraphFrame::NewStatusWindow)
     EVT_MENU(-1, GraphFrame::SelectDevice)
     EVT_CLOSE(GraphFrame::OnClose)
+    EVT_TIMER(UPDATE_TIMER, GraphFrame::OnTimer)
 END_EVENT_TABLE()
 
 GraphFrame::GraphFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
@@ -21,12 +22,19 @@ GraphFrame::GraphFrame(wxWindow *parent, wxWindowID id, const wxString &title, c
     view = VIEW_BASIC;
     
     CreateGUIControls();
+    
+    updateTimer = new wxTimer(this, UPDATE_TIMER);
+    updateTimer->Start(5000);
 }
 
 GraphFrame::~GraphFrame() {
     /** 
     *   Destructor for the Main form.
     */
+}
+
+void GraphFrame::OnTimer(wxTimerEvent& event) {
+    Update();
 }
 
 void GraphFrame::Update() {
