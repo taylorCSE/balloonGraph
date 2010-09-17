@@ -5,7 +5,7 @@
  
 #include "GraphFrame.h"
 
-BEGIN_EVENT_TABLE(GraphFrame,wxFrame)
+BEGIN_EVENT_TABLE(GraphFrame,BaseFrame)
     EVT_MENU(ID_NEWSTATUS, GraphFrame::NewStatusWindow)
     EVT_MENU(ID_NEWGRAPH, GraphFrame::NewGraphWindow)
     EVT_MENU(-1, GraphFrame::SelectDevice)
