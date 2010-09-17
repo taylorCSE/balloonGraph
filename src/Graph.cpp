@@ -10,11 +10,15 @@ Graph::Graph(wxPanel* panel, char* name, char* table, int device_id, char* col) 
     *   Constructor for the Main frame.
     */
 	wxFont windowFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-
     window = new mpWindow(panel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER);
-
-    Plot data = GetData();
+	
+    this->name = name;
+    this->db_table = table;
+    this->db_col = col;
+    this->deviceId = device_id;
     
+    Plot data = GetData();
+
     string y_label = wxT("Altitude");
     string x_label = wxT(name);
     
