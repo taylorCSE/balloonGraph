@@ -98,12 +98,7 @@ void GraphFrame::UpdateAnalogGraphs() {
 	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
 	mpWindow* tmp_graph[18];
 	
-	for(int i = 0; i < 18; i++) {
-        if(!graphs[i]) {
-            graphs[i] = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER );
-            mainSizer->Add(graphs[i], 1, wxEXPAND | wxALL);
-        }
-	}
+	SetNumGraphs(18);
 
     mainSizer->Layout();
 
@@ -124,6 +119,8 @@ void GraphFrame::ReplaceGraph(int graph_num, mpWindow* new_graph) {
 }
 
 void GraphFrame::SetNumGraphs(int num) {
+    mainSizer->SetCols((num-1)/6 + 1);
+
 	for(int i = 0; i < num; i++) {
         if(!graphs[i]) {
             graphs[i] = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER );
