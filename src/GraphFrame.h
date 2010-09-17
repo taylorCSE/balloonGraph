@@ -93,10 +93,7 @@ class GraphFrame : public BaseFrame
         enum {
             ////GUI Enum Control ID Start
             ID_TEXT = 2000,
-            VIEW_BASIC,
-            VIEW_ANALOG,
-            UPDATE_TIMER,
-            ID_NEWWINDOW
+            UPDATE_TIMER
         };
 };
 
