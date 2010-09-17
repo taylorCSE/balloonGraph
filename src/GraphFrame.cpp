@@ -34,26 +34,35 @@ void GraphFrame::Update() {
      * Updates the GUI with new database information
      */
     wxMenuBar *menubar = new wxMenuBar;
-    wxMenu *devices = new wxMenu;
-    wxMenu *view = new wxMenu;
+    wxMenu *devices_menu = new wxMenu;
+    wxMenu *view_menu = new wxMenu;
     
     deviceIds = DB_getAllDevices();
     
-    menubar->Append(devices, wxT("&Devices"));
+    menubar->Append(devices_menu, wxT("&Devices"));
 
     for(unsigned int i = 0; i < deviceIds.size(); i++) {
-        devices->Append(10000+i, deviceIds[i]);
+        devices_menu->Append(10000+i, deviceIds[i]);
     }
 
-    menubar->Append(view, wxT("&View"));
+    menubar->Append(view_menu, wxT("&View"));
     
-    view->Append(VIEW_BASIC, wxT("Basic"));
-    view->Append(VIEW_ANALOG, wxT("Analog Channels"));
+    view_menu->Append(VIEW_BASIC, wxT("Basic"));
+    view_menu->Append(VIEW_ANALOG, wxT("Analog Channels"));
 
     SetMenuBar(menubar);
     
-    //UpdateBasicGraphs();
-    UpdateAnalogGraphs();
+    switch(view) {
+        case VIEW_ANALOG:   
+            UpdateAnalogGraphs();
+            break;
+        case VIEW_BASIC:
+            UpdateBasicGraphs();
+            break;
+        default:
+            UpdateBasicGraphs();
+            break;
+    }
 }
 
 void GraphFrame::UpdateBasicGraphs() {
@@ -68,6 +77,13 @@ void GraphFrame::UpdateBasicGraphs() {
         }
 	}
 
+	for(int i = 3; i < 18; i++) {
+	    if(graphs[i]) {
+	        delete graphs[i];
+	        mainSizer->Remove(graphs[i]);
+	    }
+	}
+
 	ReplaceGraph(0, createGraphFromData(wxT("Time"),altitude.time,
 	                                    wxT("Altitude"),altitude.data));
 
@@ -76,13 +92,6 @@ void GraphFrame::UpdateBasicGraphs() {
 
 	ReplaceGraph(2, createGraphFromData(wxT("Time"),climb.time,
 	                                    wxT("Climb"),climb.data));
-
-	for(int i = 3; i < 18; i++) {
-	    if(graphs[i]) {
-	        delete graphs[i];
-	        mainSizer->Remove(graphs[i]);
-	    }
-	}
 
     mainSizer->Layout();
 }
@@ -193,10 +202,10 @@ void GraphFrame::SelectDevice( wxCommandEvent& event ) {
         deviceId = deviceIds[id - 10000];
     }
     
-    if(id = VIEW_BASIC) { 
+    if(id == VIEW_BASIC) { 
         view = VIEW_BASIC;
     }
-    if(id = VIEW_ANALOG) {
+    if(id == VIEW_ANALOG) {
         view = VIEW_ANALOG;
     }
     
