@@ -101,6 +101,7 @@ void GraphFrame::UpdateAnalogGraphs() {
 	Plot speed = DB_getPlotData("gps","Spd",atoi(deviceId.c_str()));
 	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
 	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
+	mpWindow* tmp_graph[18];
 	
 	for(int i = 0; i < 18; i++) {
         if(!graphs[i]) {
@@ -109,9 +110,15 @@ void GraphFrame::UpdateAnalogGraphs() {
         }
 	}
 
+    mainSizer->Layout();
+
 	for(int i = 0; i<18; i++) {
-	    ReplaceGraph(i, createGraphFromData(wxT("Time"),altitude.time,
-	                                        wxT("Altitude"),altitude.data));
+	    tmp_graph[i] = createGraphFromData(wxT("Time"),altitude.time,
+	                                       wxT("Altitude"),altitude.data);
+	}
+
+	for(int i = 0; i<18; i++) {
+	    ReplaceGraph(i, tmp_graph[i]);
 	}
 
     mainSizer->Layout();
@@ -120,7 +127,7 @@ void GraphFrame::UpdateAnalogGraphs() {
 void GraphFrame::ReplaceGraph(int graph_num, mpWindow* new_graph) {
     mpWindow* old_graph = graphs[graph_num];
 	mainSizer->Replace(graphs[graph_num], new_graph);
-	delete old_graph;
+	delete graphs[graph_num];
 	graphs[graph_num] = new_graph;
 }
 
