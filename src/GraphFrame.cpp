@@ -71,6 +71,8 @@ void GraphFrame::Update() {
             UpdateBasicGraphs();
             break;
     }
+
+    mainSizer->Layout();
 }
 
 void GraphFrame::UpdateGraph(int num, Graph* graph) {
@@ -82,27 +84,9 @@ void GraphFrame::UpdateGraph(int num, Graph* graph) {
 }
 
 void GraphFrame::UpdateBasicGraphs() {
-    /*
-	Plot speed = DB_getPlotData("gps","Spd",atoi(deviceId.c_str()));
-	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
-	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
-	
-	if(!graphs[0]) {
-	    graphs[i] = new Graph(mainPanel,name,"aip",atoi(deviceId.c_str()),name);
-        mainSizer->Add(graphs[i]->window, 1, wxEXPAND | wxALL);
-	}
-	
-	ReplaceGraph(0, createGraphFromData(wxT("Time"),altitude.time,
-	                                    wxT("Altitude"),altitude.data));
-
-	ReplaceGraph(1, createGraphFromData(wxT("Speed"),speed.data,
-	                                    wxT("Altitude"),speed.altitude));
-
-	ReplaceGraph(2, createGraphFromData(wxT("Climb"),climb.data,
-	                                    wxT("Altitude"),climb.altitude));
-
-    mainSizer->Layout();
-    */
+	UpdateGraph(0, new Graph(mainPanel,"Altitude","gps",atoi(deviceId.c_str()),"Altitude"));
+	UpdateGraph(1, new Graph(mainPanel,"Speed","gps",atoi(deviceId.c_str()),"Spd"));
+	UpdateGraph(2, new Graph(mainPanel,"Climb","gps",atoi(deviceId.c_str()),"Rate"));
 }
 
 void GraphFrame::UpdateAnalogGraphs() {
@@ -114,8 +98,6 @@ void GraphFrame::UpdateAnalogGraphs() {
         sprintf(name,"%s%d",name,i+1);
         UpdateGraph(i, new Graph(mainPanel,name,"aip",atoi(deviceId.c_str()),name));
 	}
-
-    mainSizer->Layout();
 }
 
 void GraphFrame::CreateGUIControls() {
