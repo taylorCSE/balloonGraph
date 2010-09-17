@@ -60,10 +60,12 @@ void DB_query(char* item ...) {
 
     /// Execute the query
     
-    mysql_query(DB_conn, query);
-    DB_result = mysql_store_result(DB_conn);
-    
-    fprintf(DB_log, "Rows Returned: %d\n",mysql_num_rows(DB_result));
+    if(!mysql_query(DB_conn, query)) {
+        DB_result = mysql_store_result(DB_conn);
+        fprintf(DB_log, "Rows Returned: %d\n",mysql_num_rows(DB_result));
+    } else {
+        fprintf(DB_log, "Error querying database.\n");
+    }
 }
 
 char* DB_resultAsText() {
@@ -165,9 +167,10 @@ Plot DB_getPlotData(char* table, char* data_column, int device_id) {
     
     DB_query("select UNIX_TIMESTAMP(%s)-UNIX_TIMESTAMP(), Altitude, %s from %s " 
              "where DeviceId=%d "
-             "order by Timestamp asc;",
+             "order by %s asc;",
              timestamp.c_str(),
-             data_column, table, device_id);
+             data_column, table, device_id,
+             timestamp.c_str());
     Plot result;
 
     MYSQL_ROW row;
