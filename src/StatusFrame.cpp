@@ -5,7 +5,7 @@
  
 #include "StatusFrame.h"
 
-BEGIN_EVENT_TABLE(StatusFrame,wxFrame)
+BEGIN_EVENT_TABLE(StatusFrame,BaseFrame)
     EVT_MENU(ID_NEWSTATUS, StatusFrame::NewStatusWindow)
     EVT_MENU(ID_NEWGRAPH, StatusFrame::NewGraphWindow)
     EVT_MENU(-1, StatusFrame::SelectDevice)
@@ -37,25 +37,8 @@ StatusFrame::~StatusFrame() {
 */
 
 void StatusFrame::Update() {
-    wxMenuBar *menubar = new wxMenuBar;
-    wxMenu *devices = new wxMenu;
-    wxMenu *view = new wxMenu;
-    
-    deviceIds = DB_getAllDevices();
-    
-    menubar->Append(devices, wxT("&Devices"));
-
-    for(unsigned int i = 0; i < deviceIds.size(); i++) {
-        devices->Append(10000+i, deviceIds[i]);
-    }
-
-    menubar->Append(view, wxT("&View"));
-    
-    view->Append(ID_NEWSTATUS, "New Status Window");
-    view->Append(ID_NEWGRAPH, "New Graph Window");
-
-    SetMenuBar(menubar);
-    
+    CreateMenu();
+   
     map<string, string> gps_info; 
     gps_info = DB_getMostRecentGPS(atoi(deviceId.c_str()));
     

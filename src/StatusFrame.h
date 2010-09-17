@@ -67,8 +67,6 @@ class StatusFrame : public BaseFrame
         enum {
             ////GUI Enum Control ID Start
             ID_TEXT = 2000,
-            ID_NEWSTATUS,
-            ID_NEWGRAPH
         };
 };
 
