@@ -6,7 +6,8 @@
 #include "GraphFrame.h"
 
 BEGIN_EVENT_TABLE(GraphFrame,wxFrame)
-    EVT_MENU(ID_NEWWINDOW, GraphFrame::NewStatusWindow)
+    EVT_MENU(ID_NEWSTATUS, GraphFrame::NewStatusWindow)
+    EVT_MENU(ID_NEWGRAPH, GraphFrame::NewGraphWindow)
     EVT_MENU(-1, GraphFrame::SelectDevice)
     EVT_CLOSE(GraphFrame::OnClose)
     EVT_TIMER(UPDATE_TIMER, GraphFrame::OnTimer)
@@ -41,24 +42,7 @@ void GraphFrame::Update() {
     /**
      * Updates the GUI with new database information
      */
-    wxMenuBar *menubar = new wxMenuBar;
-    wxMenu *devices_menu = new wxMenu;
-    wxMenu *view_menu = new wxMenu;
-    
-    deviceIds = DB_getAllDevices();
-    
-    menubar->Append(devices_menu, wxT("&Devices"));
-
-    for(unsigned int i = 0; i < deviceIds.size(); i++) {
-        devices_menu->Append(10000+i, deviceIds[i]);
-    }
-
-    menubar->Append(view_menu, wxT("&View"));
-    
-    view_menu->Append(VIEW_BASIC, wxT("Basic"));
-    view_menu->Append(VIEW_ANALOG, wxT("Analog Channels"));
-
-    SetMenuBar(menubar);
+    CreateMenu();    
     
     switch(view) {
         case VIEW_ANALOG:   
@@ -163,12 +147,6 @@ void GraphFrame::ClearGraphs() {
     }
 }
 
-void GraphFrame::NewStatusWindow( wxCommandEvent& event ) {
-    /** 
-     * Launches a new status window
-     */
-     
-    GraphFrame* frame = new GraphFrame(NULL);
-    frame->Show();     
+wxFrame* NewGraphFrame() {
+    return (wxFrame*)(new GraphFrame(NULL));
 }
-

@@ -151,24 +151,7 @@ void StatusFrame::SelectDevice( wxCommandEvent& event ) {
     Update();
 }
 
-/** 
-    Launches a new status window
-*/
-     
-void StatusFrame::NewStatusWindow( wxCommandEvent& event ) {
-
-     
-    StatusFrame* frame = new StatusFrame(NULL);
-    frame->Show();     
+wxFrame* NewStatusFrame() {
+    return (wxFrame*)(new StatusFrame(NULL));
 }
 
-/** 
-    Launches a new graph window
-*/
-     
-void StatusFrame::NewGraphWindow( wxCommandEvent& event ) {
-
-     
-    GraphFrame* frame = new GraphFrame(NULL);
-    frame->Show();     
-}

@@ -49,7 +49,6 @@ class GraphFrame : public BaseFrame
         // Event handlers
         DECLARE_EVENT_TABLE();
         void SelectDevice(wxCommandEvent& event);
-        void NewStatusWindow(wxCommandEvent& event);
         void UpdateBasicGraphs();
         void UpdateAnalogGraphs();
         void ClearGraphs();
@@ -93,7 +92,7 @@ class GraphFrame : public BaseFrame
         // Enumeration for GUI controls
         enum {
             ////GUI Enum Control ID Start
-            ID_TEXT = 1000,
+            ID_TEXT = 2000,
             VIEW_BASIC,
             VIEW_ANALOG,
             UPDATE_TIMER,

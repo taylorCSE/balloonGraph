@@ -48,8 +48,6 @@ class StatusFrame : public BaseFrame
         // Event handlers
         DECLARE_EVENT_TABLE();
         void SelectDevice(wxCommandEvent& event);
-        void NewStatusWindow(wxCommandEvent& event);
-        void NewGraphWindow(wxCommandEvent& event);
         void OnClose(wxCloseEvent& event);
 
         // Functions
@@ -68,7 +66,7 @@ class StatusFrame : public BaseFrame
         // Enumeration for GUI controls
         enum {
             ////GUI Enum Control ID Start
-            ID_TEXT = 1000,
+            ID_TEXT = 2000,
             ID_NEWSTATUS,
             ID_NEWGRAPH
         };
