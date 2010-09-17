@@ -16,14 +16,16 @@
 #else
     #include <wx/wxprec.h>
 #endif
-                           
+
+#include <wx/panel.h>
+
 #include "mathplot.h"
 #include "database.h"
 #include "Plot.h"
 
 class Graph {
     public:
-        Graph(char* name, char* table, int device_id, char* col);
+        Graph(wxPanel* panel, char* name, char* table, int device_id, char* col);
         virtual ~Graph();
         Plot GetData();
         

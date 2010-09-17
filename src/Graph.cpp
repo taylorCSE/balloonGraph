@@ -5,19 +5,22 @@
  
 #include "Graph.h"
 
-Graph::Graph(char* name, char* table, int device_id, char* col) {
+Graph::Graph(wxPanel* panel, char* name, char* table, int device_id, char* col) {
     /**
     *   Constructor for the Main frame.
     */
 	wxFont windowFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 
-    window = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER );
+    window = new mpWindow(panel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER);
 
     Plot data = GetData();
     
+    string y_label = wxT("Altitude");
+    string x_label = wxT(name);
+    
 	// Create a mpFXYVector layer
 	mpFXYVector* vectorLayer = new mpFXYVector(_(""));
-	vectorLayer->SetData(data.alitude, data.data);
+	vectorLayer->SetData(data.altitude, data.data);
 	vectorLayer->SetContinuity(true);
 	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
 	vectorLayer->SetPen(vectorpen);
@@ -41,7 +44,6 @@ Graph::Graph(char* name, char* table, int device_id, char* col) {
     leg->SetVisible(true);
     
     window->Fit();
-    return window;    
 }
 
 Graph::~Graph() {
@@ -51,5 +53,5 @@ Graph::~Graph() {
 }
 
 Plot Graph::GetData() {
-    return DB_getPlotData(table,db_col,device_id);
+    return DB_getPlotData(db_table,db_col,deviceId);
 }
