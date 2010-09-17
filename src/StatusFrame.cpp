@@ -21,6 +21,8 @@ StatusFrame::StatusFrame(wxWindow *parent, wxWindowID id, const wxString &title,
     deviceId = "Please select a device from the menu.";
     
     CreateGUIControls();
+    
+    SetTransparent(225);
 }
 
 /** 
