@@ -70,21 +70,8 @@ void GraphFrame::UpdateBasicGraphs() {
 	Plot altitude = DB_getPlotData("gps","Altitude",atoi(deviceId.c_str()));
 	Plot climb = DB_getPlotData("gps","Rate",atoi(deviceId.c_str()));
 	
-	for(int i = 0; i < 3; i++) {
-        if(!graphs[i]) {
-            graphs[i] = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(500,500), wxSUNKEN_BORDER );
-            mainSizer->Add(graphs[i], 1, wxEXPAND | wxALL);
-        }
-	}
-
-	for(int i = 3; i < 18; i++) {
-	    if(graphs[i]) {
-	        delete graphs[i];
-	        mainSizer->Remove(graphs[i]);
-	        graphs[i] = 0x00;
-	    }
-	}
-
+	SetNumGraphs(3);
+	
 	ReplaceGraph(0, createGraphFromData(wxT("Time"),altitude.time,
 	                                    wxT("Altitude"),altitude.data));
 
@@ -105,7 +92,7 @@ void GraphFrame::UpdateAnalogGraphs() {
 	
 	for(int i = 0; i < 18; i++) {
         if(!graphs[i]) {
-            graphs[i] = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(500,500), wxSUNKEN_BORDER );
+            graphs[i] = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER );
             mainSizer->Add(graphs[i], 1, wxEXPAND | wxALL);
         }
 	}
@@ -115,20 +102,34 @@ void GraphFrame::UpdateAnalogGraphs() {
 	for(int i = 0; i<18; i++) {
 	    tmp_graph[i] = createGraphFromData(wxT("Time"),altitude.time,
 	                                       wxT("Altitude"),altitude.data);
-	}
-
-	for(int i = 0; i<18; i++) {
-	    ReplaceGraph(i, tmp_graph[i]);
+        ReplaceGraph(i, tmp_graph[i]);
+        mainSizer->Layout();
 	}
 
     mainSizer->Layout();
 }
 
 void GraphFrame::ReplaceGraph(int graph_num, mpWindow* new_graph) {
-    mpWindow* old_graph = graphs[graph_num];
 	mainSizer->Replace(graphs[graph_num], new_graph);
 	delete graphs[graph_num];
 	graphs[graph_num] = new_graph;
+}
+
+void GraphFrame::SetNumGraphs(int num) {
+	for(int i = 0; i < num; i++) {
+        if(!graphs[i]) {
+            graphs[i] = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER );
+            mainSizer->Add(graphs[i], 1, wxEXPAND | wxALL);
+        }
+	}
+
+	for(int i = num; i < 18; i++) {
+	    if(graphs[i]) {
+	        delete graphs[i];
+	        mainSizer->Remove(graphs[i]);
+	        graphs[i] = 0x00;
+	    }
+	}
 }
 
 void GraphFrame::CreateGUIControls() {
@@ -156,7 +157,7 @@ mpWindow* GraphFrame::createGraphFromData(wxString x_label, vector<double> x_dat
     mpWindow* graph;
 	wxFont graphFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
 
-    graph = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(500,500), wxSUNKEN_BORDER );
+    graph = new mpWindow( mainPanel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER );
 
 	// Create a mpFXYVector layer
 	mpFXYVector* vectorLayer = new mpFXYVector(_(""));

@@ -49,6 +49,7 @@ class GraphFrame : public wxFrame
         void NewStatusWindow(wxCommandEvent& event);
         mpWindow* createGraphFromData(wxString x_label, vector<double> x_data,wxString y_label, vector<double> y_data);
         void ReplaceGraph(int graph_num, mpWindow* new_graph);
+        void SetNumGraphs(int num);
         void UpdateBasicGraphs();
         void UpdateAnalogGraphs();
         void OnClose(wxCloseEvent& event);
