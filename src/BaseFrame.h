@@ -48,6 +48,8 @@ class BaseFrame : public wxFrame
         
         wxTimer* updateTimer;
         
+        int view;
+        
     private:
         DECLARE_EVENT_TABLE();
         // Enumeration for GUI controls

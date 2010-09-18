@@ -16,6 +16,8 @@ BaseFrame::BaseFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
 : wxFrame(parent, id, title, position, size, style) {
     updateTimer = new wxTimer(this, UPDATE_TIMER);
     updateTimer->Start(5000);
+
+    view = VIEW_BASIC;
 }
 
 BaseFrame::~BaseFrame() {
@@ -73,6 +75,13 @@ void BaseFrame::SelectDevice( wxCommandEvent& event ) {
     if(id > 10000) {
         /// We're selecting a device
         deviceId = deviceIds[id - 10000];
+    }
+
+    if(id == VIEW_BASIC) {
+        view = VIEW_BASIC;
+    }
+    if(id == VIEW_ANALOG) {
+        view = VIEW_ANALOG;
     }
     
     Update();

@@ -16,7 +16,7 @@ GraphFrame::GraphFrame(wxWindow *parent, wxWindowID id, const wxString &title, c
     */
     deviceId = "Please select a device from the menu.";
     
-    view = VIEW_BASIC;
+    last_view = view;
     
     CreateGUIControls();
     
@@ -32,6 +32,10 @@ void GraphFrame::Update() {
     /**
      * Updates the GUI with new database information
      */
+     
+    if(last_view != view) ClearGraphs();
+    last_view = view;
+     
     CreateMenu();    
     
     switch(view) {
@@ -113,20 +117,7 @@ void GraphFrame::SelectDevice( wxCommandEvent& event ) {
      
     int id = event.GetId();
     
-    if(id > 10000) {
-        /// We're selecting a device
-        deviceId = deviceIds[id - 10000];
-        ClearGraphs();
-    }
-    
-    if(id == VIEW_BASIC) {
-        ClearGraphs();
-        view = VIEW_BASIC;
-    }
-    if(id == VIEW_ANALOG) {
-        ClearGraphs();
-        view = VIEW_ANALOG;
-    }
+
     
     Update();
 }

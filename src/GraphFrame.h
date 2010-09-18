@@ -67,7 +67,7 @@ class GraphFrame : public BaseFrame
         
         Graph* graphs[18];
         
-        int view;
+        int last_view;
         
     private:
         // Enumeration for GUI controls
