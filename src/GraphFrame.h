@@ -67,8 +67,6 @@ class GraphFrame : public BaseFrame
         
         Graph* graphs[18];
         
-        wxTimer* updateTimer;
-        
         int view;
         
     private:

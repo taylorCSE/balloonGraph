@@ -46,6 +46,7 @@ class BaseFrame : public wxFrame
         vector<string> deviceIds;
         string deviceId;
         
+        wxTimer* updateTimer;
         
     private:
         DECLARE_EVENT_TABLE();

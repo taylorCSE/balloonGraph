@@ -20,8 +20,6 @@ GraphFrame::GraphFrame(wxWindow *parent, wxWindowID id, const wxString &title, c
     
     CreateGUIControls();
     
-    updateTimer = new wxTimer(this, UPDATE_TIMER);
-    updateTimer->Start(5000);
 }
 
 GraphFrame::~GraphFrame() {

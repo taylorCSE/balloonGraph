@@ -14,6 +14,8 @@ END_EVENT_TABLE()
 
 BaseFrame::BaseFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
 : wxFrame(parent, id, title, position, size, style) {
+    updateTimer = new wxTimer(this, UPDATE_TIMER);
+    updateTimer->Start(5000);
 }
 
 BaseFrame::~BaseFrame() {
