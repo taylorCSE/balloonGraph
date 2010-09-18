@@ -122,21 +122,6 @@ void GraphFrame::FitAll( wxCommandEvent& event ) {
     }
 }
 
-void GraphFrame::SelectDevice( wxCommandEvent& event ) {
-    /** 
-     * Selects a device from the menu
-     *
-     * This is a catchall menu event handler becasue I couldn't think 
-     * of a better way to do this because the menu is dynamic
-     */
-     
-    int id = event.GetId();
-    
-
-    
-    Update();
-}
-
 void GraphFrame::ClearGraphs() {
     for(int i = 0; i<18; i++) {
         if(graphs[i]) mainSizer->Remove(graphs[i]->window);

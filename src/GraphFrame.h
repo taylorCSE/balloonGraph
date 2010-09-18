@@ -48,7 +48,6 @@ class GraphFrame : public BaseFrame
     private:
         // Event handlers
         DECLARE_EVENT_TABLE();
-        void SelectDevice(wxCommandEvent& event);
         void UpdateBasicGraphs();
         void UpdateAnalogGraphs();
         void ClearGraphs();
