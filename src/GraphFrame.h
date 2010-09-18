@@ -85,8 +85,6 @@ class GraphFrame : public BaseFrame
         
         int view;
         
-        string deviceId;
-        
     private:
         // Enumeration for GUI controls
         enum {

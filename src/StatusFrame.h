@@ -47,7 +47,6 @@ class StatusFrame : public BaseFrame
     private:
         // Event handlers
         DECLARE_EVENT_TABLE();
-        void SelectDevice(wxCommandEvent& event);
         void OnClose(wxCloseEvent& event);
 
         // Functions
@@ -58,8 +57,6 @@ class StatusFrame : public BaseFrame
         wxPanel *mainPanel; 
         wxBoxSizer *mainSizer;
         wxHtmlWindow *deviceInfo;
-        
-        string deviceId;
         
     private:
         // Enumeration for GUI controls

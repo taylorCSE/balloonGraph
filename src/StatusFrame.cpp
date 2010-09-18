@@ -8,7 +8,6 @@
 BEGIN_EVENT_TABLE(StatusFrame,BaseFrame)
     EVT_MENU(ID_NEWSTATUS, StatusFrame::NewStatusWindow)
     EVT_MENU(ID_NEWGRAPH, StatusFrame::NewGraphWindow)
-    EVT_MENU(-1, StatusFrame::SelectDevice)
     EVT_CLOSE(StatusFrame::OnClose)
 END_EVENT_TABLE()
 
@@ -112,26 +111,6 @@ void StatusFrame::CreateGUIControls() {
 
 void StatusFrame::OnClose(wxCloseEvent& event) {
     Destroy();
-}
-
-/** 
-    Selects a device from the menu
-    
-    This is a catchall menu event handler becasue I couldn't think 
-    of a better way to do this because the menu is dynamic
-*/
-     
-void StatusFrame::SelectDevice( wxCommandEvent& event ) {
-
-     
-    int id = event.GetId();
-    
-    if(id > 10000) {
-        /// We're selecting a device
-        deviceId = deviceIds[id - 10000];
-    }
-    
-    Update();
 }
 
 wxFrame* NewStatusFrame() {

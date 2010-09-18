@@ -8,6 +8,7 @@
 BEGIN_EVENT_TABLE(BaseFrame,wxFrame)
     EVT_MENU(ID_NEWSTATUS, BaseFrame::NewStatusWindow)
     EVT_MENU(ID_NEWGRAPH, BaseFrame::NewGraphWindow)
+    EVT_MENU(-1, BaseFrame::SelectDevice)
 END_EVENT_TABLE()
 
 BaseFrame::BaseFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
@@ -61,4 +62,15 @@ void BaseFrame::NewStatusWindow( wxCommandEvent& event ) {
 void BaseFrame::NewGraphWindow( wxCommandEvent& event ) {
     wxFrame* frame = NewGraphFrame();
     frame->Show();     
+}
+
+void BaseFrame::SelectDevice( wxCommandEvent& event ) {
+    int id = event.GetId();
+    
+    if(id > 10000) {
+        /// We're selecting a device
+        deviceId = deviceIds[id - 10000];
+    }
+    
+    Update();
 }

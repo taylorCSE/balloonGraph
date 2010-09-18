@@ -8,7 +8,6 @@
 BEGIN_EVENT_TABLE(GraphFrame,BaseFrame)
     EVT_MENU(ID_NEWSTATUS, GraphFrame::NewStatusWindow)
     EVT_MENU(ID_NEWGRAPH, GraphFrame::NewGraphWindow)
-    EVT_MENU(-1, GraphFrame::SelectDevice)
     EVT_CLOSE(GraphFrame::OnClose)
     EVT_TIMER(UPDATE_TIMER, GraphFrame::OnTimer)
 END_EVENT_TABLE()

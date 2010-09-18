@@ -36,9 +36,16 @@ class BaseFrame : public wxFrame
         void NewGraphWindow(wxCommandEvent& event);
         virtual ~BaseFrame();
         void CreateMenu();
+        void SelectDevice(wxCommandEvent& event );
+
+        virtual void Update() = 0;
+        
 
         wxMenuBar *menubar;
         vector<string> deviceIds;
+        string deviceId;
+        
+        
     private:
         DECLARE_EVENT_TABLE();
         // Enumeration for GUI controls
