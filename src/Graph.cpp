@@ -73,8 +73,14 @@ void Graph::Update(int device_id) {
 	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
 	vectorLayer->SetPen(vectorpen);
 	vectorLayer->SetDrawOutsideMargins(false);
+	
+	window->UpdateAll();
 }
 
 Plot Graph::GetData() {
     return DB_getPlotData((char*)db_table.c_str(),(char*)db_col.c_str(),deviceId);
+}
+
+void Graph::Fit() {
+    window->Fit();
 }

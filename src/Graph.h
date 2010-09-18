@@ -29,6 +29,7 @@ class Graph {
         virtual ~Graph();
         void Update(int device_id = 0);
         Plot GetData();
+        void Fit();
         mpWindow* window;
         
     private:
