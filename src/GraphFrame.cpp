@@ -6,6 +6,7 @@
 #include "GraphFrame.h"
 
 BEGIN_EVENT_TABLE(GraphFrame,BaseFrame)
+    EVT_MENU(ID_FITALL, GraphFrame::FitAll)
     EVT_CLOSE(GraphFrame::OnClose)
 END_EVENT_TABLE()
 
@@ -36,7 +37,13 @@ void GraphFrame::Update() {
     if(last_view != view) ClearGraphs();
     last_view = view;
      
-    CreateMenu();    
+    CreateMenu();
+    
+    wxMenu *graph_menu = new wxMenu;
+    
+    menubar->Append(graph_menu, wxT("&Graphs"));
+    
+    graph_menu->Append(ID_FITALL, wxT("Fit All"));
     
     switch(view) {
         case VIEW_ANALOG:   
@@ -105,6 +112,14 @@ void GraphFrame::OnClose(wxCloseEvent& event) {
     *   Exit the ChaosConnect Program
     */
     Destroy();
+}
+
+void GraphFrame::FitAll( wxCommandEvent& event ) {
+    for(int i = 0; i < 18; i++) {
+        if(graphs[i]) {
+            graphs[i]->Fit();
+        }
+    }
 }
 
 void GraphFrame::SelectDevice( wxCommandEvent& event ) {

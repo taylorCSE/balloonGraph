@@ -52,6 +52,7 @@ class GraphFrame : public BaseFrame
         void UpdateBasicGraphs();
         void UpdateAnalogGraphs();
         void ClearGraphs();
+        void FitAll(wxCommandEvent& event);
         void UpdateGraph(int num, Graph* graph);
         void OnClose(wxCloseEvent& event);
 
@@ -74,7 +75,7 @@ class GraphFrame : public BaseFrame
         enum {
             ////GUI Enum Control ID Start
             ID_TEXT = 2000,
-            UPDATE_TIMER
+            ID_FITALL
         };
 };
 
