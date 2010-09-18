@@ -6,8 +6,6 @@
 #include "StatusFrame.h"
 
 BEGIN_EVENT_TABLE(StatusFrame,BaseFrame)
-    EVT_MENU(ID_NEWSTATUS, StatusFrame::NewStatusWindow)
-    EVT_MENU(ID_NEWGRAPH, StatusFrame::NewGraphWindow)
     EVT_CLOSE(StatusFrame::OnClose)
 END_EVENT_TABLE()
 

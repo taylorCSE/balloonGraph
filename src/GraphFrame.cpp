@@ -6,8 +6,6 @@
 #include "GraphFrame.h"
 
 BEGIN_EVENT_TABLE(GraphFrame,BaseFrame)
-    EVT_MENU(ID_NEWSTATUS, GraphFrame::NewStatusWindow)
-    EVT_MENU(ID_NEWGRAPH, GraphFrame::NewGraphWindow)
     EVT_CLOSE(GraphFrame::OnClose)
     EVT_TIMER(UPDATE_TIMER, GraphFrame::OnTimer)
 END_EVENT_TABLE()
