@@ -7,7 +7,6 @@
 
 BEGIN_EVENT_TABLE(GraphFrame,BaseFrame)
     EVT_CLOSE(GraphFrame::OnClose)
-    EVT_TIMER(UPDATE_TIMER, GraphFrame::OnTimer)
 END_EVENT_TABLE()
 
 GraphFrame::GraphFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
@@ -29,10 +28,6 @@ GraphFrame::~GraphFrame() {
     /** 
     *   Destructor for the Main form.
     */
-}
-
-void GraphFrame::OnTimer(wxTimerEvent& event) {
-    Update();
 }
 
 void GraphFrame::Update() {

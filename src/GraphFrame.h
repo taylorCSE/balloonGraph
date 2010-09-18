@@ -56,7 +56,6 @@ class GraphFrame : public BaseFrame
         void OnClose(wxCloseEvent& event);
 
         // Functions
-        void OnTimer(wxTimerEvent& event);
         void Update();
         void CreateGUIControls();
         

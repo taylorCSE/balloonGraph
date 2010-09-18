@@ -8,6 +8,7 @@
 BEGIN_EVENT_TABLE(BaseFrame,wxFrame)
     EVT_MENU(ID_NEWSTATUS, BaseFrame::NewStatusWindow)
     EVT_MENU(ID_NEWGRAPH, BaseFrame::NewGraphWindow)
+    EVT_TIMER(UPDATE_TIMER, BaseFrame::OnTimer)
     EVT_MENU(-1, BaseFrame::SelectDevice)
 END_EVENT_TABLE()
 
@@ -74,3 +75,9 @@ void BaseFrame::SelectDevice( wxCommandEvent& event ) {
     
     Update();
 }
+
+void BaseFrame::OnTimer(wxTimerEvent& event) {
+    Update();
+}
+
+
