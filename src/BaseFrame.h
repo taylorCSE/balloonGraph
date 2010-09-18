@@ -38,6 +38,7 @@ class BaseFrame : public wxFrame
         void CreateMenu();
         void SelectDevice(wxCommandEvent& event );
         void OnTimer(wxTimerEvent& event);
+        void OnClose(wxCloseEvent& event);
 
         virtual void Update() = 0;
         

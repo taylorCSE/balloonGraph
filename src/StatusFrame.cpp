@@ -6,7 +6,6 @@
 #include "StatusFrame.h"
 
 BEGIN_EVENT_TABLE(StatusFrame,BaseFrame)
-    EVT_CLOSE(StatusFrame::OnClose)
 END_EVENT_TABLE()
 
 /**
@@ -100,15 +99,6 @@ void StatusFrame::CreateGUIControls() {
 
     Update();
 
-}
-
-/**
-    Event handler for the form closing event
-    Exit the ChaosConnect Program
-*/
-
-void StatusFrame::OnClose(wxCloseEvent& event) {
-    Destroy();
 }
 
 wxFrame* NewStatusFrame() {

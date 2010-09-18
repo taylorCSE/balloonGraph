@@ -7,7 +7,6 @@
 
 BEGIN_EVENT_TABLE(GraphFrame,BaseFrame)
     EVT_MENU(ID_FITALL, GraphFrame::FitAll)
-    EVT_CLOSE(GraphFrame::OnClose)
 END_EVENT_TABLE()
 
 GraphFrame::GraphFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
@@ -104,14 +103,6 @@ void GraphFrame::CreateGUIControls() {
     ClearGraphs();
 
     Update();
-}
-
-void GraphFrame::OnClose(wxCloseEvent& event) {
-    /**
-    *   Event handler for the form closing event
-    *   Exit the ChaosConnect Program
-    */
-    Destroy();
 }
 
 void GraphFrame::FitAll( wxCommandEvent& event ) {

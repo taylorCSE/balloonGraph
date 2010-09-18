@@ -53,7 +53,6 @@ class GraphFrame : public BaseFrame
         void ClearGraphs();
         void FitAll(wxCommandEvent& event);
         void UpdateGraph(int num, Graph* graph);
-        void OnClose(wxCloseEvent& event);
 
         // Functions
         void Update();

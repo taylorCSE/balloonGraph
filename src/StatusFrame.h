@@ -47,7 +47,6 @@ class StatusFrame : public BaseFrame
     private:
         // Event handlers
         DECLARE_EVENT_TABLE();
-        void OnClose(wxCloseEvent& event);
 
         // Functions
         void Update();

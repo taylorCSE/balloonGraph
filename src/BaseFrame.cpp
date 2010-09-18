@@ -10,6 +10,7 @@ BEGIN_EVENT_TABLE(BaseFrame,wxFrame)
     EVT_MENU(ID_NEWGRAPH, BaseFrame::NewGraphWindow)
     EVT_TIMER(UPDATE_TIMER, BaseFrame::OnTimer)
     EVT_MENU(-1, BaseFrame::SelectDevice)
+    EVT_CLOSE(BaseFrame::OnClose)
 END_EVENT_TABLE()
 
 BaseFrame::BaseFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
@@ -92,3 +93,10 @@ void BaseFrame::OnTimer(wxTimerEvent& event) {
 }
 
 
+void BaseFrame::OnClose(wxCloseEvent& event) {
+    /**
+    *   Event handler for the form closing event
+    *   Exit the ChaosConnect Program
+    */
+    Destroy();
+}
