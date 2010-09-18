@@ -65,21 +65,8 @@ class GraphFrame : public BaseFrame
         wxPanel *colPanel[3]; 
         wxGridSizer *mainSizer;
         wxBoxSizer *colSizer[3];
-        wxHtmlWindow *deviceInfo;
         
         Graph* graphs[18];
-        mpWindow* altitudeGraph;
-        mpWindow* speedGraph;
-        mpWindow* climbGraph;
-        
-        mpWindow* bat1Graph;
-        mpWindow* bat2Graph;
-        mpWindow* busGraph;
-        mpWindow* signalGraph;
-        mpWindow* temp_intGraph;
-        mpWindow* temp_extGraph;
-        mpWindow* pressureGraph;
-        mpWindow* rhGraph;
         
         wxTimer* updateTimer;
         
