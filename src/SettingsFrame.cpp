@@ -6,6 +6,8 @@
 #include "SettingsFrame.h"
 
 BEGIN_EVENT_TABLE(SettingsFrame,BaseFrame)
+    EVT_BUTTON(ID_OK,  SettingsFrame::OnOk)
+    EVT_BUTTON(ID_CANCEL,  SettingsFrame::OnCancel)
 END_EVENT_TABLE()
 
 /**
@@ -53,8 +55,8 @@ void SettingsFrame::CreateGUIControls() {
     wxStaticText* db_user_label = new wxStaticText(mainPanel,-1,wxT("Database Username"));
     wxStaticText* db_pass_label = new wxStaticText(mainPanel,-1,wxT("Database Password"));
     
-    wxButton* ok_button = new wxButton(mainPanel,-1,wxT("Ok"));
-    wxButton* cancel_button = new wxButton(mainPanel,-1,wxT("Cancel"));
+    wxButton* ok_button = new wxButton(mainPanel,ID_OK,wxT("Ok"));
+    wxButton* cancel_button = new wxButton(mainPanel,ID_CANCEL,wxT("Cancel"));
     
     mainSizer->Add(db_host_label, 0);
     mainSizer->Add(dbHost,       0);
@@ -71,6 +73,14 @@ void SettingsFrame::CreateGUIControls() {
 }
 
 void SettingsFrame::Update() {
+}
+
+void SettingsFrame::OnOk( wxCommandEvent& event ) {
+}
+
+void SettingsFrame::OnCancel( wxCommandEvent& event ) {
+    wxCloseEvent close_event;
+    OnClose(close_event);
 }
 
 wxFrame* NewSettingsFrame() {

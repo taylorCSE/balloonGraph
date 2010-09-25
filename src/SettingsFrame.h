@@ -51,6 +51,8 @@ class SettingsFrame : public BaseFrame
         // Functions
         void CreateGUIControls();
         void Update();
+        void OnOk( wxCommandEvent& event );
+        void OnCancel( wxCommandEvent& event );
         
         // wxWidgets gui objects
         wxPanel *mainPanel; 
