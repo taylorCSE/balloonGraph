@@ -72,6 +72,8 @@ void SettingsFrame::CreateGUIControls() {
     buttonSizer->Add(cancel_button,       0);
 
     Update();
+    
+    mainSizer->Fit(this);
 }
 
 void SettingsFrame::Update() {
