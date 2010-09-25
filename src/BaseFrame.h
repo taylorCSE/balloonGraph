@@ -59,6 +59,7 @@ class BaseFrame : public wxFrame
             ID_TEXT = 1000,
             VIEW_BASIC,
             VIEW_ANALOG,
+            VIEW_SETTINGS,
             UPDATE_TIMER,
             ID_NEWSTATUS,
             ID_NEWGRAPH

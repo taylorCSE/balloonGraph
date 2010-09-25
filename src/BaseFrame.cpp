@@ -42,6 +42,7 @@ void BaseFrame::CreateMenu() {
     
     view_menu->Append(VIEW_BASIC, wxT("Basic"));
     view_menu->Append(VIEW_ANALOG, wxT("Analog Channels"));
+    view_menu->Append(VIEW_SETTINGS, wxT("Settings"));
 
     menubar->Append(window_menu, wxT("&Window"));
     
