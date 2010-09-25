@@ -55,13 +55,18 @@ class SettingsFrame : public BaseFrame
         // wxWidgets gui objects
         wxPanel *mainPanel; 
         wxBoxSizer *mainSizer;
-        wxHtmlWindow *deviceInfo;
+        
+        wxTextCtrl* dbHost;
+        wxTextCtrl* dbName;
+        wxTextCtrl* dbUser;
+        wxTextCtrl* dbPass;
         
     private:
         // Enumeration for GUI controls
         enum {
             ////GUI Enum Control ID Start
-            ID_TEXT = 2000,
+            ID_OK = 2000,
+            ID_CANCEL,
         };
 };
 

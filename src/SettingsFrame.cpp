@@ -43,24 +43,29 @@ void SettingsFrame::CreateGUIControls() {
     mainSizer = new wxBoxSizer(wxVERTICAL);
     mainPanel->SetSizer(mainSizer);
     
-    wxTextCtrl* db_host = new wxTextCtrl(mainPanel,-1,DB_HOST);
-    wxTextCtrl* db_name = new wxTextCtrl(mainPanel,-1,DB_NAME);
-    wxTextCtrl* db_user = new wxTextCtrl(mainPanel,-1,DB_USER);
-    wxTextCtrl* db_pass = new wxTextCtrl(mainPanel,-1,DB_PASS);
+    dbHost = new wxTextCtrl(mainPanel,-1,DB_HOST);
+    dbName = new wxTextCtrl(mainPanel,-1,DB_NAME);
+    dbUser = new wxTextCtrl(mainPanel,-1,DB_USER);
+    dbPass = new wxTextCtrl(mainPanel,-1,DB_PASS);
     
     wxStaticText* db_host_label = new wxStaticText(mainPanel,-1,wxT("Database Hostname"));
     wxStaticText* db_name_label = new wxStaticText(mainPanel,-1,wxT("Database Name"));
     wxStaticText* db_user_label = new wxStaticText(mainPanel,-1,wxT("Database Username"));
     wxStaticText* db_pass_label = new wxStaticText(mainPanel,-1,wxT("Database Password"));
     
+    wxButton* ok_button = new wxButton(mainPanel,-1,wxT("Ok"));
+    wxButton* cancel_button = new wxButton(mainPanel,-1,wxT("Cancel"));
+    
     mainSizer->Add(db_host_label, 0);
-    mainSizer->Add(db_host,       0);
+    mainSizer->Add(dbHost,       0);
     mainSizer->Add(db_name_label, 0);
-    mainSizer->Add(db_name,       0);
+    mainSizer->Add(dbName,       0);
     mainSizer->Add(db_user_label, 0);
-    mainSizer->Add(db_user,       0);
+    mainSizer->Add(dbUser,       0);
     mainSizer->Add(db_pass_label, 0);
-    mainSizer->Add(db_pass,       0);
+    mainSizer->Add(dbPass,       0);
+    mainSizer->Add(ok_button,       0);
+    mainSizer->Add(cancel_button,       0);
 
     Update();
 }
