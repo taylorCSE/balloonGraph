@@ -80,6 +80,9 @@ void SettingsFrame::OnOk( wxCommandEvent& event ) {
     DB_NAME = dbName->GetValue();
     DB_USER = dbUser->GetValue();
     DB_PASS = dbPass->GetValue();
+
+    wxCloseEvent close_event;
+    OnClose(close_event);
 }
 
 void SettingsFrame::OnCancel( wxCommandEvent& event ) {
