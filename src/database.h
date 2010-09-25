@@ -14,11 +14,6 @@
 
 #include "Plot.h"
 
-#define DB_USER "root"
-#define DB_PASS "root"
-#define DB_HOST "127.0.0.1"
-#define DB_NAME "hawkeye"
-
 extern FILE * DB_log;
 
 void DB_connect();

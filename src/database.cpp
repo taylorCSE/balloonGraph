@@ -6,6 +6,11 @@ MYSQL *DB_conn = NULL;
 MYSQL_RES *DB_result = NULL;
 FILE * DB_log = NULL;
 
+char* DB_USER = "root";
+char* DB_PASS = "root";
+char* DB_HOST = "127.0.0.1";
+char* DB_NAME = "hawkeye";
+
 char DB_buf[16384];
 
 void DB_connect() {
