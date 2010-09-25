@@ -16,10 +16,10 @@
 
 extern FILE * DB_log;
 
-extern char* DB_USER;
-extern char* DB_PASS;
-extern char* DB_HOST;
-extern char* DB_NAME;
+extern string DB_USER;
+extern string DB_PASS;
+extern string DB_HOST;
+extern string DB_NAME;
 
 void DB_connect();
 void DB_query(char * item ...);

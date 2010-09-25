@@ -76,6 +76,10 @@ void SettingsFrame::Update() {
 }
 
 void SettingsFrame::OnOk( wxCommandEvent& event ) {
+    DB_HOST = dbHost->GetValue();
+    DB_NAME = dbName->GetValue();
+    DB_USER = dbUser->GetValue();
+    DB_PASS = dbPass->GetValue();
 }
 
 void SettingsFrame::OnCancel( wxCommandEvent& event ) {

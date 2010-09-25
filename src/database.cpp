@@ -6,10 +6,10 @@ MYSQL *DB_conn = NULL;
 MYSQL_RES *DB_result = NULL;
 FILE * DB_log = NULL;
 
-char* DB_USER = "root";
-char* DB_PASS = "root";
-char* DB_HOST = "127.0.0.1";
-char* DB_NAME = "hawkeye";
+string DB_USER = "root";
+string DB_PASS = "root";
+string DB_HOST = "127.0.0.1";
+string DB_NAME = "hawkeye";
 
 char DB_buf[16384];
 
@@ -23,7 +23,9 @@ void DB_connect() {
         return;
     }
 
-    if (mysql_real_connect(DB_conn, DB_HOST, DB_USER, DB_PASS, DB_NAME, 0, NULL, 0) == NULL) {
+    if (mysql_real_connect(DB_conn, DB_HOST.c_str(), DB_USER.c_str(), 
+                                    DB_PASS.c_str(), DB_NAME.c_str(),
+                                    0, NULL, 0) == NULL) {
         fprintf(DB_log,"Error %u: %s\n", mysql_errno(DB_conn), mysql_error(DB_conn));
         return;
     }
