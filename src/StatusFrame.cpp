@@ -18,7 +18,7 @@ StatusFrame::StatusFrame(wxWindow *parent, wxWindowID id, const wxString &title,
     
     CreateGUIControls();
     
-    SetTransparent(225);
+    SetTransparent(245);
 }
 
 /** 

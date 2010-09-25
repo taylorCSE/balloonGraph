@@ -20,7 +20,7 @@ SettingsFrame::SettingsFrame(wxWindow *parent, wxWindowID id, const wxString &ti
     
     CreateGUIControls();
     
-    SetTransparent(225);
+    SetTransparent(245);
 }
 
 /** 
