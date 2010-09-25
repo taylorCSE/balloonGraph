@@ -43,6 +43,7 @@ void SettingsFrame::CreateGUIControls() {
     
     mainPanel = new wxPanel(this, wxID_ANY);
     mainSizer = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
     mainPanel->SetSizer(mainSizer);
     
     dbHost = new wxTextCtrl(mainPanel,-1,DB_HOST);
@@ -66,8 +67,9 @@ void SettingsFrame::CreateGUIControls() {
     mainSizer->Add(dbUser,       0);
     mainSizer->Add(db_pass_label, 0);
     mainSizer->Add(dbPass,       0);
-    mainSizer->Add(ok_button,       0);
-    mainSizer->Add(cancel_button,       0);
+    mainSizer->Add(buttonSizer,       0);
+    buttonSizer->Add(ok_button,       0);
+    buttonSizer->Add(cancel_button,       0);
 
     Update();
 }
