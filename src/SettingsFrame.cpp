@@ -36,7 +36,7 @@ void SettingsFrame::CreateGUIControls() {
 
     
     // Set window properties and title bar
-    SetTitle(wxT("Device Settings"));
+    SetTitle(wxT("Settings"));
     SetIcon(wxNullIcon);
     
     mainPanel = new wxPanel(this, wxID_ANY);

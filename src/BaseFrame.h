@@ -24,9 +24,11 @@
 
 class GraphFrame;
 class StatusFrame;
+class SettingsFrame;
 
 extern wxFrame* NewGraphFrame();
 extern wxFrame* NewStatusFrame();
+extern wxFrame* NewSettingsFrame();
 
 class BaseFrame : public wxFrame
 {
@@ -34,6 +36,7 @@ class BaseFrame : public wxFrame
         BaseFrame(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("AppName"), const wxPoint& pos = wxDefaultPosition, const wxSize &size = wxSize(360,600), long style = BaseFrame_STYLE);
         void NewStatusWindow(wxCommandEvent& event);
         void NewGraphWindow(wxCommandEvent& event);
+        void NewSettingsWindow(wxCommandEvent& event);
         virtual ~BaseFrame();
         void CreateMenu();
         void SelectDevice(wxCommandEvent& event );
@@ -41,7 +44,6 @@ class BaseFrame : public wxFrame
         void OnClose(wxCloseEvent& event);
 
         virtual void Update() = 0;
-        
 
         wxMenuBar *menubar;
         vector<string> deviceIds;
@@ -62,6 +64,7 @@ class BaseFrame : public wxFrame
             VIEW_SETTINGS,
             UPDATE_TIMER,
             ID_NEWSTATUS,
+            ID_NEWSETTINGS,
             ID_NEWGRAPH
         };
 };

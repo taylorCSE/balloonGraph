@@ -8,6 +8,7 @@
 BEGIN_EVENT_TABLE(BaseFrame,wxFrame)
     EVT_MENU(ID_NEWSTATUS, BaseFrame::NewStatusWindow)
     EVT_MENU(ID_NEWGRAPH, BaseFrame::NewGraphWindow)
+    EVT_MENU(ID_NEWSETTINGS, BaseFrame::NewSettingsWindow)
     EVT_TIMER(UPDATE_TIMER, BaseFrame::OnTimer)
     EVT_MENU(-1, BaseFrame::SelectDevice)
     EVT_CLOSE(BaseFrame::OnClose)
@@ -42,12 +43,12 @@ void BaseFrame::CreateMenu() {
     
     view_menu->Append(VIEW_BASIC, wxT("Basic"));
     view_menu->Append(VIEW_ANALOG, wxT("Analog Channels"));
-    view_menu->Append(VIEW_SETTINGS, wxT("Settings"));
 
     menubar->Append(window_menu, wxT("&Window"));
     
     window_menu->Append(ID_NEWSTATUS, "New Status Window");
     window_menu->Append(ID_NEWGRAPH, "New Graph Window");    
+    window_menu->Append(ID_NEWSETTINGS, wxT("Settings"));
     
     SetMenuBar(menubar);
 }
@@ -68,6 +69,15 @@ void BaseFrame::NewStatusWindow( wxCommandEvent& event ) {
      
 void BaseFrame::NewGraphWindow( wxCommandEvent& event ) {
     wxFrame* frame = NewGraphFrame();
+    frame->Show();     
+}
+
+/** 
+    Launches a new settings window
+*/
+     
+void BaseFrame::NewSettingsWindow( wxCommandEvent& event ) {
+    wxFrame* frame = NewSettingsFrame();
     frame->Show();     
 }
 
