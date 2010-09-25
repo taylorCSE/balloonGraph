@@ -53,14 +53,14 @@ void SettingsFrame::CreateGUIControls() {
     wxStaticText* db_user_label = new wxStaticText(mainPanel,-1,wxT("Database Username"));
     wxStaticText* db_pass_label = new wxStaticText(mainPanel,-1,wxT("Database Password"));
     
-    mainSizer->Add(db_host_label, 1, wxEXPAND | wxALL);
-    mainSizer->Add(db_host,       1, wxEXPAND | wxALL);
-    mainSizer->Add(db_name_label, 1, wxEXPAND | wxALL);
-    mainSizer->Add(db_name,       1, wxEXPAND | wxALL);
-    mainSizer->Add(db_user_label, 1, wxEXPAND | wxALL);
-    mainSizer->Add(db_user,       1, wxEXPAND | wxALL);
-    mainSizer->Add(db_pass_label, 1, wxEXPAND | wxALL);
-    mainSizer->Add(db_pass,       1, wxEXPAND | wxALL);
+    mainSizer->Add(db_host_label, 0);
+    mainSizer->Add(db_host,       0);
+    mainSizer->Add(db_name_label, 0);
+    mainSizer->Add(db_name,       0);
+    mainSizer->Add(db_user_label, 0);
+    mainSizer->Add(db_user,       0);
+    mainSizer->Add(db_pass_label, 0);
+    mainSizer->Add(db_pass,       0);
 
     Update();
     
