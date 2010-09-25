@@ -9,12 +9,17 @@
 #include <map>
 #include <string>
 
-#include <my_global.h>
+#include <my_global.h>                
 #include <mysql.h>
 
 #include "Plot.h"
 
 extern FILE * DB_log;
+
+extern char* DB_USER;
+extern char* DB_PASS;
+extern char* DB_HOST;
+extern char* DB_NAME;
 
 void DB_connect();
 void DB_query(char * item ...);

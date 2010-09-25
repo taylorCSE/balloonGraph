@@ -43,10 +43,28 @@ void SettingsFrame::CreateGUIControls() {
     mainSizer = new wxBoxSizer(wxVERTICAL);
     mainPanel->SetSizer(mainSizer);
     
-    deviceInfo = new wxHtmlWindow(mainPanel);
-    mainSizer->Add(deviceInfo, 1, wxEXPAND | wxALL);
+    wxTextCtrl* db_host = new wxTextCtrl(mainPanel,-1,DB_HOST);
+    wxTextCtrl* db_name = new wxTextCtrl(mainPanel,-1,DB_NAME);
+    wxTextCtrl* db_user = new wxTextCtrl(mainPanel,-1,DB_USER);
+    wxTextCtrl* db_pass = new wxTextCtrl(mainPanel,-1,DB_PASS);
+    
+    wxStaticText* db_host_label = new wxStaticText(mainPanel,-1,wxT("Database Hostname"));
+    wxStaticText* db_name_label = new wxStaticText(mainPanel,-1,wxT("Database Name"));
+    wxStaticText* db_user_label = new wxStaticText(mainPanel,-1,wxT("Database Username"));
+    wxStaticText* db_pass_label = new wxStaticText(mainPanel,-1,wxT("Database Password"));
+    
+    mainSizer->Add(db_host_label, 1, wxEXPAND | wxALL);
+    mainSizer->Add(db_host,       1, wxEXPAND | wxALL);
+    mainSizer->Add(db_name_label, 1, wxEXPAND | wxALL);
+    mainSizer->Add(db_name,       1, wxEXPAND | wxALL);
+    mainSizer->Add(db_user_label, 1, wxEXPAND | wxALL);
+    mainSizer->Add(db_user,       1, wxEXPAND | wxALL);
+    mainSizer->Add(db_pass_label, 1, wxEXPAND | wxALL);
+    mainSizer->Add(db_pass,       1, wxEXPAND | wxALL);
 
     Update();
+    
+    Fit();
 
 }
 
