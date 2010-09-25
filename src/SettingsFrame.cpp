@@ -63,9 +63,6 @@ void SettingsFrame::CreateGUIControls() {
     mainSizer->Add(db_pass,       0);
 
     Update();
-    
-    Fit();
-
 }
 
 void SettingsFrame::Update() {
