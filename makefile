@@ -12,6 +12,7 @@ OBJ	   = $(BUILD)/App.o \
 			$(BUILD)/StatusFrame.o \
 			$(BUILD)/Graph.o \
 			$(BUILD)/GraphFrame.o \
+			$(BUILD)/SettingsFrame.o \
 			$(BUILD)/MathPlot.o \
 			$(BUILD)/database.o \
 			
@@ -81,6 +82,9 @@ $(BUILD)/GraphFrame.o: $(SRC)/GraphFrame.cpp $(SRC)/GraphFrame.h
 	
 $(BUILD)/MathPlot.o: $(SRC)/MathPlot.cpp $(SRC)/MathPlot.h  
 	$(CPP) -c $(SRC)/MathPlot.cpp -o $(BUILD)/MathPlot.o $(CXXFLAGS)
+
+$(BUILD)/SettingsFrame.o: $(SRC)/SettingsFrame.cpp $(SRC)/SettingsFrame.h  
+	$(CPP) -c $(SRC)/SettingsFrame.cpp -o $(BUILD)/SettingsFrame.o $(CXXFLAGS)
 
 $(BUILD)/database.o: $(SRC)/database.cpp
 	$(CPP) -c $(SRC)/database.cpp -o $(BUILD)/database.o $(CXXFLAGS)
