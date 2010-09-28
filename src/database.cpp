@@ -13,6 +13,8 @@ string DB_NAME = "balloontrack";
 
 char DB_buf[16384];
 
+/// TODO: This could use a more robust error checking method 
+
 void DB_connect() {
     DB_log = fopen("database.log","w");
 
