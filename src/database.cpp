@@ -7,9 +7,9 @@ MYSQL_RES *DB_result = NULL;
 FILE * DB_log = NULL;
 
 string DB_USER = "root";
-string DB_PASS = "root";
+string DB_PASS = "";
 string DB_HOST = "127.0.0.1";
-string DB_NAME = "hawkeye";
+string DB_NAME = "balloontrack";
 
 char DB_buf[16384];
 
@@ -42,6 +42,7 @@ void DB_query(char* item ...) {
     /// Connect to the DB if necessary
     
     if(!DB_conn) DB_connect();
+    if(!DB_conn) return;
     
     /// Assemble the query
 
@@ -78,6 +79,9 @@ void DB_query(char* item ...) {
 }
 
 char* DB_resultAsText() {
+    if(!DB_conn) return("");
+    if(!DB_result) return("");
+    
     int i = 0;
     MYSQL_ROW row;
     int num_fields;
@@ -108,6 +112,9 @@ vector<string> DB_getAllDevices() {
     int num_fields;
     
     vector<string> result;
+    
+    if(!DB_conn) return result;
+    if(!DB_result) return result;
 
     num_fields = mysql_num_fields(DB_result);
     
@@ -135,6 +142,9 @@ map<string, string> DB_getMostRecentGPS(int device_id) {
     const float KNOT_TO_MPS = 0.514444444;
     
     map<string, string> result;
+
+    if(!DB_conn) return result;
+    if(!DB_result) return result;
 
     num_fields = mysql_num_fields(DB_result);
     
@@ -181,6 +191,8 @@ Plot DB_getPlotData(char* table, char* data_column, int device_id) {
              data_column, table, device_id,
              timestamp.c_str());
     Plot result;
+
+    if(!DB_conn) return result;
 
     MYSQL_ROW row;
 
