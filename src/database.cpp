@@ -79,9 +79,8 @@ void DB_query(char* item ...) {
 }
 
 char* DB_resultAsText() {
-    if(!DB_conn) return("");
-    if(!DB_result) return("");
-    
+    if(!DB_isQueryReady()) return("");
+
     int i = 0;
     MYSQL_ROW row;
     int num_fields;
@@ -113,8 +112,7 @@ vector<string> DB_getAllDevices() {
     
     vector<string> result;
     
-    if(!DB_conn) return result;
-    if(!DB_result) return result;
+    if(!DB_isQueryReady()) return result;
 
     num_fields = mysql_num_fields(DB_result);
     
@@ -143,8 +141,7 @@ map<string, string> DB_getMostRecentGPS(int device_id) {
     
     map<string, string> result;
 
-    if(!DB_conn) return result;
-    if(!DB_result) return result;
+    if(!DB_isQueryReady()) return result;
 
     num_fields = mysql_num_fields(DB_result);
     
@@ -192,7 +189,7 @@ Plot DB_getPlotData(char* table, char* data_column, int device_id) {
              timestamp.c_str());
     Plot result;
 
-    if(!DB_conn) return result;
+    if(!DB_isQueryReady()) return result;
 
     MYSQL_ROW row;
 
@@ -205,4 +202,10 @@ Plot DB_getPlotData(char* table, char* data_column, int device_id) {
     mysql_free_result(DB_result);    
     
     return result;
+}
+
+bool DB_isQueryReady() {
+    if(!DB_conn) return false;
+    if(!DB_result) return false;
+    return true;
 }
