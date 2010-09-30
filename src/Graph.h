@@ -32,6 +32,8 @@ class Graph {
         void Fit();
         mpWindow* window;
         
+        Plot data;
+        
     private:
         string name;
         string db_table;

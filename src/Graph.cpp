@@ -62,7 +62,7 @@ void Graph::Update(int device_id) {
     if(device_id > 0) deviceId = device_id;
     
     mpFXYVector * vectorLayer = (mpFXYVector*)window->GetLayer(2);
-    Plot data = GetData();
+    data = GetData();
 
     string y_label = wxT("Altitude");
     string x_label = wxT(name);
