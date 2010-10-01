@@ -63,7 +63,9 @@ Y=\x1b[33;01m
 all: all-before src/version.h $(BIN) all-after
 
 clean: clean-custom
-	$(RM) $(OBJ) "$(BIN)"
+	@echo -e "$(G)Removing temporary files$(W)..."
+	-@$(RM) $(OBJ) "$(BIN)"
+	@echo -e "$(G)Done$(W)."
 
 # Update version file
 	
@@ -79,14 +81,17 @@ all-before:
 	
 $(BIN): $(OBJ)
 	@echo -e "Linking $(G)$<...$(W)"
+	@$(RM) temp.log temp2.log
 	-@$(LINK) $(OBJ) -o "$(BIN)" $(LIBS) $(LDFLAGS) 2> temp.log
-	@echo -e "$(R)`cat temp.log`$(W)"
+	@if test -s temp.log; then echo -e "$(R)`cat temp.log`$(W)"; fi;
+	@$(RM) temp.log temp2.log
 
 # Build Objects
 	
 $(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
-	@echo -e "Compiling $(G)$<...$(W)"
+	@echo -e "Compiling $(G)$<$(W) to $(Y)$@$(W)..."
+	@$(RM) temp.log temp2.log
 	-@$(CPP) -c $< -o $@ $(CXXFLAGS) 2> temp.log
-	@echo -e "$(R)`cat temp.log`$(W)"
-	@$(RM) temp.log
+	@if test -s temp.log; then echo -e "$(R)";cat temp.log;echo -e "$(W)"; fi;
+	@$(RM) temp.log temp2.log
 	
