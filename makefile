@@ -60,10 +60,13 @@ clean: clean-custom
 
 # Update version file
 	
-$(SRC)/version.h: .git/logs/HEAD
+all-before:
+	@echo $$((`cat build_num.txt`+1)) > build_num.txt
 	@echo "/* Automatically generated based on head commit */" > $(SRC)/version.h
 	@echo "#define VERSION_COMMIT \"`git rev-parse HEAD`\"" >> $(SRC)/version.h
-	@echo "Updating version to `git rev-parse HEAD`"
+	@echo "#define VERSION_BUILD \"`cat build_num.txt`\"" >> $(SRC)/version.h
+	@echo "Current commit is `git rev-parse HEAD`"
+	@echo "Current build is `cat build_num.txt`"
 	
 # Build exes
 	
@@ -72,7 +75,7 @@ $(BIN): $(OBJ)
 
 # Build Objects
 	
-$(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
+$(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h $(SRC)/version.h 
 	$(CPP) -c $< -o $@ $(CXXFLAGS)
 	
 $(BUILD)/Resource.o: $(SRC)/Resource.rc icons/main.ico
