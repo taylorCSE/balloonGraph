@@ -62,7 +62,7 @@ clean: clean-custom
 	
 $(SRC)/version.h: .git/logs/HEAD
 	@echo "/* Automatically generated based on head commit */" > $(SRC)/version.h
-	@echo "#define VERSION_COMMIT = \"`git rev-parse HEAD`\"" >> $(SRC)/version.h
+	@echo "#define VERSION_COMMIT \"`git rev-parse HEAD`\"" >> $(SRC)/version.h
 	@echo "Updating version to `git rev-parse HEAD`"
 	
 # Build exes
