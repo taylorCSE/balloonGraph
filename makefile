@@ -53,11 +53,17 @@ CXXFLAGS  = -fno-exceptions \
 LDFLAGS   = -Wl
 
 .PHONY: all all-before all-after clean clean-custom
-all: all-before $(BIN) all-after
+all: all-before src/version.h $(BIN) all-after
 
 clean: clean-custom
 	$(RM) $(OBJ) "$(BIN)"
 
+# Update version file
+	
+$(SRC)/version.h: .git/logs/HEAD
+	echo "/* Automatically generated based on head commit */" > $(SRC)/version.h
+	echo "\n #define VERSION_COMMIT = \"`git rev-parse HEAD`\"" >> $(SRC)/version.h
+	
 # Build exes
 	
 $(BIN): $(OBJ)
