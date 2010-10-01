@@ -54,10 +54,10 @@ LDFLAGS   = -Wl
 
 # Color codes
 
-NO_COLOR=\x1b[0m
-OK_COLOR=\x1b[32;01m
-ERROR_COLOR=\x1b[31;01m
-WARN_COLOR=\x1b[33;01m
+W=\x1b[0m
+G=\x1b[32;01m
+R=\x1b[31;01m
+Y=\x1b[33;01m
 
 .PHONY: all all-before all-after clean clean-custom
 all: all-before src/version.h $(BIN) all-after
@@ -72,20 +72,21 @@ all-before:
 	@echo "/* Automatically generated based on head commit */" > $(SRC)/version.h
 	@echo "#define VERSION_COMMIT \"`git rev-parse HEAD`\"" >> $(SRC)/version.h
 	@echo "#define VERSION_BUILD \"`cat build_num.txt`\"" >> $(SRC)/version.h
-	@echo "Current commit is `git rev-parse HEAD`"
-	@echo "Current build is `cat build_num.txt`"
+	@echo -e "Current commit is `git rev-parse HEAD`."
+	@echo -e "Current build is $(G)`cat build_num.txt`$(W)."
 	
 # Build exes
 	
 $(BIN): $(OBJ)
-	$(LINK) $(OBJ) -o "$(BIN)" $(LIBS) $(LDFLAGS)
+	@echo -e "Linking $(G)$<...$(W)"
+	-@$(LINK) $(OBJ) -o "$(BIN)" $(LIBS) $(LDFLAGS) 2> temp.log
+	@echo -e "$(R)`cat temp.log`$(W)"
 
 # Build Objects
 	
 $(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
-	$(CPP) -c $< -o $@ $(CXXFLAGS)
-	
-$(BUILD)/Resource.o: $(SRC)/Resource.rc icons/main.ico
-	$(WINDRES) $(SRC)/Resource.rc $(BUILD)/Resource.o
-	
+	@echo -e "Compiling $(G)$<...$(W)"
+	-@$(CPP) -c $< -o $@ $(CXXFLAGS) 2> temp.log
+	@echo -e "$(R)`cat temp.log`$(W)"
+	@$(RM) temp.log
 	
