@@ -18,6 +18,7 @@
 #include <wx/menu.h>
 
 #include "database.h"
+#include "version.h"
 
 #undef BaseFrame_STYLE
 #define BaseFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
