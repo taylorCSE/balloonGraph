@@ -52,8 +52,9 @@ void BaseFrame::CreateMenu() {
     
     SetMenuBar(menubar);
     
-    CreateStatusBar(1);
-    SetStatusText(wxString(VERSION_COMMIT), 0);
+    CreateStatusBar(2);
+    SetStatusText(wxString("Commit:")+wxString(VERSION_COMMIT), 0);
+    SetStatusText(wxString("Build:")+wxString(VERSION_BUILD), 1);
 }
 
 
