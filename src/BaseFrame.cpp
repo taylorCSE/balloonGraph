@@ -35,12 +35,12 @@ void BaseFrame::CreateMenu() {
     view_menu = new wxMenu;
     window_menu = new wxMenu;
     
-    deviceIds = DB_getAllDevices();
+    flightIds = DB_getAllDevices();
     
     menubar->Append(devices_menu, wxT("&Devices"));
 
-    for(unsigned int i = 0; i < deviceIds.size(); i++) {
-        devices_menu->Append(10000+i, deviceIds[i]);
+    for(unsigned int i = 0; i < flightIds.size(); i++) {
+        devices_menu->Append(10000+i, flightIds[i]);
     }
 
     menubar->Append(view_menu, wxT("&View"));
@@ -96,7 +96,7 @@ void BaseFrame::SelectDevice( wxCommandEvent& event ) {
     
     if(id > 10000) {
         /// We're selecting a device
-        deviceId = deviceIds[id - 10000];
+        flightId = flightIds[id - 10000];
     }
 
     if(id == VIEW_BASIC) {

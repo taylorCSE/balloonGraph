@@ -14,7 +14,7 @@ END_EVENT_TABLE()
 
 StatusFrame::StatusFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
 : BaseFrame(parent, id, title, position, size, style) {
-    deviceId = "Please select a device from the menu.";
+    flightId = "Please select a device from the menu.";
     
     CreateGUIControls();
     
@@ -36,7 +36,7 @@ void StatusFrame::Update() {
     CreateMenu();
 
     map<string, string> gps_info; 
-    gps_info = DB_getMostRecentGPS(deviceId);
+    gps_info = DB_getMostRecentGPS(flightId);
     
     wxString info = wxString::Format(wxT(""
         "<body bgcolor=black text=white>"
@@ -64,7 +64,7 @@ void StatusFrame::Update() {
         "RH (%%): \n"
         "</body>"
         ),
-        deviceId.c_str(),
+        flightId.c_str(),
         gps_info["Latitude"].c_str(),
         gps_info["Longitude"].c_str(),
         gps_info["Altitude_m"].c_str(),

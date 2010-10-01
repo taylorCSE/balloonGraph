@@ -14,7 +14,7 @@ GraphFrame::GraphFrame(wxWindow *parent, wxWindowID id, const wxString &title, c
     /**
     *   Constructor for the Main frame.
     */
-    deviceId = "Please select a device from the menu.";
+    flightId = "Please select a device from the menu.";
     
     last_view = view;
     
@@ -65,14 +65,14 @@ void GraphFrame::UpdateGraph(int num, Graph* graph) {
     } else {
         delete graph;
     }
-    graphs[num]->Update(atoi(deviceId.c_str()));
+    graphs[num]->Update(atoi(flightId.c_str()));
 }
 
 void GraphFrame::UpdateBasicGraphs() {
     mainSizer->SetCols(1);
-	UpdateGraph(0, new Graph(mainPanel,"Altitude","gps",atoi(deviceId.c_str()),"Altitude"));
-	UpdateGraph(1, new Graph(mainPanel,"Speed","gps",atoi(deviceId.c_str()),"Spd"));
-	UpdateGraph(2, new Graph(mainPanel,"Climb","gps",atoi(deviceId.c_str()),"Rate"));
+	UpdateGraph(0, new Graph(mainPanel,"Altitude","gps",atoi(flightId.c_str()),"Altitude"));
+	UpdateGraph(1, new Graph(mainPanel,"Speed","gps",atoi(flightId.c_str()),"Spd"));
+	UpdateGraph(2, new Graph(mainPanel,"Climb","gps",atoi(flightId.c_str()),"Rate"));
 }
 
 void GraphFrame::UpdateAnalogGraphs() {
@@ -83,7 +83,7 @@ void GraphFrame::UpdateAnalogGraphs() {
         name[0] = 'A';
         name[1] = 0x00;
         sprintf(name,"%s%d",name,i+1);
-        UpdateGraph(i, new Graph(mainPanel,name,"aip",atoi(deviceId.c_str()),name));
+        UpdateGraph(i, new Graph(mainPanel,name,"aip",atoi(flightId.c_str()),name));
 	}
 }
 

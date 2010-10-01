@@ -130,8 +130,8 @@ vector<string> DB_getAllDevices() {
     return result;
 }
 
-map<string, string> DB_getMostRecentGPS(string device_id) {
-    DB_query("select Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg, Status from gps where concat_ws('-',DeviceID,FlightID)=\"%s\" and Lat != 0 order by Timestamp desc limit 1;",device_id.c_str());
+map<string, string> DB_getMostRecentGPS(string flight_id) {
+    DB_query("select Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg, Status from gps where concat_ws('-',DeviceID,FlightID)=\"%s\" and Lat != 0 order by Timestamp desc limit 1;",flight_id.c_str());
 
     MYSQL_ROW row;
     int num_fields;
@@ -176,7 +176,7 @@ map<string, string> DB_getMostRecentGPS(string device_id) {
     return result;
 }
 
-Plot DB_getPlotData(char* table, char* data_column, string device_id) {
+Plot DB_getPlotData(char* table, char* data_column, string flight_id) {
     // Small hack to fix a typo in the database    
     string timestamp = "Timestamp";
     if(!strcmp(table,"aip")){
@@ -187,7 +187,7 @@ Plot DB_getPlotData(char* table, char* data_column, string device_id) {
              "where concat_ws('-',DeviceID,FlightID)=%s "
              "order by %s asc;",
              timestamp.c_str(),
-             data_column, table, device_id.c_str(),
+             data_column, table, flight_id.c_str(),
              timestamp.c_str());
     Plot result;
 

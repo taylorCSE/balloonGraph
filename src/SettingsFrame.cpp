@@ -16,7 +16,7 @@ END_EVENT_TABLE()
 
 SettingsFrame::SettingsFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
 : BaseFrame(parent, id, title, position, size, style) {
-    deviceId = "Please select a device from the menu.";
+    flightId = "Please select a device from the menu.";
     
     CreateGUIControls();
     

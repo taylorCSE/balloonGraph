@@ -5,7 +5,7 @@
  
 #include "Graph.h"
 
-Graph::Graph(wxPanel* panel, char* name, char* table, int device_id, char* col) {
+Graph::Graph(wxPanel* panel, char* name, char* table, int flight_id, char* col) {
     /**
     *   Constructor for the Main frame.
     */
@@ -15,7 +15,7 @@ Graph::Graph(wxPanel* panel, char* name, char* table, int device_id, char* col) 
     this->name = name;
     this->db_table = table;
     this->db_col = col;
-    this->deviceId = device_id;
+    this->flightId = flight_id;
     
     Plot data = GetData();
 
@@ -58,8 +58,8 @@ Graph::~Graph() {
     delete window;
 }
 
-void Graph::Update(int device_id) {
-    if(device_id > 0) deviceId = device_id;
+void Graph::Update(int flight_id) {
+    if(flight_id > 0) flightId = flight_id;
     
     mpFXYVector * vectorLayer = (mpFXYVector*)window->GetLayer(2);
     data = GetData();
@@ -78,7 +78,7 @@ void Graph::Update(int device_id) {
 }
 
 Plot Graph::GetData() {
-    return DB_getPlotData((char*)db_table.c_str(),(char*)db_col.c_str(),deviceId);
+    return DB_getPlotData((char*)db_table.c_str(),(char*)db_col.c_str(),flightId);
 }
 
 void Graph::Fit() {

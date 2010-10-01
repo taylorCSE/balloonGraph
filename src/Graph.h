@@ -25,9 +25,9 @@
 
 class Graph {
     public:
-        Graph(wxPanel* panel, char* name, char* table, int device_id, char* col);
+        Graph(wxPanel* panel, char* name, char* table, int flight_id, char* col);
         virtual ~Graph();
-        void Update(int device_id = 0);
+        void Update(int flight_id = 0);
         Plot GetData();
         void Fit();
         mpWindow* window;
@@ -38,7 +38,7 @@ class Graph {
         string name;
         string db_table;
         string db_col;
-        string deviceId;
+        string flightId;
 };
 
 #endif

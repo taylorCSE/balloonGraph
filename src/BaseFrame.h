@@ -50,8 +50,8 @@ class BaseFrame : public wxFrame
         wxMenu *devices_menu;
         wxMenu *view_menu;
         wxMenu *window_menu;
-        vector<string> deviceIds;
-        string deviceId;
+        vector<string> flightIds;
+        string flightId;
         
         wxTimer* updateTimer;
         
