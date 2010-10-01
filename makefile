@@ -1,5 +1,6 @@
 # Directories
 BUILD     = build
+DIST      = dist
 SRC	      = src
 
 # Tools
@@ -8,6 +9,7 @@ CPP	      = g++.exe
 LINK      = g++.exe
 WINDRES   = windres.exe
 RM        = rm -f
+ZIP       = zip
 
 # Output filenames
 BIN       = App.exe
@@ -48,7 +50,7 @@ CXXFLAGS  = -fno-exceptions \
 			-D__WIN95__ \
 			-Wno-deprecated \
 			-ggdb \
-			-O2 
+			-O2
 
 LDFLAGS   = -Wl
 
@@ -59,7 +61,7 @@ G=\x1b[32;01m
 R=\x1b[31;01m
 Y=\x1b[33;01m
 
-.PHONY: all all-before all-after clean clean-custom
+.PHONY: all all-before all-after clean clean-custom dist dist-custom
 all: all-before src/version.h $(BIN) all-after
 
 clean: clean-custom
@@ -76,7 +78,12 @@ all-before:
 	@echo "#define VERSION_BUILD \"`cat build_num.txt`\"" >> $(SRC)/version.h
 	@echo -e "Current commit is `git rev-parse HEAD`."
 	@echo -e "Current build is $(G)`cat build_num.txt`$(W)."
-	
+
+dist: dist-custom
+	@echo -e "$(G)Building distribution $(DIST)/hawkgraph-`cat build_num.txt`.zip$(W)..."
+	@$(RM) $(DIST)/hawkgraph.zip
+	@$(ZIP) $(DIST)/hawkgraph-`cat build_num.txt`.zip $(BIN) libmysql.dll
+
 # Build exes
 	
 $(BIN): $(OBJ)
