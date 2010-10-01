@@ -52,6 +52,13 @@ CXXFLAGS  = -fno-exceptions \
 
 LDFLAGS   = -Wl
 
+# Color codes
+
+NO_COLOR=\x1b[0m
+OK_COLOR=\x1b[32;01m
+ERROR_COLOR=\x1b[31;01m
+WARN_COLOR=\x1b[33;01m
+
 .PHONY: all all-before all-after clean clean-custom
 all: all-before src/version.h $(BIN) all-after
 
