@@ -18,6 +18,8 @@ BaseFrame::BaseFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
 : wxFrame(parent, id, title, position, size, style) {
     updateTimer = new wxTimer(this, UPDATE_TIMER);
     updateTimer->Start(5000);
+    
+    menubar = 0x00;
 
     view = VIEW_BASIC;
 }
@@ -26,10 +28,12 @@ BaseFrame::~BaseFrame() {
 }
 
 void BaseFrame::CreateMenu() {
+    wxMenuBar* old_menubar = menubar;
+    
     menubar = new wxMenuBar;
-    wxMenu *devices_menu = new wxMenu;
-    wxMenu *view_menu = new wxMenu;
-    wxMenu *window_menu = new wxMenu;
+    devices_menu = new wxMenu;
+    view_menu = new wxMenu;
+    window_menu = new wxMenu;
     
     deviceIds = DB_getAllDevices();
     
@@ -51,7 +55,9 @@ void BaseFrame::CreateMenu() {
     window_menu->Append(ID_NEWSETTINGS, wxT("Settings"));
     
     SetMenuBar(menubar);
-     
+
+    if(old_menubar) delete old_menubar;
+
     CreateStatusBar(2);
     SetStatusText(wxString("Commit:")+wxString(VERSION_COMMIT), 0);
     SetStatusText(wxString("Build:")+wxString(VERSION_BUILD), 1);

@@ -34,7 +34,7 @@ StatusFrame::~StatusFrame() {
 
 void StatusFrame::Update() {
     CreateMenu();
-   
+
     map<string, string> gps_info; 
     gps_info = DB_getMostRecentGPS(atoi(deviceId.c_str()));
     
@@ -77,6 +77,8 @@ void StatusFrame::Update() {
         );
     
     deviceInfo->SetPage(info);
+    
+    delete &info;
     
     delete &gps_info;
 }
