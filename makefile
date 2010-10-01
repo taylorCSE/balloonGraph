@@ -76,8 +76,8 @@ all-before:
 	@echo "/* Automatically generated based on head commit */" > $(SRC)/version.h
 	@echo "#define VERSION_COMMIT \"`git rev-parse HEAD`\"" >> $(SRC)/version.h
 	@echo "#define VERSION_BUILD \"`cat build_num.txt`\"" >> $(SRC)/version.h
+	@echo -e "$(G)***** Starting build `cat build_num.txt`$(W)."
 	@echo -e "Current commit is `git rev-parse HEAD`."
-	@echo -e "Current build is $(G)`cat build_num.txt`$(W)."
 
 dist: dist-custom
 	@echo -e "$(G)Building distribution $(DIST)/hawkgraph-`cat build_num.txt`.zip$(W)..."
@@ -99,6 +99,6 @@ $(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
 	@echo -e "Compiling $(G)$<$(W) to $(Y)$@$(W)..."
 	@$(RM) temp.log temp2.log
 	-@$(CPP) -c $< -o $@ $(CXXFLAGS) 2> temp.log
-	@if test -s temp.log; then echo -e "$(R)";cat temp.log;echo -e "$(W)"; fi;
+	@if test -s temp.log; then echo -e "$(R)`cat temp.log`$(W)"; fi;
 	@$(RM) temp.log temp2.log
 	
