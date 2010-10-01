@@ -61,7 +61,7 @@ G=\x1b[32;01m
 R=\x1b[31;01m
 Y=\x1b[33;01m
 
-.PHONY: all all-before all-after clean clean-custom dist dist-custom
+.PHONY: all all-before all-after clean clean-custom dist dist-custom todo todo-custom
 all: all-before src/version.h $(BIN) all-after
 
 clean: clean-custom
@@ -76,7 +76,8 @@ all-before:
 	@echo "/* Automatically generated based on head commit */" > $(SRC)/version.h
 	@echo "#define VERSION_COMMIT \"`git rev-parse HEAD`\"" >> $(SRC)/version.h
 	@echo "#define VERSION_BUILD \"`cat build_num.txt`\"" >> $(SRC)/version.h
-	@echo -e "$(G)***** Starting build `cat build_num.txt`$(W)."
+	@echo -e "$(G)Starting build `cat build_num.txt`$(W)"
+	@echo -e "$(G)===================$(W)"
 	@echo -e "Current commit is `git rev-parse HEAD`."
 
 dist: dist-custom
@@ -84,6 +85,9 @@ dist: dist-custom
 	@$(RM) $(DIST)/hawkgraph.zip
 	@$(ZIP) $(DIST)/hawkgraph-`cat build_num.txt`.zip $(BIN) libmysql.dll
 
+todo: todo-custom
+	-@for file in $(SRCS); do grep -H -e TODO -e FIXME $$file; done; true
+	
 # Build exes
 	
 $(BIN): $(OBJ)
