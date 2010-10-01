@@ -32,7 +32,6 @@ void GraphFrame::Update() {
     /**
      * Updates the GUI with new database information
      */
-     
     if(last_view != view) ClearGraphs();
     last_view = view;
      
@@ -63,6 +62,8 @@ void GraphFrame::UpdateGraph(int num, Graph* graph) {
     if(!graphs[num]) {
 	    graphs[num] = graph;
         mainSizer->Add(graphs[num]->window, 1, wxEXPAND | wxALL);
+    } else {
+        delete graph;
     }
     graphs[num]->Update(atoi(deviceId.c_str()));
 }
