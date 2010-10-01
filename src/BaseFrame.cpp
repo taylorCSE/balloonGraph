@@ -51,7 +51,7 @@ void BaseFrame::CreateMenu() {
     window_menu->Append(ID_NEWSETTINGS, wxT("Settings"));
     
     SetMenuBar(menubar);
-    
+     
     CreateStatusBar(2);
     SetStatusText(wxString("Commit:")+wxString(VERSION_COMMIT), 0);
     SetStatusText(wxString("Build:")+wxString(VERSION_BUILD), 1);
