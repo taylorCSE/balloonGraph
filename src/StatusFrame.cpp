@@ -36,7 +36,7 @@ void StatusFrame::Update() {
     CreateMenu();
 
     map<string, string> gps_info; 
-    gps_info = DB_getMostRecentGPS(atoi(deviceId.c_str()));
+    gps_info = DB_getMostRecentGPS(deviceId);
     
     wxString info = wxString::Format(wxT(""
         "<body bgcolor=black text=white>"

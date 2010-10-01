@@ -38,7 +38,7 @@ class Graph {
         string name;
         string db_table;
         string db_col;
-        int deviceId;
+        string deviceId;
 };
 
 #endif

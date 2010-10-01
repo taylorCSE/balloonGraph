@@ -25,8 +25,8 @@ void DB_connect();
 void DB_query(char * item ...);
 char* DB_resultAsText();
 vector<string> DB_getAllDevices();
-map<string, string> DB_getMostRecentGPS(int device_id);
-Plot DB_getPlotData(char* table, char* data_column, int device_id);
+map<string, string> DB_getMostRecentGPS(string device_id);
+Plot DB_getPlotData(char* table, char* data_column, string device_id);
 bool DB_isQueryReady();
 
 #endif

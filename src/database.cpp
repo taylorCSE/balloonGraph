@@ -106,7 +106,7 @@ char* DB_resultAsText() {
 }
 
 vector<string> DB_getAllDevices() {
-    DB_query("select distinct DeviceID from aip order by DeviceID ASC;");
+    DB_query("select distinct concat_ws('-',DeviceID,FlightID) from aip where FlightID != \"\" order by concat_ws('-',DeviceID,FlightID) ASC;");
 
     int i = 0;
     MYSQL_ROW row;
@@ -120,7 +120,7 @@ vector<string> DB_getAllDevices() {
     
     while ((row = mysql_fetch_row(DB_result))) {
           DB_buf[0] = 0x00;
-          sprintf(DB_buf,"%s%s ",DB_buf, row[i] ? row[i] : "NULL");
+          sprintf(DB_buf,"%s%s",DB_buf, row[i] ? row[i] : "NULL");
           string tmp = string(DB_buf);
           result.push_back(tmp);
     }
@@ -130,8 +130,8 @@ vector<string> DB_getAllDevices() {
     return result;
 }
 
-map<string, string> DB_getMostRecentGPS(int device_id) {
-    DB_query("select Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg, Status from gps where DeviceID=%d and Lat != 0 order by Timestamp desc limit 1;",device_id);
+map<string, string> DB_getMostRecentGPS(string device_id) {
+    DB_query("select Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg, Status from gps where concat_ws('-',DeviceID,FlightID)=\"%s\" and Lat != 0 order by Timestamp desc limit 1;",device_id.c_str());
 
     MYSQL_ROW row;
     int num_fields;
@@ -176,7 +176,7 @@ map<string, string> DB_getMostRecentGPS(int device_id) {
     return result;
 }
 
-Plot DB_getPlotData(char* table, char* data_column, int device_id) {
+Plot DB_getPlotData(char* table, char* data_column, string device_id) {
     // Small hack to fix a typo in the database    
     string timestamp = "Timestamp";
     if(!strcmp(table,"aip")){
@@ -184,10 +184,10 @@ Plot DB_getPlotData(char* table, char* data_column, int device_id) {
     }
     
     DB_query("select UNIX_TIMESTAMP(%s)-UNIX_TIMESTAMP(), Altitude, %s from %s " 
-             "where DeviceId=%d "
+             "where concat_ws('-',DeviceID,FlightID)=%s "
              "order by %s asc;",
              timestamp.c_str(),
-             data_column, table, device_id,
+             data_column, table, device_id.c_str(),
              timestamp.c_str());
     Plot result;
 
