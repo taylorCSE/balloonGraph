@@ -77,10 +77,6 @@ void StatusFrame::Update() {
         );
     
     deviceInfo->SetPage(info);
-    
-    delete &info;
-    
-    delete &gps_info;
 }
 
 /**
