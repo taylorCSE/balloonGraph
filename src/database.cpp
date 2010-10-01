@@ -105,7 +105,7 @@ char* DB_resultAsText() {
     return DB_buf;
 }
 
-vector<string> DB_getAllDevices() {
+vector<string> DB_getAllFlights() {
     DB_query("select distinct concat_ws('-',DeviceID,FlightID) from aip where FlightID != \"\" order by concat_ws('-',DeviceID,FlightID) ASC;");
 
     int i = 0;

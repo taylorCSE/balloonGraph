@@ -35,7 +35,7 @@ void BaseFrame::CreateMenu() {
     view_menu = new wxMenu;
     window_menu = new wxMenu;
     
-    flightIds = DB_getAllDevices();
+    flightIds = DB_getAllFlights();
     
     menubar->Append(devices_menu, wxT("&Devices"));
 
