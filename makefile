@@ -75,7 +75,7 @@ $(BIN): $(OBJ)
 
 # Build Objects
 	
-$(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h $(SRC)/version.h 
+$(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
 	$(CPP) -c $< -o $@ $(CXXFLAGS)
 	
 $(BUILD)/Resource.o: $(SRC)/Resource.rc icons/main.ico
