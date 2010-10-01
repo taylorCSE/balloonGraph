@@ -1,21 +1,22 @@
-BUILD	 = build
-SRC	   = src
+# Directories
+BUILD     = build
+SRC	      = src
 
+# Tools
 WXLIBNAME = wxmsw28
-CPP	   = g++.exe
-LINK	  = g++.exe
+CPP	      = g++.exe
+LINK      = g++.exe
 WINDRES   = windres.exe
-BIN	   = App.exe
+RM        = rm -f
 
-OBJ	   = $(BUILD)/App.o \
-			$(BUILD)/BaseFrame.o \
-			$(BUILD)/StatusFrame.o \
-			$(BUILD)/Graph.o \
-			$(BUILD)/GraphFrame.o \
-			$(BUILD)/SettingsFrame.o \
-			$(BUILD)/MathPlot.o \
-			$(BUILD)/database.o \
-			
+# Output filenames
+BIN       = App.exe
+
+# Source files and objects
+SRCS = $(wildcard $(SRC)/*.cpp)
+OBJ = $(subst $(SRC),$(BUILD),$(patsubst %.cpp,%.o,$(SRCS)))
+
+# Libraries to include
 LIBS	  = -mwindows \
 			-l$(WXLIBNAME) \
 			-lwxpng \
@@ -36,7 +37,8 @@ LIBS	  = -mwindows \
 			-ladvapi32 \
 			-lodbc32 \
 			-llibmysql
-			
+
+# Compile Flags			
 CXXFLAGS  = -fno-exceptions \
 			-fno-pcc-struct-return \
 			-fstrict-aliasing \
@@ -49,7 +51,6 @@ CXXFLAGS  = -fno-exceptions \
 			-O2 
 
 LDFLAGS   = -Wl
-RM		= rm -f
 
 .PHONY: all all-before all-after clean clean-custom
 all: all-before $(BIN) all-after
@@ -57,34 +58,17 @@ all: all-before $(BIN) all-after
 clean: clean-custom
 	$(RM) $(OBJ) "$(BIN)"
 
-all-before:
-
+# Build exes
+	
 $(BIN): $(OBJ)
 	$(LINK) $(OBJ) -o "$(BIN)" $(LIBS) $(LDFLAGS)
 
-$(BUILD)/App.o: $(SRC)/App.cpp $(SRC)/App.h $(SRC)/StatusFrame.h  
-	$(CPP) -c $(SRC)/App.cpp -o $(BUILD)/App.o $(CXXFLAGS)
-
-$(BUILD)/BaseFrame.o: $(SRC)/BaseFrame.cpp $(SRC)/BaseFrame.h $(SRC)/StatusFrame.h  
-	$(CPP) -c $(SRC)/BaseFrame.cpp -o $(BUILD)/BaseFrame.o $(CXXFLAGS)
-
+# Build Objects
+	
+$(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
+	$(CPP) -c $< -o $@ $(CXXFLAGS)
+	
 $(BUILD)/Resource.o: $(SRC)/Resource.rc icons/main.ico
 	$(WINDRES) $(SRC)/Resource.rc $(BUILD)/Resource.o
-
-$(BUILD)/StatusFrame.o: $(SRC)/StatusFrame.cpp $(SRC)/StatusFrame.h  
-	$(CPP) -c $(SRC)/StatusFrame.cpp -o $(BUILD)/StatusFrame.o $(CXXFLAGS)
 	
-$(BUILD)/Graph.o: $(SRC)/Graph.cpp $(SRC)/Graph.h
-	$(CPP) -c $(SRC)/Graph.cpp -o $(BUILD)/Graph.o $(CXXFLAGS)
 	
-$(BUILD)/GraphFrame.o: $(SRC)/GraphFrame.cpp $(SRC)/GraphFrame.h
-	$(CPP) -c $(SRC)/GraphFrame.cpp -o $(BUILD)/GraphFrame.o $(CXXFLAGS)
-	
-$(BUILD)/MathPlot.o: $(SRC)/MathPlot.cpp $(SRC)/MathPlot.h  
-	$(CPP) -c $(SRC)/MathPlot.cpp -o $(BUILD)/MathPlot.o $(CXXFLAGS)
-
-$(BUILD)/SettingsFrame.o: $(SRC)/SettingsFrame.cpp $(SRC)/SettingsFrame.h  
-	$(CPP) -c $(SRC)/SettingsFrame.cpp -o $(BUILD)/SettingsFrame.o $(CXXFLAGS)
-
-$(BUILD)/database.o: $(SRC)/database.cpp
-	$(CPP) -c $(SRC)/database.cpp -o $(BUILD)/database.o $(CXXFLAGS)
