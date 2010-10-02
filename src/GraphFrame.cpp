@@ -65,14 +65,14 @@ void GraphFrame::UpdateGraph(int num, Graph* graph) {
     } else {
         delete graph;
     }
-    graphs[num]->Update(atoi(flightId.c_str()));
+    graphs[num]->Update(flightId);
 }
 
 void GraphFrame::UpdateBasicGraphs() {
     mainSizer->SetCols(1);
-	UpdateGraph(0, new Graph(mainPanel,"Altitude","gps",atoi(flightId.c_str()),"Altitude"));
-	UpdateGraph(1, new Graph(mainPanel,"Speed","gps",atoi(flightId.c_str()),"Spd"));
-	UpdateGraph(2, new Graph(mainPanel,"Climb","gps",atoi(flightId.c_str()),"Rate"));
+	UpdateGraph(0, new Graph(mainPanel,"Altitude","gps",flightId,"Altitude"));
+	UpdateGraph(1, new Graph(mainPanel,"Speed","gps",flightId,"Spd"));
+	UpdateGraph(2, new Graph(mainPanel,"Climb","gps",flightId,"Rate"));
 }
 
 void GraphFrame::UpdateAnalogGraphs() {
@@ -83,7 +83,7 @@ void GraphFrame::UpdateAnalogGraphs() {
         name[0] = 'A';
         name[1] = 0x00;
         sprintf(name,"%s%d",name,i+1);
-        UpdateGraph(i, new Graph(mainPanel,name,"aip",atoi(flightId.c_str()),name));
+        UpdateGraph(i, new Graph(mainPanel,name,"aip",flightId,name));
 	}
 }
 

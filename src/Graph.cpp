@@ -5,7 +5,7 @@
  
 #include "Graph.h"
 
-Graph::Graph(wxPanel* panel, char* name, char* table, int flight_id, char* col) {
+Graph::Graph(wxPanel* panel, char* name, char* table, string flight_id, char* col) {
     /**
     *   Constructor for the Main frame.
     */
@@ -58,8 +58,8 @@ Graph::~Graph() {
     delete window;
 }
 
-void Graph::Update(int flight_id) {
-    if(flight_id > 0) flightId = flight_id;
+void Graph::Update(string flight_id) {
+    if(flight_id == "") flightId = flight_id;
     
     mpFXYVector * vectorLayer = (mpFXYVector*)window->GetLayer(2);
     data = GetData();
