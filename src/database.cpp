@@ -106,7 +106,7 @@ char* DB_resultAsText() {
 }
 
 vector<string> DB_getAllFlights() {
-    DB_query("select distinct concat_ws('-',DeviceID,FlightID) from aip where FlightID != \"\" order by concat_ws('-',DeviceID,FlightID) ASC;");
+    DB_query("select distinct concat_ws('-',DeviceID,FlightID) from aip where FlightID != \"\" order by Timesstamp DESC limit 15;");
 
     int i = 0;
     MYSQL_ROW row;
