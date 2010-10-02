@@ -47,7 +47,7 @@ class BaseFrame : public wxFrame
         virtual void Update() = 0;
 
         wxMenuBar *menubar;
-        wxMenu *devices_menu;
+        wxMenu *flight_menu;
         wxMenu *view_menu;
         wxMenu *window_menu;
         vector<string> flightIds;

@@ -31,16 +31,16 @@ void BaseFrame::CreateMenu() {
     wxMenuBar* old_menubar = menubar;
     
     menubar = new wxMenuBar;
-    devices_menu = new wxMenu;
+    flight_menu = new wxMenu;
     view_menu = new wxMenu;
     window_menu = new wxMenu;
     
     flightIds = DB_getAllFlights();
     
-    menubar->Append(devices_menu, wxT("&Devices"));
+    menubar->Append(flight_menu, wxT("&Flights"));
 
     for(unsigned int i = 0; i < flightIds.size(); i++) {
-        devices_menu->Append(10000+i, flightIds[i]);
+        flight_menu->Append(10000+i, flightIds[i]);
     }
 
     menubar->Append(view_menu, wxT("&View"));
