@@ -67,6 +67,7 @@ class GraphFrame : public BaseFrame
         Graph* graphs[18];
         
         int last_view;
+        string lastFlightId;
         
     private:
         // Enumeration for GUI controls

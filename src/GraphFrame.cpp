@@ -56,9 +56,17 @@ void GraphFrame::Update() {
     }
 
     mainSizer->Layout();
+    
+    /// TODO: I'm sure there is a cleaner way to perform this call.
+    wxCommandEvent e;
+    if(lastFlightId != flightId) FitAll(e);
+    lastFlightId != flightId;
 }
 
 void GraphFrame::UpdateGraph(int num, Graph* graph) {
+    /// TODO: This function should not be sent a graph pointer.
+    /// It should actually get a set of string that define the graph
+    /// and then it should decide whether to create a graph or not.
     if(!graphs[num]) {
 	    graphs[num] = graph;
         mainSizer->Add(graphs[num]->window, 1, wxEXPAND | wxALL);
