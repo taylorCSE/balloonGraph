@@ -9,7 +9,7 @@ Graph::Graph(wxPanel* panel, char* name, char* table, string flight_id, char* co
     /**
     *   Constructor for the Main frame.
     */
-	wxFont windowFont(11, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
+	wxFont windowFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
     window = new mpWindow(panel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER);
 	
     this->name = name;
@@ -38,7 +38,7 @@ Graph::Graph(wxPanel* panel, char* name, char* table, string flight_id, char* co
     yaxis->SetDrawOutsideMargins(false);
 	xaxis->SetLabelFormat(wxT("%.1f"));
 	yaxis->SetLabelFormat(wxT("%.1f"));
-    window->SetMargins(30, 30, 50, 100);
+    window->SetMargins(30, 30, 50, 70);
     window->AddLayer(     xaxis );
     window->AddLayer(     yaxis );
 	window->AddLayer(     vectorLayer );
