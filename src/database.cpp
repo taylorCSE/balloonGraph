@@ -184,7 +184,7 @@ Plot DB_getPlotData(char* table, char* data_column, string flight_id) {
     }
     
     DB_query("select UNIX_TIMESTAMP(%s)-UNIX_TIMESTAMP(), Altitude, %s from %s " 
-             "where concat_ws('-',DeviceID,FlightID)=%s "
+             "where concat_ws('-',DeviceID,FlightID)=\"%s\" "
              "order by %s asc;",
              timestamp.c_str(),
              data_column, table, flight_id.c_str(),

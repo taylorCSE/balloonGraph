@@ -59,7 +59,7 @@ Graph::~Graph() {
 }
 
 void Graph::Update(string flight_id) {
-    if(flight_id == "") flightId = flight_id;
+    if(flight_id != "") flightId = flight_id;
     
     mpFXYVector * vectorLayer = (mpFXYVector*)window->GetLayer(2);
     data = GetData();
