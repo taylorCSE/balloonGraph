@@ -195,6 +195,10 @@ vector<string> DB_getMostRecentAnalog(string flight_id) {
     if(num_fields < 18) return result;
     
     if (row = mysql_fetch_row(DB_result)) {
+        // push one just to make the vector indices align with database
+        // offsets (ie. A1 = [1] instead of A1 = [0])
+        result.push_back(string(""));
+        
         for(int i = 0; i<18;i++) {
             result.push_back(string(row[i]));
         }
