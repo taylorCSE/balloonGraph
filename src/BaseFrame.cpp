@@ -94,7 +94,7 @@ void BaseFrame::NewSettingsWindow( wxCommandEvent& event ) {
 void BaseFrame::SelectDevice( wxCommandEvent& event ) {
     int id = event.GetId();
     
-    if(id > 10000) {
+    if(id >= 10000) {
         /// We're selecting a device
         flightId = flightIds[id - 10000];
     }
