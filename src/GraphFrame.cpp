@@ -26,6 +26,7 @@ GraphFrame::~GraphFrame() {
     /** 
     *   Destructor for the Main form.
     */
+    ClearGraphs();
 }
 
 void GraphFrame::Update() {
