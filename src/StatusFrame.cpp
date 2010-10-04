@@ -35,7 +35,6 @@ StatusFrame::~StatusFrame() {
 void StatusFrame::Update() {
     CreateMenu();
 
-    map<string, string> gps_info; 
     wxString head,info,tail;
     
     head = wxString::Format(wxT(""
@@ -47,7 +46,7 @@ void StatusFrame::Update() {
             "</body>"));
     
     if(view == VIEW_BASIC) {    
-        gps_info = DB_getMostRecentGPS(flightId);
+        map<string, string> gps_info = DB_getMostRecentGPS(flightId);
 
         info = wxString::Format(wxT(""
             "<b>Location</b>\n<br />"
@@ -83,12 +82,18 @@ void StatusFrame::Update() {
             );
     }
     if(view == VIEW_ANALOG) {
+        vector<string> analog_data = DB_getMostRecentAnalog(flightId);
+        
         info = wxString("<b>Analog Channels</b>\n<br />");
 
-        for(int i = 1; i <= 18; i++) {
-            info = info + wxString::Format(wxT(""
-                "A%d: <font color=#33ff33>%s</font>\n<br />"
-                ),i,"test");
+        if(analog_data.size() < 19) {
+            info = info + wxString("Data not available.");
+        } else {
+            for(int i = 1; i <= 18; i++) {
+                info = info + wxString::Format(wxT(""
+                    "A%d: <font color=#33ff33>%s</font>\n<br />"
+                    ),i,analog_data[i].c_str());
+            }
         }
     }    
     deviceInfo->SetPage(head+info+tail);
