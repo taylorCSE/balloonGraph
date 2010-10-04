@@ -176,6 +176,33 @@ map<string, string> DB_getMostRecentGPS(string flight_id) {
     return result;
 }
 
+vector<string> DB_getMostRecentAnalog(string flight_id) {
+    DB_query("select "
+             "A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18 "
+             "from aip "
+             "where concat_ws('-',DeviceID,FlightID)=\"%s\""
+             "order by Timesstamp desc limit 1;",flight_id.c_str());
+
+    MYSQL_ROW row;
+    int num_fields;
+    
+    vector<string> result;
+
+    if(!DB_isQueryReady()) return result;
+
+    num_fields = mysql_num_fields(DB_result);
+    
+    if (row = mysql_fetch_row(DB_result)) {
+        for(int i = 0; i<18;i++) {
+            result[i+1] = string(row[i]);
+        }
+    }
+    
+    mysql_free_result(DB_result);
+
+    return result;
+}
+
 Plot DB_getPlotData(char* table, char* data_column, string flight_id) {
     // Small hack to fix a typo in the database    
     string timestamp = "Timestamp";

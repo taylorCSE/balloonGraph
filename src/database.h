@@ -26,6 +26,7 @@ void DB_query(char * item ...);
 char* DB_resultAsText();
 vector<string> DB_getAllFlights();
 map<string, string> DB_getMostRecentGPS(string flight_id);
+vector<string> DB_getMostRecentAnalog(string flight_id);
 Plot DB_getPlotData(char* table, char* data_column, string flight_id);
 bool DB_isQueryReady();
 
