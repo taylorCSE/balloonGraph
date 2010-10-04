@@ -192,9 +192,11 @@ vector<string> DB_getMostRecentAnalog(string flight_id) {
 
     num_fields = mysql_num_fields(DB_result);
     
+    if(num_fields < 18) return result;
+    
     if (row = mysql_fetch_row(DB_result)) {
         for(int i = 0; i<18;i++) {
-            result[i+1] = string(row[i]);
+            result.push_back(string(row[i]));
         }
     }
     
