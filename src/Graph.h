@@ -35,6 +35,8 @@ class Graph: public mpWindow {
         Plot data;
         
     private:
+        DECLARE_EVENT_TABLE();
+
         string name;
         string db_table;
         string db_col;

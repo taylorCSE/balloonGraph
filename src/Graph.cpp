@@ -5,6 +5,10 @@
  
 #include "Graph.h"
 
+BEGIN_EVENT_TABLE(Graph,mpWindow)
+    EVT_LEFT_DCLICK(Graph::OpenSingleGraph)
+END_EVENT_TABLE()
+
 Graph::Graph(wxPanel* panel, char* name, char* table, string flight_id, char* col) :
    mpWindow(panel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER) {
     /**
@@ -85,4 +89,5 @@ Plot Graph::GetData() {
 }
 
 void Graph::OpenSingleGraph(wxMouseEvent& event) {
+    exit(0);
 }
