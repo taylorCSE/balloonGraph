@@ -5,12 +5,14 @@
  
 #include "Graph.h"
 
-Graph::Graph(wxPanel* panel, char* name, char* table, string flight_id, char* col) {
+Graph::Graph(wxPanel* panel, char* name, char* table, string flight_id, char* col) :
+   mpWindow(panel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER) {
     /**
     *   Constructor for the Main frame.
     */
+    
 	wxFont windowFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    window = new mpWindow(panel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER);
+    //this = new mpWindow(panel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER);
 	
     this->name = name;
     this->db_table = table;
@@ -38,30 +40,31 @@ Graph::Graph(wxPanel* panel, char* name, char* table, string flight_id, char* co
     yaxis->SetDrawOutsideMargins(false);
 	xaxis->SetLabelFormat(wxT("%.1f"));
 	yaxis->SetLabelFormat(wxT("%.1f"));
-    window->SetMargins(30, 30, 50, 70);
-    window->AddLayer(     xaxis );
-    window->AddLayer(     yaxis );
-	window->AddLayer(     vectorLayer );
-    window->AddLayer(     new mpText(y_label + wxT(" vs ") + x_label, 60, 5) );
+    SetMargins(30, 30, 50, 70);
+    AddLayer(     xaxis );
+    AddLayer(     yaxis );
+	AddLayer(     vectorLayer );
+    AddLayer(     new mpText(y_label + wxT(" vs ") + x_label, 60, 5) );
+    
     mpInfoLegend* leg;
-    window->AddLayer( leg = new mpInfoLegend(wxRect(200,20,40,40), wxTRANSPARENT_BRUSH)); //&hatch2));
+    AddLayer( leg = new mpInfoLegend(wxRect(200,20,40,40), wxTRANSPARENT_BRUSH)); //&hatch2));
     leg->SetVisible(true);
     
-    window->Fit();
+    Fit();
+
+//    *((int*)0x00) = 0;
 }
 
 Graph::~Graph() {
     /** 
     *   Destructor for the Main form.
     */
-    
-    delete window;
 }
 
 void Graph::Update(string flight_id) {
     if(flight_id != "") flightId = flight_id;
     
-    mpFXYVector * vectorLayer = (mpFXYVector*)window->GetLayer(2);
+    mpFXYVector * vectorLayer = (mpFXYVector*)this->GetLayer(2);
     data = GetData();
 
     string y_label = wxT("Altitude");
@@ -74,13 +77,12 @@ void Graph::Update(string flight_id) {
 	vectorLayer->SetPen(vectorpen);
 	vectorLayer->SetDrawOutsideMargins(false);
 	
-	window->UpdateAll();
+	UpdateAll();
 }
 
 Plot Graph::GetData() {
     return DB_getPlotData((char*)db_table.c_str(),(char*)db_col.c_str(),flightId);
 }
 
-void Graph::Fit() {
-    window->Fit();
+void Graph::OpenSingleGraph(wxMouseEvent& event) {
 }

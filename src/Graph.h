@@ -18,19 +18,19 @@
 #endif
 
 #include <wx/panel.h>
+#include <wx/event.h>
 
 #include "mathplot.h"
 #include "database.h"
 #include "Plot.h"
 
-class Graph {
+class Graph: public mpWindow {
     public:
         Graph(wxPanel* panel, char* name, char* table, string flight_id, char* col);
         virtual ~Graph();
         void Update(string flight_id = "");
         Plot GetData();
-        void Fit();
-        mpWindow* window;
+        void OpenSingleGraph(wxMouseEvent& event);
         
         Plot data;
         

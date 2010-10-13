@@ -61,7 +61,7 @@ void GraphFrame::Update() {
     /// TODO: I'm sure there is a cleaner way to perform this call.
     wxCommandEvent e;
     if(lastFlightId != flightId) FitAll(e);
-    lastFlightId != flightId;
+    lastFlightId = flightId;
 }
 
 void GraphFrame::UpdateGraph(int num, Graph* graph) {
@@ -70,7 +70,7 @@ void GraphFrame::UpdateGraph(int num, Graph* graph) {
     /// and then it should decide whether to create a graph or not.
     if(!graphs[num]) {
 	    graphs[num] = graph;
-        mainSizer->Add(graphs[num]->window, 1, wxEXPAND | wxALL);
+        mainSizer->Add(graphs[num], 1, wxEXPAND | wxALL);
     } else {
         delete graph;
     }
@@ -125,7 +125,7 @@ void GraphFrame::FitAll( wxCommandEvent& event ) {
 
 void GraphFrame::ClearGraphs() {
     for(int i = 0; i<18; i++) {
-        if(graphs[i]) mainSizer->Remove(graphs[i]->window);
+        if(graphs[i]) mainSizer->Remove(graphs[i]);
         delete graphs[i];
         graphs[i] = 0x00;
     }
