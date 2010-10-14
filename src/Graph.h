@@ -24,6 +24,9 @@
 #include "database.h"
 #include "Plot.h"
 
+class SingleGraphFrame;
+extern wxFrame* NewSingleGraphFrame();
+
 class Graph: public mpWindow {
     public:
         Graph(wxPanel* panel, char* name, char* table, string flight_id, char* col);

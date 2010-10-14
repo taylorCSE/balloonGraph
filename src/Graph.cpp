@@ -85,5 +85,6 @@ Plot Graph::GetData() {
 }
 
 void Graph::OpenSingleGraph(wxMouseEvent& event) {
-    exit(0);
+    wxFrame* frame = NewSingleGraphFrame();
+    frame->Show();     
 }
