@@ -19,7 +19,9 @@ END_EVENT_TABLE()
 */
 
 BaseFrame::BaseFrame()
-: wxFrame(NULL, -1, wxT("AppName"), wxDefaultPosition, wxSize(360,600), wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX) {
+: wxFrame(NULL, -1, wxT("AppName"), wxDefaultPosition, wxSize(360,600), 
+          wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | 
+          wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX) {
     updateTimer = new wxTimer(this, UPDATE_TIMER);
     updateTimer->Start(5000);
     
@@ -46,7 +48,9 @@ BaseFrame::~BaseFrame() {
     Options can be provided to disable specific menus.
 */
 
-void BaseFrame::CreateMenu(bool show_view, bool show_window, bool show_flights) {
+void BaseFrame::CreateMenu(bool show_view, 
+                           bool show_window, 
+                           bool show_flights) {
     wxMenuBar* old_menubar = menubar;
     
     menubar = new wxMenuBar;
