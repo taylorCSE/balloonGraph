@@ -29,7 +29,8 @@ class SingleGraphFrame;
 class Graph: public mpWindow {
     public:
         Graph();
-        Graph(wxPanel* panel, string name, string table, string flight_id, string col);
+        Graph(wxPanel* panel, string name, string table, 
+                              string flight_id, string col);
         virtual ~Graph();
         void Update(string flight_id = "");
         Plot GetData();
