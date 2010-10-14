@@ -1,6 +1,6 @@
 /**
  * \file SingleGraphFrame.h
- * \brief Main window header file
+ * \brief SingleGraphFrame header file
  */
 
 #ifndef __SINGLEFRAME_h__
@@ -17,18 +17,10 @@
     #include <wx/wxprec.h>
 #endif
 
-
-#include <wx/timer.h>
 #include <wx/menu.h>
 #include <wx/statusbr.h>
-#include <wx/slider.h>
-#include <wx/stattext.h>
-#include <wx/choice.h>
 #include <wx/panel.h>
 #include <wx/sizer.h>
-#include <wx/progdlg.h>
-#include <wx/dcbuffer.h>
-#include <wx/html/htmlwin.h>
                            
 #include "GraphFrame.h"
 #include "Graph.h"
@@ -57,9 +49,8 @@ class SingleGraphFrame : public BaseFrame
         Graph* graph;
         
     private:
-        // Enumeration for GUI controls
+        // IDs for GUI elements
         enum {
-            ////GUI Enum Control ID Start
             ID_TEXT = 2000,
         };
 };
