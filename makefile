@@ -50,7 +50,7 @@ CXXFLAGS  = -fno-exceptions \
 			-D__WIN95__ \
 			-Wno-deprecated \
 			-ggdb \
-			-O2
+			-O0
 
 LDFLAGS   = -Wl
 
