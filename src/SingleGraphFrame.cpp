@@ -1,6 +1,6 @@
 /**
  * \file SingleGraphFrame.cpp
- * \brief Main Windows Class
+ * \brief Frame for single graphs
  */
  
 #include "SingleGraphFrame.h"
@@ -24,7 +24,7 @@ SingleGraphFrame::SingleGraphFrame(Graph* graph)
 }
 
 /** 
-   Destructor for the Main form.
+   Destructor for the Main frame.
 */
 
 SingleGraphFrame::~SingleGraphFrame() {
@@ -35,18 +35,16 @@ SingleGraphFrame::~SingleGraphFrame() {
 */
 
 void SingleGraphFrame::Update() {
-    CreateMenu();
+    CreateMenu(false, false);
     
     graph->Update(flightId);
 }
 
 /**
-   Creates all of the GUI controls on the main form.
+   Creates all of the GUI controls on the frame.
 */
     
 void SingleGraphFrame::CreateGUIControls() {
-
-    
     // Set window properties and title bar
     SetTitle(wxT("Graph"));
     SetIcon(wxNullIcon);
