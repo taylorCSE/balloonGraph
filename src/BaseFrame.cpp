@@ -14,8 +14,8 @@ BEGIN_EVENT_TABLE(BaseFrame,wxFrame)
     EVT_CLOSE(BaseFrame::OnClose)
 END_EVENT_TABLE()
 
-BaseFrame::BaseFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
-: wxFrame(parent, id, title, position, size, style) {
+BaseFrame::BaseFrame()
+: wxFrame(NULL, -1, wxT("AppName"), wxDefaultPosition, wxSize(360,600)) {
     updateTimer = new wxTimer(this, UPDATE_TIMER);
     updateTimer->Start(5000);
     

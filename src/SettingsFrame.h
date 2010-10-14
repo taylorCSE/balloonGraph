@@ -41,7 +41,7 @@
 class SettingsFrame : public BaseFrame
 {
     public:
-        SettingsFrame(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("AppName"), const wxPoint& pos = wxDefaultPosition, const wxSize &size = wxSize(360,600), long style = SettingsFrame_STYLE);
+        SettingsFrame();
         virtual ~SettingsFrame();
 
     private:

@@ -9,8 +9,8 @@ BEGIN_EVENT_TABLE(GraphFrame,BaseFrame)
     EVT_MENU(ID_FITALL, GraphFrame::FitAll)
 END_EVENT_TABLE()
 
-GraphFrame::GraphFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
-: BaseFrame(parent, id, title, position, size, style) {
+GraphFrame::GraphFrame()
+: BaseFrame() {
     /**
     *   Constructor for the Main frame.
     */
@@ -132,5 +132,5 @@ void GraphFrame::ClearGraphs() {
 }
 
 wxFrame* NewGraphFrame() {
-    return (wxFrame*)(new GraphFrame(NULL));
+    return (wxFrame*)(new GraphFrame());
 }

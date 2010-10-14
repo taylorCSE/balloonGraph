@@ -34,7 +34,7 @@ extern wxFrame* NewSettingsFrame();
 class BaseFrame : public wxFrame
 {
     public:
-        BaseFrame(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("AppName"), const wxPoint& pos = wxDefaultPosition, const wxSize &size = wxSize(360,600), long style = BaseFrame_STYLE);
+        BaseFrame();
         void NewStatusWindow(wxCommandEvent& event);
         void NewGraphWindow(wxCommandEvent& event);
         void NewSettingsWindow(wxCommandEvent& event);

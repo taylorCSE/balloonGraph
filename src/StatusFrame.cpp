@@ -12,8 +12,8 @@ END_EVENT_TABLE()
    Constructor for the Main frame.
 */
 
-StatusFrame::StatusFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
-: BaseFrame(parent, id, title, position, size, style) {
+StatusFrame::StatusFrame()
+: BaseFrame() {
     flightId = "Please select a device from the menu.";
     
     CreateGUIControls();
@@ -122,6 +122,6 @@ void StatusFrame::CreateGUIControls() {
 }
 
 wxFrame* NewStatusFrame() {
-    return (wxFrame*)(new StatusFrame(NULL));
+    return (wxFrame*)(new StatusFrame());
 }
 

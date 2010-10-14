@@ -14,8 +14,8 @@ END_EVENT_TABLE()
    Constructor for the Main frame.
 */
 
-SettingsFrame::SettingsFrame(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
-: BaseFrame(parent, id, title, position, size, style) {
+SettingsFrame::SettingsFrame()
+: BaseFrame() {
     flightId = "Please select a device from the menu.";
     
     CreateGUIControls();
@@ -97,6 +97,6 @@ void SettingsFrame::OnCancel( wxCommandEvent& event ) {
 }
 
 wxFrame* NewSettingsFrame() {
-    return (wxFrame*)(new SettingsFrame(NULL));
+    return (wxFrame*)(new SettingsFrame());
 }
 

@@ -42,7 +42,7 @@
 class GraphFrame : public BaseFrame
 {
     public:
-        GraphFrame(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("AppName"), const wxPoint& pos = wxDefaultPosition, const wxSize &size = wxSize(360,600), long style = GraphFrame_STYLE);
+        GraphFrame();
         virtual ~GraphFrame();
 
     private:

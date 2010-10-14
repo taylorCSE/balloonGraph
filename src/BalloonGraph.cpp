@@ -15,7 +15,7 @@ IMPLEMENT_APP(BalloonGraph)
 */
 
 bool BalloonGraph::OnInit() {
-    StatusFrame* frame = new StatusFrame(NULL);
+    StatusFrame* frame = new StatusFrame();
     SetTopWindow(frame);
     frame->Show();
     return true;

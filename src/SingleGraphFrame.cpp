@@ -13,7 +13,7 @@ END_EVENT_TABLE()
 */
 
 SingleGraphFrame::SingleGraphFrame(Graph* graph)
-: BaseFrame(NULL, -1, wxT("AppName"), wxDefaultPosition, wxSize(360,600), SingleGraphFrame_STYLE) {
+: BaseFrame() {
     flightId = "Please select a device from the menu.";
     
     this->graph = graph;

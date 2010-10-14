@@ -41,7 +41,7 @@
 class StatusFrame : public BaseFrame
 {
     public:
-        StatusFrame(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("AppName"), const wxPoint& pos = wxDefaultPosition, const wxSize &size = wxSize(360,600), long style = StatusFrame_STYLE);
+        StatusFrame();
         virtual ~StatusFrame();
 
     private:
