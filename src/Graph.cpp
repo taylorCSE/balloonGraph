@@ -16,8 +16,6 @@ Graph::Graph(wxPanel* panel, char* name, char* table, string flight_id, char* co
     */
     
 	wxFont windowFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
-    //this = new mpWindow(panel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER);
-	
     this->name = name;
     this->db_table = table;
     this->db_col = col;
@@ -55,8 +53,6 @@ Graph::Graph(wxPanel* panel, char* name, char* table, string flight_id, char* co
     leg->SetVisible(true);
     
     Fit();
-
-//    *((int*)0x00) = 0;
 }
 
 Graph::~Graph() {
