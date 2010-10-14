@@ -3,8 +3,8 @@
  * \brief Main Application Header File
  */
 
-#ifndef __CHAOSCONNECTFRMApp_h__
-#define __CHAOSCONNECTFRMApp_h__
+#ifndef __BALLOONGRAPH_h__
+#define __BALLOONGRAPH_h__
 
 #ifdef __BORLANDC__
 	#pragma hdrstop
@@ -16,9 +16,9 @@
 	#include <wx/wxprec.h>
 #endif
 
-#define APP_NAME "HawkEye"
+#define APP_NAME "BalloonGraph"
 
-class App : public wxApp
+class BalloonGraph : public wxApp
 {
 	public:
 		bool OnInit();

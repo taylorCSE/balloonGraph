@@ -1,14 +1,14 @@
 /**
- * \file App.cpp
+ * \file BalloonGraph.cpp
  * \brief Main Application Code
  */
 
-#include "App.h"
+#include "BalloonGraph.h"
 #include "StatusFrame.h"
 
-IMPLEMENT_APP(App)
+IMPLEMENT_APP(BalloonGraph)
 
-bool App::OnInit()
+bool BalloonGraph::OnInit()
 {
     /**
     *   Creates the main frame and shows it
@@ -19,7 +19,7 @@ bool App::OnInit()
     return true;
 }
  
-int App::OnExit()
+int BalloonGraph::OnExit()
 {
     /**
     *   Closes the application
