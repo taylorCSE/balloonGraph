@@ -1,19 +1,34 @@
+/**
+ * \file Database.cpp
+ * \brief Handles database communication
+ *
+ * This is absolutely not thread safe. If calls are being made from 
+ * multiple threads, behavior will be unexpected.
+ *
+ * TODO: This could use a more robust error checking method 
+ */
+
 #include "database.h"
 
 using namespace std;
 
+/// Globals to maintain database connection
 MYSQL *DB_conn = NULL;
 MYSQL_RES *DB_result = NULL;
 FILE * DB_log = NULL;
 
+/// Defualt database values
 string DB_USER = "root";
 string DB_PASS = "";
 string DB_HOST = "127.0.0.1";
 string DB_NAME = "balloontrack";
 
+/// Small buffer to use in various calls
 char DB_buf[16384];
 
-/// TODO: This could use a more robust error checking method 
+/**
+    Connect to the database
+*/
 
 void DB_connect() {
     DB_log = fopen("database.log","w");
@@ -34,6 +49,28 @@ void DB_connect() {
     
     fprintf(DB_log,"Database connecton established.\n");
 }
+
+/**
+    Query the database
+    
+    This isn't particularly secure if a user is able to enter elements 
+    of the query. It simply takes the supplied items and puts them 
+    together as a query.
+    
+    The following are allowes as part of the format string:
+    
+    %s - String (char*)
+    %d - Integer
+    %f - Float
+    %c - Character
+    
+    Example call:
+    
+    DB_query("select * from users where name = '%s'",name);
+    
+    In the preceeding example, %s will be replaced by the value in name 
+    and the query will be executed.
+*/
 
 void DB_query(char* item ...) {
     char query[1024];
@@ -80,6 +117,12 @@ void DB_query(char* item ...) {
     }
 }
 
+/**
+    Get the query result as text.
+    
+    This returns a character pointer to the buffer holding the result.
+*/
+
 char* DB_resultAsText() {
     if(!DB_isQueryReady()) return("");
 
@@ -105,6 +148,12 @@ char* DB_resultAsText() {
     return DB_buf;
 }
 
+/**
+    Get most recent flights in the database
+    
+    This returns the most recent 15 flights from the database.
+*/
+
 vector<string> DB_getAllFlights() {
     DB_query("select distinct concat_ws('-',DeviceID,FlightID) from aip where FlightID != \"\" order by Timesstamp DESC limit 15;");
 
@@ -129,6 +178,10 @@ vector<string> DB_getAllFlights() {
 
     return result;
 }
+
+/**
+    Get most recent GPS data
+*/
 
 map<string, string> DB_getMostRecentGPS(string flight_id) {
     DB_query("select Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg, Status from gps where concat_ws('-',DeviceID,FlightID)=\"%s\" and Lat != 0 order by Timestamp desc limit 1;",flight_id.c_str());
@@ -176,6 +229,10 @@ map<string, string> DB_getMostRecentGPS(string flight_id) {
     return result;
 }
 
+/**
+    Get most recent analog data
+*/
+
 vector<string> DB_getMostRecentAnalog(string flight_id) {
     DB_query("select "
              "A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18 "
@@ -209,6 +266,12 @@ vector<string> DB_getMostRecentAnalog(string flight_id) {
     return result;
 }
 
+/**
+    Get data for a specific plot.
+    
+    Returns a plot filled with data.
+*/
+
 Plot DB_getPlotData(char* table, char* data_column, string flight_id) {
     // Small hack to fix a typo in the database    
     string timestamp = "Timestamp";
@@ -238,6 +301,10 @@ Plot DB_getPlotData(char* table, char* data_column, string flight_id) {
     
     return result;
 }
+
+/**
+    Test to see if there is a query ready.
+*/
 
 bool DB_isQueryReady() {
     if(!DB_conn) return false;
