@@ -1,6 +1,9 @@
 /**
  * \file BaseFrame.h
- * \brief Main window header file
+ * \brief Main frame header file
+ *
+ * All of the frame classes extend this one. It provides basic menus, 
+ * flight selections, and an update timer.
  */
 #ifndef __BASEFRAME_h__
 #define __BASEFRAME_h__
@@ -37,7 +40,7 @@ class BaseFrame : public wxFrame
         void NewSettingsWindow(wxCommandEvent& event);
         virtual ~BaseFrame();
         void CreateMenu(bool show_view = true, bool show_window = true, bool show_flights = true);
-        void SelectDevice(wxCommandEvent& event );
+        void SelectFlight(wxCommandEvent& event );
         void OnTimer(wxTimerEvent& event);
         void OnClose(wxCloseEvent& event);
 
