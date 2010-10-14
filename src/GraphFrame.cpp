@@ -9,11 +9,12 @@ BEGIN_EVENT_TABLE(GraphFrame,BaseFrame)
     EVT_MENU(ID_FITALL, GraphFrame::FitAll)
 END_EVENT_TABLE()
 
+/**
+    Constructor
+*/
+
 GraphFrame::GraphFrame()
 : BaseFrame() {
-    /**
-    *   Constructor for the Main frame.
-    */
     flightId = "Please select a device from the menu.";
     
     last_view = view;
@@ -22,17 +23,19 @@ GraphFrame::GraphFrame()
     
 }
 
+/**
+    Deconstructor
+*/
+
 GraphFrame::~GraphFrame() {
-    /** 
-    *   Destructor for the Main form.
-    */
     ClearGraphs();
 }
 
+/**
+    Update the GUI with new information
+*/
+
 void GraphFrame::Update() {
-    /**
-     * Updates the GUI with new database information
-     */
     if(last_view != view) ClearGraphs();
     last_view = view;
      
@@ -64,6 +67,10 @@ void GraphFrame::Update() {
     lastFlightId = flightId;
 }
 
+/**
+    Update a specified graph
+*/
+
 void GraphFrame::UpdateGraph(int num, Graph* graph) {
     /// TODO: This function should not be sent a graph pointer.
     /// It should actually get a set of string that define the graph
@@ -77,12 +84,22 @@ void GraphFrame::UpdateGraph(int num, Graph* graph) {
     graphs[num]->Update(flightId);
 }
 
+/**
+    Update the basic graphs
+*/
+
 void GraphFrame::UpdateBasicGraphs() {
     mainSizer->SetCols(1);
 	UpdateGraph(0, new Graph(mainPanel,"Altitude","gps",flightId,"Altitude"));
 	UpdateGraph(1, new Graph(mainPanel,"Speed","gps",flightId,"Spd"));
 	UpdateGraph(2, new Graph(mainPanel,"Climb","gps",flightId,"Rate"));
 }
+
+/**
+    Update the analog graphs
+    
+    This loops through all 18 of the analog items and displays them
+*/
 
 void GraphFrame::UpdateAnalogGraphs() {
 	char name[4];
@@ -96,11 +113,11 @@ void GraphFrame::UpdateAnalogGraphs() {
 	}
 }
 
+/**
+    Create the GUI controls
+*/
+
 void GraphFrame::CreateGUIControls() {
-   /**
-    *   Creates all of the GUI controls on the main form.
-    */
-    
     SetTitle(wxT("Device Graphs"));
     SetIcon(wxNullIcon);
     
@@ -114,6 +131,12 @@ void GraphFrame::CreateGUIControls() {
 
     Update();
 }
+    
+/**
+    Fit all graphs
+
+    This simply calls Fit() on each of the graphs that are active.    
+*/
 
 void GraphFrame::FitAll( wxCommandEvent& event ) {
     for(int i = 0; i < 18; i++) {
@@ -123,6 +146,13 @@ void GraphFrame::FitAll( wxCommandEvent& event ) {
     }
 }
 
+/**
+    Clears all graphs
+    
+    This removes all existing graphs from the sizer and deletes them from
+    memory.
+*/
+
 void GraphFrame::ClearGraphs() {
     for(int i = 0; i<18; i++) {
         if(graphs[i]) mainSizer->Remove(graphs[i]);
@@ -130,6 +160,14 @@ void GraphFrame::ClearGraphs() {
         graphs[i] = 0x00;
     }
 }
+
+/**
+    Create a new graph frame.
+    
+    This function allows for the creation of new graph frame from classes
+    that don't know about all of the details of the class. This is used
+    by BaseFrame to create a new GraphFrame from the menu.
+*/
 
 wxFrame* NewGraphFrame() {
     return (wxFrame*)(new GraphFrame());
