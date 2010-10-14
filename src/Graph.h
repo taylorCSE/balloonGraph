@@ -25,11 +25,11 @@
 #include "Plot.h"
 
 class SingleGraphFrame;
-extern wxFrame* NewSingleGraphFrame();
 
 class Graph: public mpWindow {
     public:
-        Graph(wxPanel* panel, char* name, char* table, string flight_id, char* col);
+        Graph();
+        Graph(wxPanel* panel, string name, string table, string flight_id, string col);
         virtual ~Graph();
         void Update(string flight_id = "");
         Plot GetData();
@@ -37,13 +37,15 @@ class Graph: public mpWindow {
         
         Plot data;
         
-    private:
-        DECLARE_EVENT_TABLE();
-
         string name;
         string db_table;
         string db_col;
         string flightId;
+
+    private:
+        DECLARE_EVENT_TABLE();
 };
+
+extern wxFrame* NewSingleGraphFrame(Graph*);
 
 #endif

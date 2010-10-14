@@ -9,7 +9,10 @@ BEGIN_EVENT_TABLE(Graph,mpWindow)
     EVT_LEFT_DCLICK(Graph::OpenSingleGraph)
 END_EVENT_TABLE()
 
-Graph::Graph(wxPanel* panel, char* name, char* table, string flight_id, char* col) :
+Graph::Graph() {
+}
+
+Graph::Graph(wxPanel* panel, string name, string table, string flight_id, string col) :
    mpWindow(panel, -1, wxPoint(0,0), wxSize(1,1), wxSUNKEN_BORDER) {
     /**
     *   Constructor for the Main frame.
@@ -85,6 +88,6 @@ Plot Graph::GetData() {
 }
 
 void Graph::OpenSingleGraph(wxMouseEvent& event) {
-    wxFrame* frame = NewSingleGraphFrame();
+    wxFrame* frame = NewSingleGraphFrame(this);
     frame->Show();     
 }
