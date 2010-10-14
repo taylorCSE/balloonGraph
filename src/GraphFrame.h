@@ -1,6 +1,6 @@
 /**
  * \file GraphFrame.h
- * \brief Main window header file
+ * \brief Graph frame header file
  */
 
 #ifndef __GRAPHFRAME_h__
@@ -67,9 +67,8 @@ class GraphFrame : public BaseFrame
         string lastFlightId;
         
     private:
-        // Enumeration for GUI controls
+        // ID's for GUI controls
         enum {
-            ////GUI Enum Control ID Start
             ID_TEXT = 2000,
             ID_FITALL
         };
