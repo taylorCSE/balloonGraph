@@ -17,7 +17,6 @@
     #include <wx/wxprec.h>
 #endif
 
-
 #include <wx/timer.h>
 #include <wx/menu.h>
 #include <wx/statusbr.h>
@@ -34,9 +33,6 @@
 #include "mathplot.h"
 #include "database.h"
 #include "BaseFrame.h"
-
-#undef StatusFrame_STYLE
-#define StatusFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
 
 class StatusFrame : public BaseFrame
 {

@@ -36,9 +36,6 @@
 #include "Graph.h"
 #include "Plot.h"
 
-#undef GraphFrame_STYLE
-#define GraphFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
-
 class GraphFrame : public BaseFrame
 {
     public:

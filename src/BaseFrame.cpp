@@ -15,7 +15,7 @@ BEGIN_EVENT_TABLE(BaseFrame,wxFrame)
 END_EVENT_TABLE()
 
 BaseFrame::BaseFrame()
-: wxFrame(NULL, -1, wxT("AppName"), wxDefaultPosition, wxSize(360,600)) {
+: wxFrame(NULL, -1, wxT("AppName"), wxDefaultPosition, wxSize(360,600), wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX) {
     updateTimer = new wxTimer(this, UPDATE_TIMER);
     updateTimer->Start(5000);
     

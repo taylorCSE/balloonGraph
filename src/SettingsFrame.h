@@ -35,9 +35,6 @@
 #include "database.h"
 #include "BaseFrame.h"
 
-#undef SettingsFrame_STYLE
-#define SettingsFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
-
 class SettingsFrame : public BaseFrame
 {
     public:

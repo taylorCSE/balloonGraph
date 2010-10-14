@@ -36,9 +36,6 @@
 #include "database.h"
 #include "BaseFrame.h"
 
-#undef SingleGraphFrame_STYLE
-#define SingleGraphFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
-
 class SingleGraphFrame : public BaseFrame
 {
     public:
