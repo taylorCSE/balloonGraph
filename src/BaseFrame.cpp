@@ -14,6 +14,10 @@ BEGIN_EVENT_TABLE(BaseFrame,wxFrame)
     EVT_CLOSE(BaseFrame::OnClose)
 END_EVENT_TABLE()
 
+/**
+    Constructor
+*/
+
 BaseFrame::BaseFrame()
 : wxFrame(NULL, -1, wxT("AppName"), wxDefaultPosition, wxSize(360,600), wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX) {
     updateTimer = new wxTimer(this, UPDATE_TIMER);
@@ -24,8 +28,18 @@ BaseFrame::BaseFrame()
     view = VIEW_BASIC;
 }
 
+/**
+    Deconstructor
+*/
+
 BaseFrame::~BaseFrame() {
 }
+
+/**
+    Creates the default menus
+    
+    Options can be provided to disable specific menus.
+*/
 
 void BaseFrame::CreateMenu(bool show_view, bool show_window, bool show_flights) {
     wxMenuBar* old_menubar = menubar;
@@ -97,6 +111,10 @@ void BaseFrame::NewSettingsWindow( wxCommandEvent& event ) {
     frame->Show();     
 }
 
+/**
+    Handles new flight selection event
+*/
+
 void BaseFrame::SelectFlight( wxCommandEvent& event ) {
     int id = event.GetId();
     
@@ -115,15 +133,19 @@ void BaseFrame::SelectFlight( wxCommandEvent& event ) {
     Update();
 }
 
+/**
+    Handles timer firing
+*/
+
 void BaseFrame::OnTimer(wxTimerEvent& event) {
     Update();
 }
 
 
+/**
+   Exit the Program
+*/
+
 void BaseFrame::OnClose(wxCloseEvent& event) {
-    /**
-    *   Event handler for the form closing event
-    *   Exit the ChaosConnect Program
-    */
     Destroy();
 }
