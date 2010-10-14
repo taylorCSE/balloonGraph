@@ -27,7 +27,7 @@ BaseFrame::BaseFrame(wxWindow *parent, wxWindowID id, const wxString &title, con
 BaseFrame::~BaseFrame() {
 }
 
-void BaseFrame::CreateMenu() {
+void BaseFrame::CreateMenu(bool show_view, bool show_window, bool show_flights) {
     wxMenuBar* old_menubar = menubar;
     
     menubar = new wxMenuBar;
@@ -35,24 +35,30 @@ void BaseFrame::CreateMenu() {
     view_menu = new wxMenu;
     window_menu = new wxMenu;
     
-    flightIds = DB_getAllFlights();
+    if(show_flights) {
+        flightIds = DB_getAllFlights();
+        
+        menubar->Append(flight_menu, wxT("&Flights"));
     
-    menubar->Append(flight_menu, wxT("&Flights"));
-
-    for(unsigned int i = 0; i < flightIds.size(); i++) {
-        flight_menu->Append(10000+i, flightIds[i]);
+        for(unsigned int i = 0; i < flightIds.size(); i++) {
+            flight_menu->Append(10000+i, flightIds[i]);
+        }
+    }
+    
+    if(show_view) {
+        menubar->Append(view_menu, wxT("&View"));
+        
+        view_menu->Append(VIEW_BASIC, wxT("Basic"));
+        view_menu->Append(VIEW_ANALOG, wxT("Analog Channels"));
     }
 
-    menubar->Append(view_menu, wxT("&View"));
-    
-    view_menu->Append(VIEW_BASIC, wxT("Basic"));
-    view_menu->Append(VIEW_ANALOG, wxT("Analog Channels"));
-
-    menubar->Append(window_menu, wxT("&Window"));
-    
-    window_menu->Append(ID_NEWSTATUS, "New Status Window");
-    window_menu->Append(ID_NEWGRAPH, "New Graph Window");    
-    window_menu->Append(ID_NEWSETTINGS, wxT("Settings"));
+    if(show_window) {
+        menubar->Append(window_menu, wxT("&Window"));
+        
+        window_menu->Append(ID_NEWSTATUS, "New Status Window");
+        window_menu->Append(ID_NEWGRAPH, "New Graph Window");    
+        window_menu->Append(ID_NEWSETTINGS, wxT("Settings"));
+    }
     
     SetMenuBar(menubar);
 
