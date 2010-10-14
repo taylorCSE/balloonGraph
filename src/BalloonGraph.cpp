@@ -1,6 +1,8 @@
 /**
  * \file BalloonGraph.cpp
  * \brief Main Application Code
+ *
+ * This is the entry point for the application.
  */
 
 #include "BalloonGraph.h"
@@ -8,21 +10,21 @@
 
 IMPLEMENT_APP(BalloonGraph)
 
-bool BalloonGraph::OnInit()
-{
-    /**
-    *   Creates the main frame and shows it
-    */
+/**
+    Creates the main frame and shows it
+*/
+
+bool BalloonGraph::OnInit() {
     StatusFrame* frame = new StatusFrame(NULL);
     SetTopWindow(frame);
     frame->Show();
     return true;
 }
  
-int BalloonGraph::OnExit()
-{
-    /**
-    *   Closes the application
-    */
+/**
+   Closes the application
+*/
+
+int BalloonGraph::OnExit() {
     return 0;
 }
