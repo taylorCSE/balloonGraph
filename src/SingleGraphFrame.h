@@ -31,6 +31,7 @@
 #include <wx/html/htmlwin.h>
                            
 #include "GraphFrame.h"
+#include "Graph.h"
 #include "mathplot.h"
 #include "database.h"
 #include "BaseFrame.h"
@@ -41,7 +42,7 @@
 class SingleGraphFrame : public BaseFrame
 {
     public:
-        SingleGraphFrame(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("AppName"), const wxPoint& pos = wxDefaultPosition, const wxSize &size = wxSize(360,600), long style = SingleGraphFrame_STYLE);
+        SingleGraphFrame(Graph* graph);
         virtual ~SingleGraphFrame();
 
     private:
@@ -55,7 +56,8 @@ class SingleGraphFrame : public BaseFrame
         // wxWidgets gui objects
         wxPanel *mainPanel; 
         wxBoxSizer *mainSizer;
-        wxHtmlWindow *deviceInfo;
+        
+        Graph* graph;
         
     private:
         // Enumeration for GUI controls
