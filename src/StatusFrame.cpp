@@ -121,6 +121,10 @@ void StatusFrame::CreateGUIControls() {
 
 }
 
+/**
+    Create a new status frame
+*/
+
 wxFrame* NewStatusFrame() {
     return (wxFrame*)(new StatusFrame());
 }

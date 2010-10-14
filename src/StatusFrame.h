@@ -54,9 +54,8 @@ class StatusFrame : public BaseFrame
         wxHtmlWindow *deviceInfo;
         
     private:
-        // Enumeration for GUI controls
+        // IDs for GUI elements
         enum {
-            ////GUI Enum Control ID Start
             ID_TEXT = 2000,
         };
 };
