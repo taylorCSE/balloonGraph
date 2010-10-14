@@ -10,7 +10,7 @@ BEGIN_EVENT_TABLE(BaseFrame,wxFrame)
     EVT_MENU(ID_NEWGRAPH, BaseFrame::NewGraphWindow)
     EVT_MENU(ID_NEWSETTINGS, BaseFrame::NewSettingsWindow)
     EVT_TIMER(UPDATE_TIMER, BaseFrame::OnTimer)
-    EVT_MENU(-1, BaseFrame::SelectFlight)
+    EVT_MENU(-1, BaseFrame::OnMenu)
     EVT_CLOSE(BaseFrame::OnClose)
 END_EVENT_TABLE()
 
@@ -120,7 +120,7 @@ void BaseFrame::NewSettingsWindow( wxCommandEvent& event ) {
     Handles new flight selection event
 */
 
-void BaseFrame::SelectFlight( wxCommandEvent& event ) {
+void BaseFrame::OnMenu( wxCommandEvent& event ) {
     int id = event.GetId();
     
     if(id >= 10000) {

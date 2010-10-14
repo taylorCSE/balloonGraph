@@ -40,7 +40,7 @@ class BaseFrame : public wxFrame
         void NewSettingsWindow(wxCommandEvent& event);
         virtual ~BaseFrame();
         void CreateMenu(bool show_view = true, bool show_window = true, bool show_flights = true);
-        void SelectFlight(wxCommandEvent& event );
+        void OnMenu(wxCommandEvent& event );
         void OnTimer(wxTimerEvent& event);
         void OnClose(wxCloseEvent& event);
 
