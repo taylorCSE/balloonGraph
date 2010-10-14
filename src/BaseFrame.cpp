@@ -23,7 +23,11 @@ BaseFrame::BaseFrame()
     updateTimer = new wxTimer(this, UPDATE_TIMER);
     updateTimer->Start(5000);
     
+    // Nullify the pointers
     menubar = 0x00;
+    flight_menu = 0x00;
+    view_menu = 0x00;
+    window_menu = 0x00;
 
     view = VIEW_BASIC;
 }
@@ -33,6 +37,7 @@ BaseFrame::BaseFrame()
 */
 
 BaseFrame::~BaseFrame() {
+    /// Free the menus if they were created
 }
 
 /**
@@ -45,11 +50,9 @@ void BaseFrame::CreateMenu(bool show_view, bool show_window, bool show_flights) 
     wxMenuBar* old_menubar = menubar;
     
     menubar = new wxMenuBar;
-    flight_menu = new wxMenu;
-    view_menu = new wxMenu;
-    window_menu = new wxMenu;
     
     if(show_flights) {
+        flight_menu = new wxMenu;
         flightIds = DB_getAllFlights();
         
         menubar->Append(flight_menu, wxT("&Flights"));
@@ -60,6 +63,7 @@ void BaseFrame::CreateMenu(bool show_view, bool show_window, bool show_flights) 
     }
     
     if(show_view) {
+        view_menu = new wxMenu;
         menubar->Append(view_menu, wxT("&View"));
         
         view_menu->Append(VIEW_BASIC, wxT("Basic"));
@@ -67,6 +71,7 @@ void BaseFrame::CreateMenu(bool show_view, bool show_window, bool show_flights) 
     }
 
     if(show_window) {
+        window_menu = new wxMenu;
         menubar->Append(window_menu, wxT("&Window"));
         
         window_menu->Append(ID_NEWSTATUS, "New Status Window");
