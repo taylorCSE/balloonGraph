@@ -36,14 +36,18 @@ void DB_connect() {
     DB_conn = mysql_init(NULL);
     
     if (DB_conn == NULL) {
-        fprintf(DB_log, "Error %u: %s\n", mysql_errno(DB_conn), mysql_error(DB_conn));
+        // Connection to mysql library has failed
+        fprintf(DB_log, "Error %u: %s\n", mysql_errno(DB_conn), 
+                                          mysql_error(DB_conn));
         return;
     }
 
     if (mysql_real_connect(DB_conn, DB_HOST.c_str(), DB_USER.c_str(), 
                                     DB_PASS.c_str(), DB_NAME.c_str(),
                                     0, NULL, 0) == NULL) {
-        fprintf(DB_log,"Error %u: %s\n", mysql_errno(DB_conn), mysql_error(DB_conn));
+        // Connection to server and/or database has failed
+        fprintf(DB_log,"Error %u: %s\n", mysql_errno(DB_conn), 
+                                         mysql_error(DB_conn));
         return;
     }
     
@@ -155,7 +159,8 @@ char* DB_resultAsText() {
 */
 
 vector<string> DB_getAllFlights() {
-    DB_query("select distinct concat_ws('-',DeviceID,FlightID) from aip where FlightID != \"\" order by Timesstamp DESC limit 15;");
+    DB_query("select distinct concat_ws('-',DeviceID,FlightID) from aip "
+             "where FlightID != \"\" order by Timesstamp DESC limit 15;");
 
     int i = 0;
     MYSQL_ROW row;
@@ -184,7 +189,12 @@ vector<string> DB_getAllFlights() {
 */
 
 map<string, string> DB_getMostRecentGPS(string flight_id) {
-    DB_query("select Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg, Status from gps where concat_ws('-',DeviceID,FlightID)=\"%s\" and Lat != 0 order by Timestamp desc limit 1;",flight_id.c_str());
+    DB_query("select "
+             "Altitude, Rate, Lat, LatRef, Lon, LonRef, Spd, Hdg, Status "
+             "from gps "
+             "where concat_ws('-',DeviceID,FlightID)=\"%s\" and Lat != 0 "
+             "order by Timestamp desc limit 1;",
+             flight_id.c_str());
 
     MYSQL_ROW row;
     int num_fields;
@@ -235,7 +245,8 @@ map<string, string> DB_getMostRecentGPS(string flight_id) {
 
 vector<string> DB_getMostRecentAnalog(string flight_id) {
     DB_query("select "
-             "A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18 "
+             "A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,"
+             "A11,A12,A13,A14,A15,A16,A17,A18 "
              "from aip "
              "where concat_ws('-',DeviceID,FlightID)=\"%s\""
              "order by Timesstamp desc limit 1;",flight_id.c_str());
@@ -279,7 +290,8 @@ Plot DB_getPlotData(char* table, char* data_column, string flight_id) {
         timestamp = "TimesStamp";
     }
     
-    DB_query("select UNIX_TIMESTAMP(%s)-UNIX_TIMESTAMP(), Altitude, %s from %s " 
+    DB_query("select UNIX_TIMESTAMP(%s)-UNIX_TIMESTAMP(), Altitude, %s "
+             "from %s " 
              "where concat_ws('-',DeviceID,FlightID)=\"%s\" "
              "order by %s asc;",
              timestamp.c_str(),
