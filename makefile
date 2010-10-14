@@ -12,7 +12,7 @@ RM        = rm -f
 ZIP       = zip
 
 # Output filenames
-BIN       = App.exe
+BIN       = BalloonGraph.exe
 
 # Source files and objects
 SRCS = $(wildcard $(SRC)/*.cpp)
@@ -81,9 +81,9 @@ all-before:
 	@echo -e "Current commit is `git rev-parse HEAD`."
 
 dist: dist-custom
-	@echo -e "$(G)Building distribution $(DIST)/hawkgraph-`cat build_num.txt`.zip$(W)..."
-	@$(RM) $(DIST)/hawkgraph.zip
-	@$(ZIP) $(DIST)/hawkgraph-`cat build_num.txt`.zip $(BIN) libmysql.dll
+	@echo -e "$(G)Building distribution $(DIST)/balloongraph-`cat build_num.txt`.zip$(W)..."
+	@$(RM) $(DIST)/balloongraph.zip
+	@$(ZIP) $(DIST)/balloongraph-`cat build_num.txt`.zip $(BIN) libmysql.dll
 
 todo: todo-custom
 	-@for file in $(SRCS); do grep -H -e TODO -e FIXME $$file; done; true
