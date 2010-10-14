@@ -9,9 +9,6 @@ BEGIN_EVENT_TABLE(Graph,mpWindow)
     EVT_LEFT_DCLICK(Graph::OpenSingleGraph)
 END_EVENT_TABLE()
 
-Graph::Graph() {
-}
-
 /**
    Constructor
 */
