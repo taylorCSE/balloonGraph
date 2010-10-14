@@ -17,7 +17,6 @@
     #include <wx/wxprec.h>
 #endif
 
-
 #include <wx/timer.h>
 #include <wx/menu.h>
 #include <wx/statusbr.h>
@@ -61,9 +60,8 @@ class SettingsFrame : public BaseFrame
         wxTextCtrl* dbPass;
         
     private:
-        // Enumeration for GUI controls
+        // IDs fro various GUI elements
         enum {
-            ////GUI Enum Control ID Start
             ID_OK = 2000,
             ID_CANCEL,
         };
