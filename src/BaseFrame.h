@@ -60,9 +60,8 @@ class BaseFrame : public wxFrame
         
     private:
         DECLARE_EVENT_TABLE();
-        // Enumeration for GUI controls
+        /// IDs for various controls
         enum {
-            ////GUI Enum Control ID Start
             ID_TEXT = 1000,
             VIEW_BASIC,
             VIEW_ANALOG,
