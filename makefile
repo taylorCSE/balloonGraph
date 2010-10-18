@@ -91,6 +91,10 @@ all-before:
 	@echo "#define VERSION_BUILD $(BUILD)" >> $(BUILD_DIR)/_version.h
 	@rm $(SRC_DIR)/version.h
 	@mv $(BUILD_DIR)/_version.h $(SRC_DIR)/version.h
+	
+	@echo "Writing new VERSION.txt."
+	@echo "BalloonGraph $(MAJOR).$(MINOR).$(BUILD)" > VERSION.txt
+	@echo "Based on commit $(COMMIT)" >> VERSION.txt
 
 dist: dist-custom
 	@echo -e "$(G)Building distribution $(DIST)/balloongraph-`cat build_num.txt`.zip$(W)..."
