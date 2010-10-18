@@ -89,7 +89,7 @@ void BaseFrame::CreateMenu(bool show_view,
 
     CreateStatusBar(2);
     SetStatusText(wxString("Commit:")+wxString(VERSION_COMMIT), 0);
-    SetStatusText(wxString("Build:")+wxString(VERSION_BUILD), 1);
+    SetStatusText(wxString("Version:")+wxString(VERSION), 1);
 }
 
 

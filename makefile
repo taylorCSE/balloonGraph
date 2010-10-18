@@ -1,22 +1,28 @@
 # Directories
-BUILD     = build
-DIST      = dist
-SRC	      = src
+BUILD_DIR	 = build
+DIST	  = dist
+SRC_DIR		  = src
 
 # Tools
 WXLIBNAME = wxmsw28
-CPP	      = g++.exe
-LINK      = g++.exe
+CPP		  = g++.exe
+LINK	  = g++.exe
 WINDRES   = windres.exe
-RM        = rm -f
-ZIP       = zip
+RM		= rm -f
+ZIP	   = zip
 
 # Output filenames
-BIN       = BalloonGraph.exe
+BIN	   = BalloonGraph.exe
+
+# Metadata
+COMMIT = `git rev-parse HEAD`
+MAJOR = `cat $(SRC_DIR)/version.h | awk '/MAJOR/{ printf("%d",$$3); }'`
+MINOR = `cat $(SRC_DIR)/version.h | awk '/MINOR/{ printf("%d",$$3); }'`
+BUILD = `cat $(SRC_DIR)/version.h | awk '/BUILD/{ printf("%d",$$3+1); }'`
 
 # Source files and objects
-SRCS = $(wildcard $(SRC)/*.cpp)
-OBJ = $(subst $(SRC),$(BUILD),$(patsubst %.cpp,%.o,$(SRCS)))
+SRC_DIRS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ = $(subst $(SRC_DIR),$(BUILD_DIR),$(patsubst %.cpp,%.o,$(SRC_DIRS)))
 
 # Libraries to include
 LIBS	  = -mwindows \
@@ -72,13 +78,19 @@ clean: clean-custom
 # Update version file
 	
 all-before:
-	@echo $$((`cat build_num.txt`+1)) > build_num.txt
-	@echo "/* Automatically generated based on head commit */" > $(SRC)/version.h
-	@echo "#define VERSION_COMMIT \"`git rev-parse HEAD`\"" >> $(SRC)/version.h
-	@echo "#define VERSION_BUILD \"`cat build_num.txt`\"" >> $(SRC)/version.h
-	@echo -e "$(G)Starting build `cat build_num.txt`$(W)"
-	@echo -e "$(G)===================$(W)"
+	@echo -e "$(G)Starting Build for $(MAJOR).$(MINOR) $(W)"
+	@echo -e "$(G)=======================$(W)"
 	@echo -e "Current commit is `git rev-parse HEAD`."
+	
+	@echo "Updating build number."
+	@echo "/* Automatically generated build information */" > $(BUILD_DIR)/_version.h
+	@echo "#define VERSION \"$(MAJOR).$(MINOR).$(BUILD)\"" >> $(BUILD_DIR)/_version.h
+	@echo "#define VERSION_COMMIT \"$(COMMIT)\"" >> $(BUILD_DIR)/_version.h
+	@echo "#define VERSION_MAJOR $(MAJOR)" >> $(BUILD_DIR)/_version.h
+	@echo "#define VERSION_MINOR $(MINOR)" >> $(BUILD_DIR)/_version.h
+	@echo "#define VERSION_BUILD $(BUILD)" >> $(BUILD_DIR)/_version.h
+	@rm $(SRC_DIR)/version.h
+	@mv $(BUILD_DIR)/_version.h $(SRC_DIR)/version.h
 
 dist: dist-custom
 	@echo -e "$(G)Building distribution $(DIST)/balloongraph-`cat build_num.txt`.zip$(W)..."
@@ -86,7 +98,7 @@ dist: dist-custom
 	@$(ZIP) $(DIST)/balloongraph-`cat build_num.txt`.zip $(BIN) libmysql.dll
 
 todo: todo-custom
-	-@for file in $(SRCS); do grep -H -e TODO -e FIXME $$file; done; true
+	-@for file in $(SRC_DIRS); do grep -H -e TODO -e FIXME $$file; done; true
 	
 # Build exes
 	
@@ -99,7 +111,7 @@ $(BIN): $(OBJ)
 
 # Build Objects
 	
-$(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(SRC_DIR)/%.h
 	@echo -e "Compiling $(G)$<$(W) to $(Y)$@$(W)..."
 	@$(RM) temp.log temp2.log
 	-@$(CPP) -c $< -o $@ $(CXXFLAGS) 2> temp.log
