@@ -13,7 +13,7 @@ END_EVENT_TABLE()
 */
 
 AboutFrame::AboutFrame()
-: wxFrame(NULL,-1, wxT(""), wxDefaultPosition, wxSize(360,600), 
+: wxFrame(NULL,-1, wxT(""), wxDefaultPosition, wxSize(360,300), 
           wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | 
           wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX) {
     CreateGUIControls();
@@ -48,7 +48,13 @@ void AboutFrame::CreateGUIControls() {
 
     info->SetPage(wxString::Format(wxT(""
         "<b>BalloonGraph</b>\n<br />"
-        )));
+        "Version: %s<br />"
+        "Build %d <br />"
+        "Commit %s<br />"),
+        VERSION,
+        VERSION_BUILD,
+        VERSION_COMMIT
+        ));
 
 }
 
