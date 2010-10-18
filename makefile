@@ -18,7 +18,8 @@ BIN	   = BalloonGraph.exe
 COMMIT = `git rev-parse HEAD`
 MAJOR = `cat $(SRC_DIR)/version.h | awk '/MAJOR/{ printf("%d",$$3); }'`
 MINOR = `cat $(SRC_DIR)/version.h | awk '/MINOR/{ printf("%d",$$3); }'`
-BUILD = `cat $(SRC_DIR)/version.h | awk '/BUILD/{ printf("%d",$$3+1); }'`
+BUILD = `cat $(SRC_DIR)/version.h | awk '/BUILD/{ printf("%d",$$3); }'`
+BUILD_INCREMENT = `cat $(SRC_DIR)/version.h | awk '/BUILD/{ printf("%d",$$3+1); }'`
 
 # Source files and objects
 SRC_DIRS = $(wildcard $(SRC_DIR)/*.cpp)
@@ -84,11 +85,11 @@ all-before:
 	
 	@echo "Updating build number."
 	@echo "/* Automatically generated build information */" > $(BUILD_DIR)/_version.h
-	@echo "#define VERSION \"$(MAJOR).$(MINOR).$(BUILD)\"" >> $(BUILD_DIR)/_version.h
+	@echo "#define VERSION \"$(MAJOR).$(MINOR).$(BUILD_INCREMENT)\"" >> $(BUILD_DIR)/_version.h
 	@echo "#define VERSION_COMMIT \"$(COMMIT)\"" >> $(BUILD_DIR)/_version.h
 	@echo "#define VERSION_MAJOR $(MAJOR)" >> $(BUILD_DIR)/_version.h
 	@echo "#define VERSION_MINOR $(MINOR)" >> $(BUILD_DIR)/_version.h
-	@echo "#define VERSION_BUILD $(BUILD)" >> $(BUILD_DIR)/_version.h
+	@echo "#define VERSION_BUILD $(BUILD_INCREMENT)" >> $(BUILD_DIR)/_version.h
 	@rm $(SRC_DIR)/version.h
 	@mv $(BUILD_DIR)/_version.h $(SRC_DIR)/version.h
 	
@@ -97,9 +98,13 @@ all-before:
 	@echo "Based on commit $(COMMIT)" >> VERSION.txt
 
 dist: dist-custom
-	@echo -e "$(G)Building distribution $(DIST)/balloongraph-`cat build_num.txt`.zip$(W)..."
-	@$(RM) $(DIST)/balloongraph.zip
-	@$(ZIP) $(DIST)/balloongraph-`cat build_num.txt`.zip $(BIN) libmysql.dll
+	@echo -e "$(G)Building distribution $(DIST)/balloongraph-$(BUILD).zip$(W)..."
+	$(ZIP) $(DIST)/balloongraph-$(BUILD).zip \
+			$(BIN) \
+			libmysql.dll \
+			README.txt \
+			VERSION.txt \
+			LICENSE.txt
 
 todo: todo-custom
 	-@for file in $(SRC_DIRS); do grep -H -e TODO -e FIXME $$file; done; true
