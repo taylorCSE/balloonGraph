@@ -27,10 +27,12 @@
 class GraphFrame;
 class StatusFrame;
 class SettingsFrame;
+class AboutFrame;
 
 extern wxFrame* NewGraphFrame();
 extern wxFrame* NewStatusFrame();
 extern wxFrame* NewSettingsFrame();
+extern wxFrame* NewAboutFrame();
 
 class BaseFrame : public wxFrame
 {
@@ -39,10 +41,12 @@ class BaseFrame : public wxFrame
         void NewStatusWindow(wxCommandEvent& event);
         void NewGraphWindow(wxCommandEvent& event);
         void NewSettingsWindow(wxCommandEvent& event);
+        void NewAboutWindow(wxCommandEvent& event);
         virtual ~BaseFrame();
         void CreateMenu(bool show_view = true, 
                         bool show_window = true, 
-                        bool show_flights = true);
+                        bool show_flights = true,
+                        bool show_help = true);
         void OnMenu(wxCommandEvent& event );
         void OnTimer(wxTimerEvent& event);
         void OnClose(wxCloseEvent& event);
@@ -53,6 +57,7 @@ class BaseFrame : public wxFrame
         wxMenu *flight_menu;
         wxMenu *view_menu;
         wxMenu *window_menu;
+        wxMenu *help_menu;
         vector<string> flightIds;
         string flightId;
         
@@ -71,7 +76,8 @@ class BaseFrame : public wxFrame
             UPDATE_TIMER,
             ID_NEWSTATUS,
             ID_NEWSETTINGS,
-            ID_NEWGRAPH
+            ID_NEWGRAPH,
+            ID_ABOUT,
         };
 };
 #endif

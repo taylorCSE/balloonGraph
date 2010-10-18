@@ -13,7 +13,9 @@ END_EVENT_TABLE()
 */
 
 AboutFrame::AboutFrame()
-: wxFrame() {
+: wxFrame(NULL,-1, wxT(""), wxDefaultPosition, wxSize(360,600), 
+          wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | 
+          wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX) {
     CreateGUIControls();
     
     SetTransparent(245);
@@ -34,7 +36,7 @@ void AboutFrame::CreateGUIControls() {
 
     
     // Set window properties and title bar
-    SetTitle(wxT("Device About"));
+    SetTitle(wxT("About"));
     SetIcon(wxNullIcon);
     
     mainPanel = new wxPanel(this, wxID_ANY);

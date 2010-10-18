@@ -9,6 +9,7 @@ BEGIN_EVENT_TABLE(BaseFrame,wxFrame)
     EVT_MENU(ID_NEWSTATUS, BaseFrame::NewStatusWindow)
     EVT_MENU(ID_NEWGRAPH, BaseFrame::NewGraphWindow)
     EVT_MENU(ID_NEWSETTINGS, BaseFrame::NewSettingsWindow)
+    EVT_MENU(ID_ABOUT, BaseFrame::NewAboutWindow)
     EVT_TIMER(UPDATE_TIMER, BaseFrame::OnTimer)
     EVT_MENU(-1, BaseFrame::OnMenu)
     EVT_CLOSE(BaseFrame::OnClose)
@@ -50,7 +51,8 @@ BaseFrame::~BaseFrame() {
 
 void BaseFrame::CreateMenu(bool show_view, 
                            bool show_window, 
-                           bool show_flights) {
+                           bool show_flights,
+                           bool show_help) {
     wxMenuBar* old_menubar = menubar;
     
     menubar = new wxMenuBar;
@@ -81,6 +83,13 @@ void BaseFrame::CreateMenu(bool show_view,
         window_menu->Append(ID_NEWSTATUS, "New Status Window");
         window_menu->Append(ID_NEWGRAPH, "New Graph Window");    
         window_menu->Append(ID_NEWSETTINGS, wxT("Settings"));
+    }
+    
+    if(show_help) {
+        help_menu = new wxMenu;
+        menubar->Append(help_menu, wxT("&Help"));
+        
+        help_menu->Append(ID_ABOUT, "About");
     }
     
     SetMenuBar(menubar);
@@ -117,6 +126,15 @@ void BaseFrame::NewGraphWindow( wxCommandEvent& event ) {
      
 void BaseFrame::NewSettingsWindow( wxCommandEvent& event ) {
     wxFrame* frame = NewSettingsFrame();
+    frame->Show();     
+}
+
+/** 
+    Launches a new about window
+*/
+     
+void BaseFrame::NewAboutWindow( wxCommandEvent& event ) {
+    wxFrame* frame = NewAboutFrame();
     frame->Show();     
 }
 
