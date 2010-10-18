@@ -1,6 +1,6 @@
 /* Automatically generated build information */
-#define VERSION "1.10.856"
-#define VERSION_COMMIT "fcb7a7845b676e73fb930f1cebdc92af852fc15d"
+#define VERSION "1.10.857"
+#define VERSION_COMMIT "ebf7e320ee4cca514cd47ff675c8895104da9332"
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 10
-#define VERSION_BUILD 856
+#define VERSION_BUILD 857
