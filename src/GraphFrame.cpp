@@ -41,11 +41,7 @@ void GraphFrame::Update() {
      
     CreateMenu();
     
-    wxMenu *graph_menu = new wxMenu;
-    
-    menubar->Append(graph_menu, wxT("&Graphs"));
-    
-    graph_menu->Append(ID_FITALL, wxT("Fit All"));
+    view_menu->Append(ID_FITALL, wxT("Fit All"));
     
     switch(view) {
         case VIEW_ANALOG:   
