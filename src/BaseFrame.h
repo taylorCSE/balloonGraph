@@ -46,7 +46,8 @@ class BaseFrame : public wxFrame
         void CreateMenu(bool show_view = true, 
                         bool show_window = true, 
                         bool show_flights = true,
-                        bool show_help = true);
+                        bool show_help = true,
+                        bool show_data = false);
         void OnMenu(wxCommandEvent& event );
         void OnTimer(wxTimerEvent& event);
         void OnClose(wxCloseEvent& event);
@@ -57,6 +58,7 @@ class BaseFrame : public wxFrame
         wxMenu *flight_menu;
         wxMenu *view_menu;
         wxMenu *window_menu;
+        wxMenu *data_menu;
         wxMenu *help_menu;
         vector<string> flightIds;
         string flightId;

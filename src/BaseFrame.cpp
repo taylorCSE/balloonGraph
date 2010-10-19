@@ -52,7 +52,8 @@ BaseFrame::~BaseFrame() {
 void BaseFrame::CreateMenu(bool show_view, 
                            bool show_window, 
                            bool show_flights,
-                           bool show_help) {
+                           bool show_help,
+                           bool show_data) {
     wxMenuBar* old_menubar = menubar;
     
     menubar = new wxMenuBar;
@@ -85,6 +86,15 @@ void BaseFrame::CreateMenu(bool show_view,
         window_menu->Append(ID_NEWSETTINGS, wxT("Settings"));
     }
     
+    if(show_data) {
+        data_menu = new wxMenu;
+        menubar->Append(data_menu, wxT("&Data"));
+        
+        for(int i = 1; i <= 18; i++) {
+            data_menu->Append(9000+i, wxString::Format(wxT("A%d"),i));
+        }
+    }
+
     if(show_help) {
         help_menu = new wxMenu;
         menubar->Append(help_menu, wxT("&Help"));
