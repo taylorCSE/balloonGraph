@@ -53,6 +53,7 @@ void DB_connect() {
         fprintf(DB_log,"Error %u: %s\n", mysql_errno(DB_conn), 
                                          mysql_error(DB_conn));
         DB_STATUS = "Connection Failed";
+        DB_conn = 0x00;
         return;
     }
     
