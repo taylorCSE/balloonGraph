@@ -80,6 +80,7 @@ Graph::~Graph() {
 */
 
 void Graph::Update(string flight_id) {
+    /// TODO: graphs need to fit when changing data flight
     if(flight_id != "") flightId = flight_id;
     
     mpFXYVector * vectorLayer = (mpFXYVector*)this->GetLayer(2);

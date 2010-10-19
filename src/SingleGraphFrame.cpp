@@ -35,7 +35,7 @@ SingleGraphFrame::~SingleGraphFrame() {
 */
 
 void SingleGraphFrame::Update() {
-    CreateMenu(false, false);
+    CreateMenu(false, false, true, false);
     
     graph->Update(flightId);
 }
