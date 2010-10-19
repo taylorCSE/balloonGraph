@@ -33,6 +33,7 @@ class SingleGraphFrame : public BaseFrame
     public:
         SingleGraphFrame(Graph* graph);
         virtual ~SingleGraphFrame();
+        void SetData(wxCommandEvent& event );
 
     private:
         // Event handlers
@@ -45,7 +46,7 @@ class SingleGraphFrame : public BaseFrame
         // wxWidgets gui objects
         wxPanel *mainPanel; 
         wxBoxSizer *mainSizer;
-        
+
         Graph* graph;
         
     private:

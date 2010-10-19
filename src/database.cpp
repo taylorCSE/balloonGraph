@@ -154,7 +154,7 @@ char* DB_resultAsText() {
       sprintf(DB_buf,"%s\n",DB_buf);
     }
     
-    mysql_free_result(DB_result);    
+    mysql_free_result(DB_result);
 
     return DB_buf;
 }
@@ -304,6 +304,7 @@ Plot DB_getPlotData(char* table, char* data_column, string flight_id) {
              timestamp.c_str(),
              data_column, table, flight_id.c_str(),
              timestamp.c_str());
+    
     Plot result;
 
     if(!DB_isQueryReady()) return result;

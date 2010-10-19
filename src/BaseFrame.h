@@ -61,6 +61,7 @@ class BaseFrame : public wxFrame
         wxMenu *data_menu;
         wxMenu *help_menu;
         vector<string> flightIds;
+        
         string flightId;
         
         wxTimer* updateTimer;

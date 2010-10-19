@@ -6,6 +6,7 @@
 #include "SingleGraphFrame.h"
 
 BEGIN_EVENT_TABLE(SingleGraphFrame,BaseFrame)
+    EVT_MENU(-1, SingleGraphFrame::SetData)
 END_EVENT_TABLE()
 
 /**
@@ -60,6 +61,30 @@ void SingleGraphFrame::CreateGUIControls() {
                       graph->db_col);     
     mainSizer->Add(graph, 1, wxEXPAND | wxALL);
 
+    Update();
+}
+
+/**
+    OnMenu event handler
+    
+    This overloads the method in baseframe to capture the data events.
+*/
+
+void SingleGraphFrame::SetData( wxCommandEvent& event ) {
+    int id = event.GetId();
+    
+    if(id > 9000 && id < 10000) {
+        /// We're selecting a dataset
+        string db_col = wxString::Format("A%d",id - 9000).c_str();
+        wxMessageBox(db_col);
+        graph->Update(flightId,db_col);
+    }
+    
+    if(id >= 10000) {
+        /// We're selecting a device
+        flightId = flightIds[id - 10000];
+    }    
+    
     Update();
 }
 

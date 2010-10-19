@@ -83,7 +83,12 @@ Graph::~Graph() {
 void Graph::Update(string flight_id, string db_col) {
     /// TODO: graphs need to fit when changing data flight
     if(flight_id != "") flightId = flight_id;
-    if(db_col != "") this->db_col = db_col;
+    if(db_col != "") {
+        this->db_col = db_col;
+        this->name = db_col;
+    }
+    
+    if(db_col.c_str()[0] == 'A') this->db_table = "aip";
     
     mpFXYVector * vectorLayer = (mpFXYVector*)this->GetLayer(2);
     data = GetData();
