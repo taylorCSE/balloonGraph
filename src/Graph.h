@@ -32,7 +32,7 @@ class Graph: public mpWindow {
         Graph(wxPanel* panel, string name, string table, 
                               string flight_id, string col);
         virtual ~Graph();
-        void Update(string flight_id = "");
+        void Update(string flight_id = "", string db_col = "");
         Plot GetData();
         void OpenSingleGraph(wxMouseEvent& event);
         
