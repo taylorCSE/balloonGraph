@@ -61,7 +61,6 @@ void SingleGraphFrame::CreateGUIControls() {
     mainSizer->Add(graph, 1, wxEXPAND | wxALL);
 
     Update();
-
 }
 
 wxFrame* NewSingleGraphFrame(Graph* graph) {
