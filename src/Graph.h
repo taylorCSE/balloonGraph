@@ -42,6 +42,7 @@ class Graph: public mpWindow {
         string db_table;
         string db_col;
         string flightId;
+        string lastFlightId;
 
     private:
         DECLARE_EVENT_TABLE();

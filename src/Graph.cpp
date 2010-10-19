@@ -21,6 +21,7 @@ Graph::Graph(wxPanel* panel, string name, string table,
     this->db_table = table;
     this->db_col = col;
     this->flightId = flight_id;
+    this->lastFlightId = flight_id;
     
     // Set up the font    
     wxFont windowFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, 
@@ -98,6 +99,11 @@ void Graph::Update(string flight_id, string db_col) {
 	vectorLayer->SetDrawOutsideMargins(false);
 	
 	UpdateAll();
+	
+	if(flightId != lastFlightId) {
+	    lastFlightId = flightId;
+	    Fit();
+	}
 }
 
 /**

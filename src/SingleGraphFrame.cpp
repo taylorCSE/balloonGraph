@@ -66,4 +66,3 @@ void SingleGraphFrame::CreateGUIControls() {
 wxFrame* NewSingleGraphFrame(Graph* graph) {
     return (wxFrame*)(new SingleGraphFrame(graph));
 }
-
