@@ -96,6 +96,8 @@ all-before:
 	@echo "Writing new VERSION.txt."
 	@echo "BalloonGraph $(MAJOR).$(MINOR).$(BUILD)" > VERSION.txt
 	@echo "Based on commit $(COMMIT)" >> VERSION.txt
+	
+	u2d VERSION.txt
 
 dist: dist-custom
 	@echo -e "$(G)Building distribution $(DIST)/balloongraph-$(BUILD).zip$(W)..."
