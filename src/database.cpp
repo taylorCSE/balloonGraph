@@ -23,6 +23,9 @@ string DB_PASS = "";
 string DB_HOST = "127.0.0.1";
 string DB_NAME = "balloontrack";
 
+/// Database status
+string DB_STATUS;
+
 /// Small buffer to use in various calls
 char DB_buf[16384];
 
@@ -39,6 +42,7 @@ void DB_connect() {
         // Connection to mysql library has failed
         fprintf(DB_log, "Error %u: %s\n", mysql_errno(DB_conn), 
                                           mysql_error(DB_conn));
+        DB_STATUS = "MySQL init error";
         return;
     }
 
@@ -48,10 +52,12 @@ void DB_connect() {
         // Connection to server and/or database has failed
         fprintf(DB_log,"Error %u: %s\n", mysql_errno(DB_conn), 
                                          mysql_error(DB_conn));
+        DB_STATUS = "Connection Failed";
         return;
     }
     
     fprintf(DB_log,"Database connecton established.\n");
+    DB_STATUS = "Connected to DB";
 }
 
 /**

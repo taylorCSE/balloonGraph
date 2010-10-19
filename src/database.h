@@ -21,6 +21,8 @@ extern string DB_PASS;
 extern string DB_HOST;
 extern string DB_NAME;
 
+extern string DB_STATUS;
+
 void DB_connect();
 void DB_query(char * item ...);
 char* DB_resultAsText();

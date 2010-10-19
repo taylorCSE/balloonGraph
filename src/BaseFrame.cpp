@@ -97,10 +97,9 @@ void BaseFrame::CreateMenu(bool show_view,
     if(old_menubar) delete old_menubar;
 
     CreateStatusBar(2);
-    SetStatusText(wxString(""), 0);
+    SetStatusText(wxString(DB_STATUS), 0);
     SetStatusText(wxString("Version:")+wxString(VERSION), 1);
 }
-
 
 /** 
     Launches a new status window
