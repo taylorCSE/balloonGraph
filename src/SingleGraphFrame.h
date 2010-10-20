@@ -34,6 +34,7 @@ class SingleGraphFrame : public BaseFrame
         SingleGraphFrame(Graph* graph);
         virtual ~SingleGraphFrame();
         void SetData(wxCommandEvent& event );
+        void InitialFit(wxTimerEvent& event);
 
     private:
         // Event handlers
@@ -48,10 +49,13 @@ class SingleGraphFrame : public BaseFrame
 
         Graph* graph;
         
+        wxTimer* fitTimer;
+        
     private:
         // IDs for GUI elements
         enum {
             ID_TEXT = 2000,
+            FIT_TIMER,
         };
 };
 

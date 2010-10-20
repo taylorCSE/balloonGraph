@@ -7,6 +7,7 @@
 
 BEGIN_EVENT_TABLE(SingleGraphFrame,BaseFrame)
     EVT_MENU(-1, SingleGraphFrame::SetData)
+    EVT_TIMER(FIT_TIMER, SingleGraphFrame::InitialFit)    
 END_EVENT_TABLE()
 
 /**
@@ -31,13 +32,12 @@ SingleGraphFrame::SingleGraphFrame(Graph* graph)
     mainSizer->Add(this->graph, 1, wxEXPAND | wxALL);
     mainSizer->Layout();
     
-    graph->Fit();
-
     flightId = string(this->graph->flightId);
     
     Update();
-    
-    SetTransparent(245);
+
+    fitTimer = new wxTimer(this, FIT_TIMER);
+    fitTimer->Start(100, true);
 }
 
 /** 
@@ -54,7 +54,7 @@ SingleGraphFrame::~SingleGraphFrame() {
 void SingleGraphFrame::Update() {
     CreateMenu(false, false, true, false,true);
     
-    graph->Update();
+    graph->Update(flightId);
 }
 
 /**
@@ -94,6 +94,19 @@ void SingleGraphFrame::SetData( wxCommandEvent& event ) {
     }    
     
     Update();
+}
+
+
+/**
+    Handles timer firing
+    
+    For some reason, the graph won't fit properly unless the fitting 
+    happens after the window is drawn. This is a one-shot event to 
+    fit the graph a short time after window creation.
+*/
+
+void SingleGraphFrame::InitialFit(wxTimerEvent& event) {
+    graph->Fit();
 }
 
 wxFrame* NewSingleGraphFrame(Graph* graph) {

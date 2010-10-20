@@ -136,5 +136,5 @@ Plot Graph::GetData() {
 
 void Graph::OpenSingleGraph(wxMouseEvent& event) {
     wxFrame* frame = NewSingleGraphFrame(this);
-    frame->Show();     
+    frame->Show();
 }
