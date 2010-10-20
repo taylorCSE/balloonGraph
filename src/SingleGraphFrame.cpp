@@ -15,9 +15,9 @@ END_EVENT_TABLE()
 
 SingleGraphFrame::SingleGraphFrame(Graph* graph)
 : BaseFrame() {
-    flightId = "Please select a device from the menu.";
-    
     this->graph = graph;
+    
+    flightId = string(graph->flightId);
     
     CreateGUIControls();
     
@@ -61,7 +61,9 @@ void SingleGraphFrame::CreateGUIControls() {
                       graph->db_col);
     mainSizer->Add(graph, 1, wxEXPAND | wxALL);
 
+    flightId = graph->flightId;
     Update();
+    graph->Fit();
 }
 
 /**
