@@ -40,6 +40,7 @@ class Graph: public mpWindow {
         
         mpScaleX* xaxis;
         mpScaleY* yaxis;
+        mpText* title;
 
         string name;
         string db_table;

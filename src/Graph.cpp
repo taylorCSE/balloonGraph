@@ -56,11 +56,14 @@ Graph::Graph(wxPanel* panel, string name, string table,
     leg = new mpInfoLegend(wxRect(200,20,40,40), wxTRANSPARENT_BRUSH);
     leg->SetVisible(true);
 
+    // Create the title
+   	title = new mpText(y_label + wxT(" vs ") + x_label, 60, 5);
+    
     // Add all the layers
     AddLayer(xaxis);
     AddLayer(yaxis);
 	AddLayer(vectorLayer);
-    AddLayer(new mpText(y_label + wxT(" vs ") + x_label, 60, 5));
+    AddLayer(title);
     AddLayer(leg);
 
     // Lay items out nicely
@@ -84,7 +87,6 @@ void Graph::Update(string flight_id, string db_col) {
     if(db_col != "") {
         this->db_col = db_col;
         this->name = db_col;
-        xaxis->SetName(name);
     }
     
     // TODO: database code could completely handle the tables
@@ -93,9 +95,14 @@ void Graph::Update(string flight_id, string db_col) {
     mpFXYVector * vectorLayer = (mpFXYVector*)this->GetLayer(2);
     data = GetData();
 
+    // Update labels
     string y_label = wxT("Altitude");
     string x_label = wxT(name);
-    
+
+    xaxis->SetName(x_label);
+    yaxis->SetName(y_label);
+    title->SetName(y_label + wxT(" vs ") + x_label);
+
 	// Create a mpFXYVector layer
 	vectorLayer->SetData(data.altitude, data.data);
 	vectorLayer->SetContinuity(true);
