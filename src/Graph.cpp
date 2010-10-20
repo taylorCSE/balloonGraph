@@ -21,7 +21,7 @@ Graph::Graph(wxPanel* panel, string name, string table,
     this->db_table = table;
     this->db_col = col;
     this->flightId = flight_id;
-    this->lastFlightId = flight_id;
+    this->lastFlightId = "";
     
     // Set up the font    
     wxFont windowFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, 

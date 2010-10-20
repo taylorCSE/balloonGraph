@@ -90,6 +90,10 @@ void BaseFrame::CreateMenu(bool show_view,
         data_menu = new wxMenu;
         menubar->Append(data_menu, wxT("&Data"));
         
+        data_menu->Append(ID_ALTITUDE, "Altitude");
+        data_menu->Append(ID_SPEED, "Speed");
+        data_menu->Append(ID_BEARING, "Bearing");
+        data_menu->Append(ID_CLIMB, "Climb");
         for(int i = 1; i <= 18; i++) {
             data_menu->Append(9000+i, wxString::Format(wxT("A%d"),i));
         }

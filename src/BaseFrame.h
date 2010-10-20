@@ -81,6 +81,10 @@ class BaseFrame : public wxFrame
             ID_NEWSETTINGS,
             ID_NEWGRAPH,
             ID_ABOUT,
+            ID_ALTITUDE,
+            ID_SPEED,
+            ID_BEARING,
+            ID_CLIMB
         };
 };
 #endif

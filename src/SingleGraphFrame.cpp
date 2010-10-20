@@ -73,13 +73,17 @@ void SingleGraphFrame::CreateGUIControls() {
 void SingleGraphFrame::SetData( wxCommandEvent& event ) {
     int id = event.GetId();
     
-    if(id > 9000 && id < 10000) {
+    if(id > 9000 && id <= 9018) {
         /// We're selecting a dataset
         string db_col = wxString::Format("A%d",id - 9000).c_str();
         graph->Update(flightId,db_col);
     }
     
-    if(id >= 10000) {
+    if(id == ID_ALTITUDE) {
+        //graph->Update(flightId,"Altitude");
+    }
+
+    if(id > 10000) {
         /// We're selecting a device
         flightId = flightIds[id - 10000];
     }    
