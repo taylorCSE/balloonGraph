@@ -100,7 +100,7 @@ all-before:
 	@u2d VERSION.txt
 
 dist: dist-custom
-	@echo -e "$(G)Building distribution $(DIST)/balloongraph-$(BUILD).zip$(W)..."
+	@echo -e "$(G)Building distribution $(DIST)/balloongraph-$(MAJOR)-$(MINOR)-$(BUILD).zip$(W)..."
 	$(ZIP) $(DIST)/balloongraph-$(BUILD).zip \
 			$(BIN) \
 			libmysql.dll \
