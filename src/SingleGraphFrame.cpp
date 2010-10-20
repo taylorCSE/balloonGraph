@@ -76,7 +76,6 @@ void SingleGraphFrame::SetData( wxCommandEvent& event ) {
     if(id > 9000 && id < 10000) {
         /// We're selecting a dataset
         string db_col = wxString::Format("A%d",id - 9000).c_str();
-        wxMessageBox(db_col);
         graph->Update(flightId,db_col);
     }
     
