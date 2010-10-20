@@ -105,6 +105,7 @@ dist: dist-custom
 			$(BIN) \
 			libmysql.dll \
 			README.txt \
+			CHANGELOG.txt \
 			VERSION.txt \
 			LICENSE.txt
 
