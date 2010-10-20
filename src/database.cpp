@@ -125,6 +125,7 @@ void DB_query(char* item ...) {
         fprintf(DB_log, "Rows Returned: %d\n",mysql_num_rows(DB_result));
     } else {
         fprintf(DB_log, "Error querying database.\n");
+        DB_result = 0x00;
     }
 }
 
@@ -290,10 +291,20 @@ vector<string> DB_getMostRecentAnalog(string flight_id) {
     Returns a plot filled with data.
 */
 
-Plot DB_getPlotData(char* table, char* data_column, string flight_id) {
-    // Small hack to fix a typo in the database    
+Plot DB_getPlotData(string data_column, string flight_id) {
+    string table = "aip";
+    
+    if(!strcmp(data_column.c_str(),"Altitude") ||
+       !strcmp(data_column.c_str(),"Rate") ||
+       !strcmp(data_column.c_str(),"Bearing") ||
+       !strcmp(data_column.c_str(),"Climb")) {
+        table = "gps";
+    }
+    
     string timestamp = "Timestamp";
-    if(!strcmp(table,"aip")){
+
+    // Small hack to fix a typo in the database
+    if(!strcmp(table.c_str(),"aip")){
         timestamp = "TimesStamp";
     }
     
@@ -302,7 +313,7 @@ Plot DB_getPlotData(char* table, char* data_column, string flight_id) {
              "where concat_ws('-',DeviceID,FlightID)=\"%s\" "
              "order by %s asc;",
              timestamp.c_str(),
-             data_column, table, flight_id.c_str(),
+             data_column.c_str(), table.c_str(), flight_id.c_str(),
              timestamp.c_str());
     
     Plot result;

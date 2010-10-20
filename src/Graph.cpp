@@ -125,9 +125,8 @@ void Graph::Update(string flight_id, string db_col) {
 */
 
 Plot Graph::GetData() {
-    return DB_getPlotData((char*)db_table.c_str(),
-                          (char*)db_col.c_str(),
-                          flightId);
+    Plot result = DB_getPlotData(db_col,flightId);
+    return result;
 }
 
 /**

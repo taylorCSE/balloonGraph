@@ -80,7 +80,7 @@ void SingleGraphFrame::SetData( wxCommandEvent& event ) {
     }
     
     if(id == ID_ALTITUDE) {
-        //graph->Update(flightId,"Altitude");
+        graph->Update(flightId,"Altitude");
     }
 
     if(id > 10000) {
