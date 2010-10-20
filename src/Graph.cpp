@@ -41,8 +41,6 @@ Graph::Graph(wxPanel* panel, string name, string table,
 	vectorLayer->SetDrawOutsideMargins(false);
 
 	// Set up the axis
-    mpScaleX* xaxis;
-    mpScaleY* yaxis;
     xaxis = new mpScaleX(x_label, mpALIGN_BOTTOM, true, mpX_NORMAL);
     yaxis = new mpScaleY(y_label, mpALIGN_LEFT, true);
     xaxis->SetFont(windowFont);
@@ -86,8 +84,10 @@ void Graph::Update(string flight_id, string db_col) {
     if(db_col != "") {
         this->db_col = db_col;
         this->name = db_col;
+        xaxis->SetName(name);
     }
     
+    // TODO: database code could completely handle the tables
     if(db_col.c_str()[0] == 'A') this->db_table = "aip";
     
     mpFXYVector * vectorLayer = (mpFXYVector*)this->GetLayer(2);

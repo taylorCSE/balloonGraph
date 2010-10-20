@@ -38,6 +38,9 @@ class Graph: public mpWindow {
         
         Plot data;
         
+        mpScaleX* xaxis;
+        mpScaleY* yaxis;
+
         string name;
         string db_table;
         string db_col;
