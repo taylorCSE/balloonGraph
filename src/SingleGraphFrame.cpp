@@ -15,11 +15,27 @@ END_EVENT_TABLE()
 
 SingleGraphFrame::SingleGraphFrame(Graph* graph)
 : BaseFrame() {
-    this->graph = graph;
+    SetTitle(wxT("Graph"));
+    SetIcon(wxNullIcon);
     
-    flightId = string(graph->flightId);
+    mainPanel = new wxPanel(this, wxID_ANY);
+    mainSizer = new wxBoxSizer(wxVERTICAL);
+    mainPanel->SetSizer(mainSizer);
     
-    CreateGUIControls();
+    this->graph = new Graph(mainPanel,
+                      graph->name,
+                      graph->db_table,
+                      graph->flightId,
+                      graph->db_col);
+    
+    mainSizer->Add(this->graph, 1, wxEXPAND | wxALL);
+    mainSizer->Layout();
+    
+    graph->Fit();
+
+    flightId = string(this->graph->flightId);
+    
+    Update();
     
     SetTransparent(245);
 }
@@ -38,32 +54,7 @@ SingleGraphFrame::~SingleGraphFrame() {
 void SingleGraphFrame::Update() {
     CreateMenu(false, false, true, false,true);
     
-    graph->Update(flightId);
-}
-
-/**
-   Creates all of the GUI controls on the frame.
-*/
-    
-void SingleGraphFrame::CreateGUIControls() {
-    // Set window properties and title bar
-    SetTitle(wxT("Graph"));
-    SetIcon(wxNullIcon);
-    
-    mainPanel = new wxPanel(this, wxID_ANY);
-    mainSizer = new wxBoxSizer(wxVERTICAL);
-    mainPanel->SetSizer(mainSizer);
-    
-    graph = new Graph(mainPanel,
-                      graph->name,
-                      graph->db_table,
-                      graph->flightId,
-                      graph->db_col);
-    mainSizer->Add(graph, 1, wxEXPAND | wxALL);
-
-    flightId = graph->flightId;
-    Update();
-    graph->Fit();
+    graph->Update();
 }
 
 /**

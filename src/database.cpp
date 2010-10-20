@@ -318,7 +318,10 @@ Plot DB_getPlotData(string data_column, string flight_id) {
     
     Plot result;
 
-    if(!DB_isQueryReady()) return result;
+    if(!DB_isQueryReady()) {
+        fprintf(DB_log, "Data query not ready.\n");
+        return result;
+    }
 
     MYSQL_ROW row;
 

@@ -41,8 +41,7 @@ class SingleGraphFrame : public BaseFrame
 
         // Functions
         void Update();
-        void CreateGUIControls();
-        
+
         // wxWidgets gui objects
         wxPanel *mainPanel; 
         wxBoxSizer *mainSizer;

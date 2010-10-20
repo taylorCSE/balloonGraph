@@ -67,6 +67,7 @@ Graph::Graph(wxPanel* panel, string name, string table,
     AddLayer(leg);
 
     // Lay items out nicely
+    UpdateAll();
     Fit();
 }
 
