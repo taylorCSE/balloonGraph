@@ -101,7 +101,7 @@ all-before:
 
 dist: dist-custom
 	@echo -e "$(G)Building distribution $(DIST)/balloongraph-$(MAJOR)-$(MINOR)-$(BUILD).zip$(W)..."
-	$(ZIP) $(DIST)/balloongraph-$(BUILD).zip \
+	$(ZIP) $(DIST)/balloongraph-$(MAJOR)-$(MINOR)-$(BUILD).zip \
 			$(BIN) \
 			libmysql.dll \
 			README.txt \
