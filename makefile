@@ -115,7 +115,7 @@ todo: todo-custom
 # Build exes
 	
 $(BIN): $(OBJ)
-	@echo -e "Linking $(G)$<...$(W)"
+	@echo -e "Linking $(G)$@...$(W)"
 	@$(RM) temp.log temp2.log
 	-@$(LINK) $(OBJ) -o "$(BIN)" $(LIBS) $(LDFLAGS) 2> temp.log
 	@if test -s temp.log; then echo -e "$(R)`cat temp.log`$(W)"; fi;
