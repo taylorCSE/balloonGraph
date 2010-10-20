@@ -83,6 +83,18 @@ void SingleGraphFrame::SetData( wxCommandEvent& event ) {
         graph->Update(flightId,"Altitude");
     }
 
+    if(id == ID_SPEED) {
+        graph->Update(flightId,"Spd");
+    }
+
+    if(id == ID_CLIMB) {
+        graph->Update(flightId,"Rate");
+    }
+
+    if(id == ID_BEARING) {
+        graph->Update(flightId,"Hdg");
+    }
+
     if(id > 10000) {
         /// We're selecting a device
         flightId = flightIds[id - 10000];

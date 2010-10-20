@@ -296,8 +296,8 @@ Plot DB_getPlotData(string data_column, string flight_id) {
     
     if(!strcmp(data_column.c_str(),"Altitude") ||
        !strcmp(data_column.c_str(),"Rate") ||
-       !strcmp(data_column.c_str(),"Bearing") ||
-       !strcmp(data_column.c_str(),"Climb")) {
+       !strcmp(data_column.c_str(),"Hdg") ||
+       !strcmp(data_column.c_str(),"Spd")) {
         table = "gps";
     }
     
