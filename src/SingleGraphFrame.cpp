@@ -58,7 +58,7 @@ void SingleGraphFrame::CreateGUIControls() {
                       graph->name,
                       graph->db_table,
                       graph->flightId,
-                      graph->db_col);     
+                      graph->db_col);
     mainSizer->Add(graph, 1, wxEXPAND | wxALL);
 
     Update();

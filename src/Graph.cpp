@@ -87,8 +87,6 @@ void Graph::Update(string flight_id, string db_col) {
     if(db_col != "") {
         this->db_col = db_col;
         this->name = db_col;
-        // TODO: database code could completely handle the tables
-        if(db_col.c_str()[0] == 'A') this->db_table = "aip";
         
         // Flag flight ID as changed so that the graph will auto fit
         lastFlightId = "";
