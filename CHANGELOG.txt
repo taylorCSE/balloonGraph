@@ -1,6 +1,7 @@
 1.11
     - added ability to change the y-axis on single graphs
     - added label and unit conversions for HawkEye and MET units
+    - added file icon
 
 1.10
     - First release
