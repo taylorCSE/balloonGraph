@@ -114,10 +114,10 @@ todo: todo-custom
 	
 # Build exes
 	
-$(BIN): $(OBJ)
+$(BIN): $(OBJ) $(BUILD_DIR)/icon.o
 	@echo -e "Linking $(G)$@...$(W)"
 	@$(RM) temp.log temp2.log
-	-@$(LINK) $(OBJ) -o "$(BIN)" $(LIBS) $(LDFLAGS) 2> temp.log
+	-@$(LINK) $(OBJ) $(BUILD_DIR)/icon.o -o "$(BIN)" $(LIBS) $(LDFLAGS) 2> temp.log
 	@if test -s temp.log; then echo -e "$(R)`cat temp.log`$(W)"; fi;
 	@$(RM) temp.log temp2.log
 
@@ -127,6 +127,13 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp $(SRC_DIR)/%.h
 	@echo -e "Compiling $(G)$<$(W) to $(Y)$@$(W)..."
 	@$(RM) temp.log temp2.log
 	-@$(CPP) -c $< -o $@ $(CXXFLAGS) 2> temp.log
+	@if test -s temp.log; then echo -e "$(R)`cat temp.log`$(W)"; fi;
+	@$(RM) temp.log temp2.log
+	
+$(BUILD_DIR)/icon.o: $(SRC_DIR)/icon.rc
+	@echo -e "Compiling icon..."
+	@$(RM) temp.log temp2.log
+	-@$(WINDRES) "$(SRC_DIR)/icon.rc" "$(BUILD_DIR)/icon.o" 2> temp.log
 	@if test -s temp.log; then echo -e "$(R)`cat temp.log`$(W)"; fi;
 	@$(RM) temp.log temp2.log
 	
