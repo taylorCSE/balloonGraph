@@ -81,6 +81,8 @@ class BaseFrame : public wxFrame
             ID_NEWSETTINGS,
             ID_NEWGRAPH,
             ID_ABOUT,
+            ID_VSALTITUDE,
+            ID_VSTIME,
             ID_ALTITUDE,
             ID_SPEED,
             ID_BEARING,

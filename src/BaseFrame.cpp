@@ -25,6 +25,8 @@ BaseFrame::BaseFrame()
           wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX) {
     flightId = "";
 
+    SetIcon(wxIcon(wxT("icon.xpm")));
+    
     updateTimer = new wxTimer(this, UPDATE_TIMER);
     updateTimer->Start(5000);
     
@@ -92,6 +94,9 @@ void BaseFrame::CreateMenu(bool show_view,
         data_menu = new wxMenu;
         menubar->Append(data_menu, wxT("&Data"));
         
+        data_menu->Append(ID_VSALTITUDE, "vs Altitude");
+        data_menu->Append(ID_VSTIME, "vs Time");
+
         data_menu->Append(ID_ALTITUDE, "Altitude");
         data_menu->Append(ID_SPEED, "Speed");
         data_menu->Append(ID_BEARING, "Bearing");
