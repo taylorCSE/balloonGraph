@@ -23,12 +23,14 @@ Graph::Graph(wxPanel* panel, string name, string table,
     this->flightId = flight_id;
     this->lastFlightId = "";
     
+    this->byAltitude = true;
+    
     // Set up the font    
     wxFont windowFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, 
                           wxFONTWEIGHT_NORMAL);
     // Get the data for the graph
     Plot data = GetData();
-
+    
     string y_label = wxT("Altitude");
     string x_label = wxT(name);
     
@@ -97,7 +99,12 @@ void Graph::Update(string flight_id, string db_col) {
     data = GetData();
 
     // Update labels
-    string y_label = wxT("Altitude");
+    string y_label;
+    if(byAltitude) {
+        y_label = wxT("Altitude");
+    } else {
+        y_label = wxT("Time");
+    }
     string x_label = wxT(name);
 
     xaxis->SetName(x_label);
@@ -105,7 +112,11 @@ void Graph::Update(string flight_id, string db_col) {
     title->SetName(y_label + wxT(" vs ") + x_label);
 
 	// Create a mpFXYVector layer
-	vectorLayer->SetData(data.altitude, data.data);
+    if(byAltitude) {
+        vectorLayer->SetData(data.altitude, data.data);
+    } else {
+        vectorLayer->SetData(data.time, data.data);
+    }	
 	vectorLayer->SetContinuity(true);
 	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
 	vectorLayer->SetPen(vectorpen);

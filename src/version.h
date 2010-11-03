@@ -1,6 +1,6 @@
 /* Automatically generated build information */
-#define VERSION "1.11.1027"
-#define VERSION_COMMIT "3989b0d63b4b17656c9822fb6db2aac82e260775"
+#define VERSION "1.11.1037"
+#define VERSION_COMMIT "d131b7a37274e60482f678e47ef9808f7dcb2545"
 #define VERSION_MAJOR 1
 #define VERSION_MINOR 11
-#define VERSION_BUILD 1027
+#define VERSION_BUILD 1037

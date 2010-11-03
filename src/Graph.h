@@ -42,6 +42,8 @@ class Graph: public mpWindow {
         mpScaleY* yaxis;
         mpText* title;
 
+        bool byAltitude;
+
         string name;
         string db_table;
         string db_col;

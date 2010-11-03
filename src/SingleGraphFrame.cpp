@@ -72,6 +72,18 @@ void SingleGraphFrame::SetData( wxCommandEvent& event ) {
         graph->Update(flightId,db_col);
     }
     
+    if(id == ID_VSALTITUDE) {
+        graph->byAltitude = true;
+        graph->Update();
+        graph->Fit();
+    }
+
+    if(id == ID_VSTIME) {
+        graph->byAltitude = false;
+        graph->Update();
+        graph->Fit();
+    }
+
     if(id == ID_ALTITUDE) {
         graph->Update(flightId,"Altitude");
     }
