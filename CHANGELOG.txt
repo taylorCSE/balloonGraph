@@ -1,3 +1,6 @@
+1.13
+    - added red coloring for certain data values
+
 1.12
     -fixed bug in rate calculation
 
