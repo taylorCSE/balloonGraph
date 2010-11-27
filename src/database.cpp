@@ -224,9 +224,9 @@ map<string, string> DB_getMostRecentGPS(string flight_id) {
         sprintf(buf,"%d",(int)(atoi(row[0])*M_TO_FT));
         result["Altitude_ft"] = string(buf);
         result["Rate"] = string(row[1]);
-        sprintf(buf,"%d",atoi(row[1]) - 10000);
+        sprintf(buf,"%d",atoi(row[1]));
         result["Rate_mps"] = string(buf);
-        sprintf(buf,"%d",(int)((atoi(row[1]) - 10000)*M_TO_FT));
+        sprintf(buf,"%d",(int)((atoi(row[1]))*M_TO_FT));
         result["Rate_fps"] = string(buf);
         result["Lat"] = string(row[2]);
         result["LatRef"] = string(row[3]);
