@@ -28,6 +28,22 @@ StatusFrame::StatusFrame()
 StatusFrame::~StatusFrame() {
 }
 
+/** 
+    Colors a string based on parameters
+*/
+
+string StatusFrame::ColorString(string input, string true_value) {
+    string color = "#33ff33";
+    
+    if(true_value != "" && input != true_value) {
+        color = "#ff3333";
+    }
+    
+    string output = "<font color=" + color + ">" + input + "</font>";
+    
+    return output;
+}
+
 /**
     Updates the GUI with new database information
 */
@@ -70,15 +86,15 @@ void StatusFrame::Update() {
             "Pressure (HPA): \n<br />"
             "RH (%%): \n"
             ),
-            gps_info["Latitude"].c_str(),
-            gps_info["Longitude"].c_str(),
-            gps_info["Altitude_m"].c_str(),
-            gps_info["Altitude_ft"].c_str(),
-            gps_info["Spd_knots"].c_str(),
-            gps_info["Spd_mps"].c_str(),
-            gps_info["Hdg"].c_str(),
-            gps_info["Rate_mps"].c_str(),
-            gps_info["Status"].c_str()
+            ColorString(gps_info["Latitude"]).c_str(),
+            ColorString(gps_info["Longitude"]).c_str(),
+            ColorString(gps_info["Altitude_m"]).c_str(),
+            ColorString(gps_info["Altitude_ft"]).c_str(),
+            ColorString(gps_info["Spd_knots"]).c_str(),
+            ColorString(gps_info["Spd_mps"]).c_str(),
+            ColorString(gps_info["Hdg"]).c_str(),
+            ColorString(gps_info["Rate_mps"]).c_str(),
+            ColorString(gps_info["Status"],"1").c_str()
             );
     }
     if(view == VIEW_ANALOG) {

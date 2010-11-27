@@ -45,6 +45,7 @@ class StatusFrame : public BaseFrame
         DECLARE_EVENT_TABLE();
 
         // Functions
+        string ColorString(string input, string true_value = "");
         void Update();
         void CreateGUIControls();
         
