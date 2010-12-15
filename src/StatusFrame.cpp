@@ -190,6 +190,39 @@ void StatusFrame::Update() {
         }
     }
 
+    if(view == VIEW_AIR_SAMPLE) {
+        vector<string> analog_data = DB_getMostRecentAnalog(flightId);
+
+        if(analog_data.size() < 19) {
+            info = info + wxString("Data not available.");
+        } else {
+            info = wxString::Format(wxT(""
+                "<b>Air Sampler</b>\n<br />"
+                "Battery Voltage: %s\n<br />"
+                "GPS Status: %s\n<br />"
+                "Current Altitude (M): %s\n<br />"
+                "Pressure (HPA): %s\n<br />"
+                "Sample 1 Pressure (HPA): %s\n<br />"
+                "Sample 2 Pressure (HPA): %s\n<br />"
+                "Sample 3 Pressure (HPA): %s\n<br />"
+                "Sample 1 Target Altitude (M): %s\n<br />"
+                "Sample 2 Target Altitude (M): %s\n<br />"
+                "Sample 3 Target Altitude (M): %s\n<br />"
+                ),
+                ColorString(DB_asVoltage(analog_data[1])).c_str(),
+                ColorString(DB_asGPSStatus(analog_data[2])).c_str(),
+                ColorString(analog_data[3]).c_str(),
+                ColorString(DB_asPressure(analog_data[4])).c_str(),
+                ColorString(DB_asPressure(analog_data[5])).c_str(),
+                ColorString(DB_asPressure(analog_data[6])).c_str(),
+                ColorString(DB_asPressure(analog_data[7])).c_str(),
+                ColorString(analog_data[8]).c_str(),
+                ColorString(analog_data[9]).c_str(),
+                ColorString(analog_data[10]).c_str()
+                );
+        }
+    }
+
     deviceInfo->SetPage(head+info+tail);
 }
 
