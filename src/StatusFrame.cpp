@@ -146,13 +146,13 @@ void StatusFrame::Update() {
                 ColorString(analog_data[2]).c_str(),
                 ColorString(DB_asRate(analog_data[3])).c_str(),
                 ColorString(DB_asGPSStatus(analog_data[4])).c_str(),
-                ColorString(analog_data[5]).c_str(),
-                ColorString(analog_data[6]).c_str(),
+                ColorString(DB_asValveStatus(analog_data[5])).c_str(),
+                ColorString(DB_asCutDownStatus(analog_data[6])).c_str(),
                 ColorString(analog_data[7]).c_str(),
                 ColorString(analog_data[8]).c_str(),
                 ColorString(analog_data[9]).c_str(),
-                ColorString(analog_data[10]).c_str(),
-                ColorString(analog_data[11]).c_str(),
+                ColorString(DB_asAirTemp(analog_data[10])).c_str(),
+                ColorString(DB_asSurfaceTemp(analog_data[11])).c_str(),
                 ColorString(analog_data[12]).c_str(),
                 ColorString(analog_data[13]).c_str()
                 );

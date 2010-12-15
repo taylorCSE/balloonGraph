@@ -34,5 +34,9 @@ bool DB_isQueryReady();
 string DB_asVoltage(string input);
 string DB_asRate(string input);
 string DB_asGPSStatus(string input);
+string DB_asValveStatus(string input);
+string DB_asCutDownStatus(string input);
+string DB_asAirTemp(string input);
+string DB_asSurfaceTemp(string input);
 
 #endif

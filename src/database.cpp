@@ -369,3 +369,27 @@ string DB_asGPSStatus(string input) {
     else return string("Lock");
 }
 
+string DB_asValveStatus(string input) {
+    if(input == "0") return string("Closed");
+    else return string("Open");
+}
+
+string DB_asCutDownStatus(string input) {
+    if(input == "0") return string("Off");
+    else return string("On");
+}
+
+string DB_asAirTemp(string input) {
+    float output = ((atoi(input.c_str())*0.0048875) *100) - 273.15;
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
+
+string DB_asSurfaceTemp(string input) {
+    float output = (atoi(input.c_str())*0.02) - 273.15;
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
+
