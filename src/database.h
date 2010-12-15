@@ -33,5 +33,6 @@ Plot DB_getPlotData(string data_column, string flight_id);
 bool DB_isQueryReady();
 string DB_asVoltage(string input);
 string DB_asRate(string input);
+string DB_asGPSStatus(string input);
 
 #endif

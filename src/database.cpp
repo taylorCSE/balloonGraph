@@ -363,3 +363,9 @@ string DB_asRate(string input) {
     sprintf(buf,"%d",output);
     return string(buf);
 }
+
+string DB_asGPSStatus(string input) {
+    if(input == "0") return string("Unlock");
+    else return string("Lock");
+}
+
