@@ -393,3 +393,8 @@ string DB_asSurfaceTemp(string input) {
     return string(buf);
 }
 
+string DB_asReeling(string input) {
+    if(input == "0") return string("Down");
+    else return string("Up");
+}
+

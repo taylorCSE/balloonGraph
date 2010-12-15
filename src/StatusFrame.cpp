@@ -158,6 +158,37 @@ void StatusFrame::Update() {
                 );
         }
     }
+        
+    if(view == VIEW_REEL_DOWN) {
+        vector<string> analog_data = DB_getMostRecentAnalog(flightId);
+
+        if(analog_data.size() < 19) {
+            info = info + wxString("Data not available.");
+        } else {
+            info = wxString::Format(wxT(""
+                "<b>Reel Down Status</b>\n<br />"
+                "Battery Voltage: %s\n<br />"
+                "GPS Status: %s\n<br />"
+                "Current Altitude (M): %s\n<br />"
+                "Line Deploy (M): %s\n<br />"
+                "Deploy Time (M): %s\n<br />"
+                "Reeling: %s\n<br />"
+                "Target Reel Down Altitude (M): %s\n<br />"
+                "Target Reel Up Altitude (M): %s\n<br />"
+                "Target Down Time (M): %s\n<br />"
+                ),
+                ColorString(DB_asVoltage(analog_data[1])).c_str(),
+                ColorString(DB_asGPSStatus(analog_data[2])).c_str(),
+                ColorString(analog_data[3]).c_str(),
+                ColorString(analog_data[4]).c_str(),
+                ColorString(analog_data[5]).c_str(),
+                ColorString(DB_asReeling(analog_data[6])).c_str(),
+                ColorString(analog_data[7]).c_str(),
+                ColorString(analog_data[8]).c_str(),
+                ColorString(analog_data[9]).c_str()
+                );
+        }
+    }
 
     deviceInfo->SetPage(head+info+tail);
 }
