@@ -405,3 +405,32 @@ string DB_asPressure(string input) {
     return string(buf);
 }
 
+/* Two part unit converstions */
+
+string DB_asTwoPartPressure(string input_a, string input_b) {
+    int a = atoi(input_a.c_str());
+    int b = atoi(input_b.c_str());
+    float output = a+(b*.01);
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
+
+string DB_asTwoPartTemp(string input_a, string input_b) {
+    int a = atoi(input_a.c_str());
+    int b = atoi(input_b.c_str());
+    float output = (a-1000)+(b*.01);
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
+
+string DB_asTwoPartRH(string input_a, string input_b) {
+    int a = atoi(input_a.c_str());
+    int b = atoi(input_b.c_str());
+    float output = a+(b*.01);
+    char buf[100];
+    sprintf(buf,"%f",output);             
+    return string(buf);
+}
+

@@ -41,4 +41,8 @@ string DB_asSurfaceTemp(string input);
 string DB_asReeling(string input);
 string DB_asPressure(string input);
 
+string DB_asTwoPartPressure(string input_a, string input_b);
+string DB_asTwoPartTemp(string input_a, string input_b);
+string DB_asTwoPartRH(string input_a, string input_b);
+
 #endif
