@@ -244,6 +244,34 @@ void StatusFrame::Update() {
         }
     }
 
+    if(view == VIEW_MET_GROUND) {
+        vector<string> analog_data = DB_getMostRecentAnalog(flightId);
+
+        if(analog_data.size() < 19) {
+            info = info + wxString("Data not available.");
+        } else {
+            info = wxString::Format(wxT(""
+                "<b>MET Ground</b>\n<br />"
+                "Battery Voltage: %s\n<br />"
+                "Pressure (HPA): %s\n<br />"
+                "Tempature C: %s\n<br />"
+                "RH%%: %s\n<br />"
+                "Dew Point: \n<br />"
+                "Wind Speed (M/S): %s\n<br />"
+                "Wind Speed (MPH): %s\n<br />"
+                "Wind Direction: %s\n<br />"
+                ),
+                ColorString(DB_asVoltage(analog_data[1])).c_str(),
+                ColorString(DB_asPressure(analog_data[2])).c_str(),
+                ColorString(DB_asMETGround(analog_data[3])).c_str(),
+                ColorString(DB_asMETGround(analog_data[4])).c_str(),
+                ColorString(analog_data[5]).c_str(),
+                ColorString(DB_asWindSpeed(analog_data[5])).c_str(),
+                ColorString(DB_asWindDirection(analog_data[6])).c_str()
+                );
+        }
+    }
+
     deviceInfo->SetPage(head+info+tail);
 }
 

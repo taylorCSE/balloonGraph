@@ -405,6 +405,27 @@ string DB_asPressure(string input) {
     return string(buf);
 }
 
+string DB_asMETGround(string input) {
+    float output = (atoi(input.c_str())*0.0048875);
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
+
+string DB_asWindSpeed(string input) {
+    float output = (atoi(input.c_str())*0.45);
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
+
+string DB_asWindDirection(string input) {
+    float output = (atoi(input.c_str())*0.352);
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
+
 /* Two part unit converstions */
 
 string DB_asTwoPartPressure(string input_a, string input_b) {
@@ -433,4 +454,3 @@ string DB_asTwoPartRH(string input_a, string input_b) {
     sprintf(buf,"%f",output);             
     return string(buf);
 }
-

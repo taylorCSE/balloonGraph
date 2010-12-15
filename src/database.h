@@ -31,6 +31,7 @@ map<string, string> DB_getMostRecentGPS(string flight_id);
 vector<string> DB_getMostRecentAnalog(string flight_id);
 Plot DB_getPlotData(string data_column, string flight_id);
 bool DB_isQueryReady();
+
 string DB_asVoltage(string input);
 string DB_asRate(string input);
 string DB_asGPSStatus(string input);
@@ -40,6 +41,9 @@ string DB_asAirTemp(string input);
 string DB_asSurfaceTemp(string input);
 string DB_asReeling(string input);
 string DB_asPressure(string input);
+string DB_asMETGround(string input);
+string DB_asWindSpeed(string input);
+string DB_asWindDirection(string input);
 
 string DB_asTwoPartPressure(string input_a, string input_b);
 string DB_asTwoPartTemp(string input_a, string input_b);
