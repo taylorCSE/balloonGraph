@@ -50,7 +50,13 @@ string StatusFrame::ColorString(string input, string true_value) {
 
 void StatusFrame::Update() {
     CreateMenu();
-
+    view_menu->Append(VIEW_VALVE, wxT("Valve"));
+    view_menu->Append(VIEW_REEL_DOWN, wxT("Reel Down"));
+    view_menu->Append(VIEW_AIR_SAMPLE, wxT("Air Sampler"));
+    view_menu->Append(VIEW_MET_AIRBORNE, wxT("MET Airborne"));
+    view_menu->Append(VIEW_MET_GROUND, wxT("MET Ground"));
+    view_menu->Append(VIEW_BEACON, wxT("BEACON"));
+    
     wxString head,info,tail;
     
     head = wxString::Format(wxT(""
@@ -97,6 +103,7 @@ void StatusFrame::Update() {
             ColorString(gps_info["Status"],"1").c_str()
             );
     }
+    
     if(view == VIEW_ANALOG) {
         vector<string> analog_data = DB_getMostRecentAnalog(flightId);
         
@@ -132,9 +139,8 @@ void StatusFrame::CreateGUIControls() {
     
     deviceInfo = new wxHtmlWindow(mainPanel);
     mainSizer->Add(deviceInfo, 1, wxEXPAND | wxALL);
-
+    
     Update();
-
 }
 
 /**
