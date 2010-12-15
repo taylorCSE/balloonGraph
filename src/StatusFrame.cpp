@@ -142,7 +142,7 @@ void StatusFrame::Update() {
                 "Evelope Diff. Presure HPA: %s\n<br />"
                 "Gas Flow  (M/S): %s\n<br />"
                 ),
-                ColorString(analog_data[1]).c_str(),
+                ColorString(DB_asVoltage(analog_data[1])).c_str(),
                 ColorString(analog_data[2]).c_str(),
                 ColorString(analog_data[3]).c_str(),
                 ColorString(analog_data[4]).c_str(),

@@ -345,3 +345,21 @@ bool DB_isQueryReady() {
     if(!DB_result) return false;
     return true;
 }
+
+/** 
+    Various unit conversions
+ */
+
+string DB_asVoltage(string input) {
+    float output = (atoi(input.c_str())*0.004885)*2;
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
+
+string DB_asRate(string input) {
+    int output = atoi(input.c_str())-10000;
+    char buf[100];
+    sprintf(buf,"%d",output);
+    return string(buf);
+}
