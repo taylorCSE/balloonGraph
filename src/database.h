@@ -39,5 +39,6 @@ string DB_asCutDownStatus(string input);
 string DB_asAirTemp(string input);
 string DB_asSurfaceTemp(string input);
 string DB_asReeling(string input);
+string DB_asPressure(string input);
 
 #endif

@@ -398,3 +398,10 @@ string DB_asReeling(string input) {
     else return string("Up");
 }
 
+string DB_asPressure(string input) {
+    float output = ((atoi(input.c_str())*0.0048875)/0.267)*0.068947;
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
+
