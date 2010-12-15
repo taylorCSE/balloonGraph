@@ -67,7 +67,7 @@ void StatusFrame::Update() {
     tail = wxString::Format(wxT(""
             "</body>"));
     
-    if(view == VIEW_BASIC) {    
+    if(view == VIEW_BASIC) {
         map<string, string> gps_info = DB_getMostRecentGPS(flightId);
 
         info = wxString::Format(wxT(""
@@ -119,6 +119,46 @@ void StatusFrame::Update() {
             }
         }
     }    
+
+    if(view == VIEW_VALVE) {
+        vector<string> analog_data = DB_getMostRecentAnalog(flightId);
+
+        if(analog_data.size() < 19) {
+            info = info + wxString("Data not available.");
+        } else {
+            info = wxString::Format(wxT(""
+                "<b>Valve Status</b>\n<br />"
+                "Battery Voltage: %s\n<br />"
+                "Current Altitude (M): %s\n<br />"
+                "Current Rate (M/M): %s\n<br />"
+                "GPS Status: %s\n<br />"
+                "Valve Status: %s\n<br />"
+                "Cut Down Status: %s\n<br />"
+                "Abort Count Down (M): %s\n<br />"
+                "Target Altitude (M): %s\n<br />"
+                "Target Abort Time (M): %s\n<br />"
+                "Evelope Air Temp. C: %s\n<br />"
+                "Evelope Surface Temp. C: %s\n<br />"
+                "Evelope Diff. Presure HPA: %s\n<br />"
+                "Gas Flow  (M/S): %s\n<br />"
+                ),
+                ColorString(analog_data[1]).c_str(),
+                ColorString(analog_data[2]).c_str(),
+                ColorString(analog_data[3]).c_str(),
+                ColorString(analog_data[4]).c_str(),
+                ColorString(analog_data[5]).c_str(),
+                ColorString(analog_data[6]).c_str(),
+                ColorString(analog_data[7]).c_str(),
+                ColorString(analog_data[8]).c_str(),
+                ColorString(analog_data[9]).c_str(),
+                ColorString(analog_data[10]).c_str(),
+                ColorString(analog_data[11]).c_str(),
+                ColorString(analog_data[12]).c_str(),
+                ColorString(analog_data[13]).c_str()
+                );
+        }
+    }
+
     deviceInfo->SetPage(head+info+tail);
 }
 
