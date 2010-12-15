@@ -170,11 +170,8 @@ void BaseFrame::OnMenu( wxCommandEvent& event ) {
         flightId = flightIds[id - 10000];
     }
 
-    if(id == VIEW_BASIC) {
-        view = VIEW_BASIC;
-    }
-    if(id == VIEW_ANALOG) {
-        view = VIEW_ANALOG;
+    if(id >= VIEW_BASIC && id <= VIEW_BEACON) {
+        view = id;
     }
     
     Update();
