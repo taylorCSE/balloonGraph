@@ -272,6 +272,27 @@ void StatusFrame::Update() {
         }
     }
 
+    if(view == VIEW_BEACON) {
+        vector<string> analog_data = DB_getMostRecentAnalog(flightId);
+
+        if(analog_data.size() < 19) {
+            info = info + wxString("Data not available.");
+        } else {
+            info = wxString::Format(wxT(""
+                "<b>BEACON</b>\n<br />"
+                "Battery Voltage: %s\n<br />"
+                "GPS Status: %s\n<br />"
+                "Altitude (M): %s\n<br />"
+                "Current Rate (M/M): %s\n<br />"
+                ),
+                ColorString(DB_asVoltage(analog_data[1])).c_str(),
+                ColorString(DB_asGPSStatus(analog_data[2])).c_str(),
+                ColorString(analog_data[3]).c_str(),
+                ColorString(DB_asRate(analog_data[4])).c_str()
+                );
+        }
+    }
+
     deviceInfo->SetPage(head+info+tail);
 }
 
