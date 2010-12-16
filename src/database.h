@@ -48,5 +48,6 @@ string DB_asWindDirection(string input);
 string DB_asTwoPartPressure(string input_a, string input_b);
 string DB_asTwoPartTemp(string input_a, string input_b);
 string DB_asTwoPartRH(string input_a, string input_b);
+string DB_asCalculatedDewpoint(string input_a, string input_b);
 
 #endif

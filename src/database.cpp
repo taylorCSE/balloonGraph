@@ -454,3 +454,13 @@ string DB_asTwoPartRH(string input_a, string input_b) {
     sprintf(buf,"%f",output);             
     return string(buf);
 }
+
+string DB_asCalculatedDewpoint(string input_a, string input_b) {
+    int a = atoi(input_a.c_str());
+    int b = atoi(input_b.c_str());
+    float output = (a*.0048875) - ((100 - (b*0.0048875)) / 5);
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
+
