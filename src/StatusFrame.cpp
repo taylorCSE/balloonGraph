@@ -256,7 +256,7 @@ void StatusFrame::Update() {
                 "Pressure (HPA): %s\n<br />"
                 "Tempature C: %s\n<br />"
                 "RH%%: %s\n<br />"
-                "Dew Point: \n<br />"
+                "Dew Point: %s\n<br />"
                 "Wind Speed (M/S): %s\n<br />"
                 "Wind Speed (MPH): %s\n<br />"
                 "Wind Direction: %s\n<br />"
@@ -265,6 +265,7 @@ void StatusFrame::Update() {
                 ColorString(DB_asPressure(analog_data[2])).c_str(),
                 ColorString(DB_asMETGround(analog_data[3])).c_str(),
                 ColorString(DB_asMETGround(analog_data[4])).c_str(),
+                ColorString(DB_asCalculatedDewpoint(analog_data[3],analog_data[4])).c_str(),
                 ColorString(analog_data[5]).c_str(),
                 ColorString(DB_asWindSpeed(analog_data[5])).c_str(),
                 ColorString(DB_asWindDirection(analog_data[6])).c_str()
