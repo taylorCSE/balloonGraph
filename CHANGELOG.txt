@@ -1,4 +1,5 @@
 1.15
+    - Fixed crash bug on window close
 
 1.14
     - Added specific views for device types
