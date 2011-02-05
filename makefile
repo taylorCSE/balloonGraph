@@ -4,7 +4,6 @@ DIST	  = dist
 SRC_DIR		  = src
 
 # Tools
-WXLIBNAME = wxmsw28
 CPP		  = g++.exe
 LINK	  = g++.exe
 WINDRES   = windres.exe
@@ -26,12 +25,24 @@ SRC_DIRS = $(wildcard $(SRC_DIR)/*.cpp)
 OBJ = $(subst $(SRC_DIR),$(BUILD_DIR),$(patsubst %.cpp,%.o,$(SRC_DIRS)))
 
 # Libraries to include
-LIBS	  = -mwindows \
-			-l$(WXLIBNAME) \
-			-lwxpng \
-			-lwxtiff \
-			-lwxjpeg \
-			-lwxzlib \
+LIBS	  = --subsystem,windows \
+			-mthreads \
+			-mwindows \
+			-lwx_msw_richtext-2.8 \
+			-lwx_msw_aui-2.8 \
+			-lwx_msw_xrc-2.8 \
+			-lwx_msw_qa-2.8 \
+			-lwx_msw_html-2.8 \
+			-lwx_msw_adv-2.8 \
+			-lwx_msw_core-2.8 \
+			-lwx_base_xml-2.8 \
+			-lwx_base_net-2.8 \
+			-lwx_base-2.8 \
+			-lwxregex-2.8 \
+			-lwxexpat-2.8 \
+			-lwxtiff-2.8 \
+			-lwxjpeg-2.8 \
+			-lwxpng-2.8 \
 			-lkernel32 \
 			-luser32 \
 			-lgdi32 \
@@ -45,12 +56,28 @@ LIBS	  = -mwindows \
 			-lrpcrt4 \
 			-ladvapi32 \
 			-lodbc32 \
+			-lz \
+			-lrpcrt4 \
+			-loleaut32 \
+			-lole32 \
+			-luuid \
+			-lwinspool \
+			-lwinmm \
+			-lshell32 \
+			-lcomctl32 \
+			-lcomdlg32 \
+			-lctl3d32 \
+			-ladvapi32 \
+			-lwsock32 \
+			-lgdi32 \
 			-llibmysql
 
 # Compile Flags			
 CXXFLAGS  = -fno-exceptions \
 			-fno-pcc-struct-return \
 			-fstrict-aliasing \
+			-static-libgcc \
+			-static-libstdc++ \
 			-Wall \
 			-D__WXMSW__ \
 			-D__GNUWIN32__ \
@@ -59,8 +86,19 @@ CXXFLAGS  = -fno-exceptions \
 			-ggdb \
 			-O0
 
-LDFLAGS   = -Wl
-
+LDFLAGS   = -Wl \
+			-fno-exceptions \
+			-fno-pcc-struct-return \
+			-fstrict-aliasing \
+			-static-libgcc \
+			-static-libstdc++ \
+			-Wall \
+			-D__WXMSW__ \
+			-D__GNUWIN32__ \
+			-D__WIN95__ \
+			-Wno-deprecated \
+			-ggdb \
+			-O0
 # Color codes
 
 W=\x1b[0m
