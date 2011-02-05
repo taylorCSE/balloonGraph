@@ -122,7 +122,7 @@ void DB_query(char* item ...) {
     
     if(!mysql_query(DB_conn, query)) {
         DB_result = mysql_store_result(DB_conn);
-        fprintf(DB_log, "Rows Returned: %d\n",mysql_num_rows(DB_result));
+        fprintf(DB_log, "Rows Returned: %d\n",(int)mysql_num_rows(DB_result));
     } else {
         fprintf(DB_log, "Error querying database.\n");
         DB_result = 0x00;
