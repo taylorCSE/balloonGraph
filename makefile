@@ -57,25 +57,16 @@ LIBS	  = --subsystem,windows \
 			-ladvapi32 \
 			-lodbc32 \
 			-lz \
-			-lrpcrt4 \
-			-loleaut32 \
-			-lole32 \
-			-luuid \
 			-lwinspool \
-			-lwinmm \
-			-lshell32 \
-			-lcomctl32 \
-			-lcomdlg32 \
 			-lctl3d32 \
-			-ladvapi32 \
 			-lwsock32 \
-			-lgdi32 \
 			-llibmysql
 
 # Compile Flags			
 CXXFLAGS  = -fno-exceptions \
 			-fno-pcc-struct-return \
 			-fstrict-aliasing \
+			-ffunction-sections \
 			-static-libgcc \
 			-static-libstdc++ \
 			-Wall \
