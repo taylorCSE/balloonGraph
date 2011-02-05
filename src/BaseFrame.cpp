@@ -44,7 +44,6 @@ BaseFrame::BaseFrame()
 */
 
 BaseFrame::~BaseFrame() {
-    /// Free the menus if they were created
 }
 
 /**
@@ -191,5 +190,9 @@ void BaseFrame::OnTimer(wxTimerEvent& event) {
 */
 
 void BaseFrame::OnClose(wxCloseEvent& event) {
+    if(updateTimer) {
+        delete updateTimer;
+        updateTimer = 0x00;
+    }
     Destroy();
 }
