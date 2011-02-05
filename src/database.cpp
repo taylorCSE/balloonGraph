@@ -325,7 +325,7 @@ Plot DB_getPlotData(string data_column, string flight_id) {
 
     MYSQL_ROW row;
 
-    while (row = mysql_fetch_row(DB_result)) {
+    while ( (row = mysql_fetch_row(DB_result)) ) {
         result.time.push_back(strtod(row[0],NULL));
         result.altitude.push_back(strtod(row[1],NULL));
         result.data.push_back(strtod(row[2],NULL));
