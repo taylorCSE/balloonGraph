@@ -86,19 +86,6 @@ CXXFLAGS  = -fno-exceptions \
 			-ggdb \
 			-O0
 
-LDFLAGS   = -Wl \
-			-fno-exceptions \
-			-fno-pcc-struct-return \
-			-fstrict-aliasing \
-			-static-libgcc \
-			-static-libstdc++ \
-			-Wall \
-			-D__WXMSW__ \
-			-D__GNUWIN32__ \
-			-D__WIN95__ \
-			-Wno-deprecated \
-			-ggdb \
-			-O0
 # Color codes
 
 W=\x1b[0m
@@ -155,7 +142,7 @@ todo: todo-custom
 $(BIN): $(OBJ) $(BUILD_DIR)/icon.o
 	@echo -e "Linking $(G)$@...$(W)"
 	@$(RM) temp.log temp2.log
-	-@$(LINK) $(OBJ) $(BUILD_DIR)/icon.o -o "$(BIN)" $(LIBS) $(LDFLAGS) 2> temp.log
+	-@$(LINK) $(OBJ) $(BUILD_DIR)/icon.o -o "$(BIN)" $(LIBS) $(CXXFLAGS) 2> temp.log
 	@if test -s temp.log; then echo -e "$(R)`cat temp.log`$(W)"; fi;
 	@$(RM) temp.log temp2.log
 
