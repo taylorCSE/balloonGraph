@@ -7,6 +7,7 @@
 
 BEGIN_EVENT_TABLE(GraphFrame,BaseFrame)
     EVT_MENU(ID_FITALL, GraphFrame::FitAll)
+    EVT_MENU(ID_FLIPAXIS, GraphFrame::FlipAxis)
 END_EVENT_TABLE()
 
 /**
@@ -139,6 +140,21 @@ void GraphFrame::FitAll( wxCommandEvent& event ) {
     for(int i = 0; i < 18; i++) {
         if(graphs[i]) {
             graphs[i]->Fit();
+        }
+    }
+}
+
+/**
+    Fit all graphs
+
+    This simply calls Fit() on each of the graphs that are active.    
+*/
+
+void GraphFrame::FlipAxis( wxCommandEvent& event ) {
+    for(int i = 0; i < 18; i++) {
+        if(graphs[i]) {
+            exit(0);
+            //graphs[i]->FlipAxis();
         }
     }
 }

@@ -49,6 +49,7 @@ class GraphFrame : public BaseFrame
         void UpdateAnalogGraphs();
         void ClearGraphs();
         void FitAll(wxCommandEvent& event);
+        void FlipAxis(wxCommandEvent& event);
         void UpdateGraph(int num, Graph* graph);
 
         // Functions
