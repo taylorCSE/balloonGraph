@@ -55,6 +55,7 @@ class SingleGraphFrame : public BaseFrame
         // IDs for GUI elements
         enum {
             ID_TEXT = 2000,
+            ID_FLIPAXIS,
             FIT_TIMER,
         };
 };

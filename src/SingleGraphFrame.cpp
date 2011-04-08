@@ -53,6 +53,11 @@ SingleGraphFrame::~SingleGraphFrame() {
 
 void SingleGraphFrame::Update() {
     CreateMenu(false, false, true, false,true);
+
+    view_menu = new wxMenu;
+    menubar->Append(view_menu, wxT("&View"));
+    
+    view_menu->Append(ID_FLIPAXIS, wxT("Flip Axis"));
     
     graph->Update(flightId);
 }
