@@ -34,6 +34,7 @@ class Graph: public mpWindow {
         virtual ~Graph();
         void Update(string flight_id = "", string db_col = "");
         Plot GetData();
+        void FlipAxis();
         void OpenSingleGraph(wxMouseEvent& event);
         
         Plot data;
@@ -43,6 +44,7 @@ class Graph: public mpWindow {
         mpText* title;
 
         bool byAltitude;
+        bool flippedAxis;
 
         string name;
         string db_table;

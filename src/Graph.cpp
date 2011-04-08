@@ -24,6 +24,7 @@ Graph::Graph(wxPanel* panel, string name, string table,
     this->lastFlightId = "";
     
     this->byAltitude = true;
+    this->flippedAxis = false;
     
     // Set up the font    
     wxFont windowFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, 
@@ -107,15 +108,29 @@ void Graph::Update(string flight_id, string db_col) {
     }
     string x_label = wxT(name);
 
-    xaxis->SetName(x_label);
-    yaxis->SetName(y_label);
-    title->SetName(y_label + wxT(" vs ") + x_label);
+    if(flippedAxis) {
+        xaxis->SetName(y_label);
+        yaxis->SetName(x_label);
+        title->SetName(x_label + wxT(" vs ") + y_label);
+    } else {
+        xaxis->SetName(x_label);
+        yaxis->SetName(y_label);
+        title->SetName(y_label + wxT(" vs ") + x_label);
+    }
 
 	// Create a mpFXYVector layer
     if(byAltitude) {
-        vectorLayer->SetData(data.altitude, data.data);
+        if(flippedAxis) {
+            vectorLayer->SetData(data.data, data.altitude);
+        } else {
+            vectorLayer->SetData(data.altitude, data.data);
+        }
     } else {
-        vectorLayer->SetData(data.time, data.data);
+        if(flippedAxis) {
+            vectorLayer->SetData(data.data, data.time);
+        } else {
+            vectorLayer->SetData(data.time, data.data);
+        }
     }	
 	vectorLayer->SetContinuity(true);
 	wxPen vectorpen(*wxBLUE, 2, wxSOLID);
@@ -137,6 +152,17 @@ void Graph::Update(string flight_id, string db_col) {
 Plot Graph::GetData() {
     Plot result = DB_getPlotData(db_col,flightId);
     return result;
+}
+
+/**
+    Get new data from the database
+*/
+
+void Graph::FlipAxis() {
+    flippedAxis = !flippedAxis;
+    Update();
+    UpdateAll();
+    Fit();
 }
 
 /**

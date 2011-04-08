@@ -153,8 +153,7 @@ void GraphFrame::FitAll( wxCommandEvent& event ) {
 void GraphFrame::FlipAxis( wxCommandEvent& event ) {
     for(int i = 0; i < 18; i++) {
         if(graphs[i]) {
-            exit(0);
-            //graphs[i]->FlipAxis();
+            graphs[i]->FlipAxis();
         }
     }
 }
