@@ -1,4 +1,5 @@
 1.16
+    - Added option to flip axis on graphs
 
 1.15
     - Updated for GCC 4.5
