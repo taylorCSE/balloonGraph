@@ -145,9 +145,9 @@ void GraphFrame::FitAll( wxCommandEvent& event ) {
 }
 
 /**
-    Fit all graphs
+    Flip the x and y axis
 
-    This simply calls Fit() on each of the graphs that are active.    
+    This simply calls FlipAxis() on each of the graphs that are active.    
 */
 
 void GraphFrame::FlipAxis( wxCommandEvent& event ) {
