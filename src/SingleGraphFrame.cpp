@@ -77,6 +77,10 @@ void SingleGraphFrame::SetData( wxCommandEvent& event ) {
         graph->Update(flightId,db_col);
     }
     
+    if(id == ID_FLIPAXIS) {
+        graph->FlipAxis();
+    }
+
     if(id == ID_VSALTITUDE) {
         graph->byAltitude = true;
         graph->Update();
