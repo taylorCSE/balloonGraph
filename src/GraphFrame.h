@@ -70,6 +70,7 @@ class GraphFrame : public BaseFrame
         // ID's for GUI controls
         enum {
             ID_TEXT = 2000,
+            ID_FLIPAXIS,
             ID_FITALL
         };
 };

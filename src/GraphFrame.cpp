@@ -41,6 +41,7 @@ void GraphFrame::Update() {
      
     CreateMenu();
     
+    view_menu->Append(ID_FLIPAXIS, wxT("Flip Axis"));
     view_menu->Append(ID_FITALL, wxT("Fit All"));
     
     switch(view) {
