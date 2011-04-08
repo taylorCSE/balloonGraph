@@ -8,6 +8,7 @@
 BEGIN_EVENT_TABLE(GraphFrame,BaseFrame)
     EVT_MENU(ID_FITALL, GraphFrame::FitAll)
     EVT_MENU(ID_FLIPAXIS, GraphFrame::FlipAxis)
+    EVT_MENU(ID_FLIPALTITUDE, GraphFrame::FlipAltitude)
 END_EVENT_TABLE()
 
 /**
@@ -42,6 +43,7 @@ void GraphFrame::Update() {
      
     CreateMenu();
     
+    view_menu->Append(ID_FLIPALTITUDE, wxT("Time/Altitude"));
     view_menu->Append(ID_FLIPAXIS, wxT("Flip Axis"));
     view_menu->Append(ID_FITALL, wxT("Fit All"));
     
@@ -154,6 +156,22 @@ void GraphFrame::FlipAxis( wxCommandEvent& event ) {
     for(int i = 0; i < 18; i++) {
         if(graphs[i]) {
             graphs[i]->FlipAxis();
+        }
+    }
+}
+
+/**
+    Switch between time and altitude
+
+    This simply alternates byAltitude on each of the graphs that are active.    
+*/
+
+void GraphFrame::FlipAltitude( wxCommandEvent& event ) {
+    for(int i = 0; i < 18; i++) {
+        if(graphs[i]) {
+            graphs[i]->byAltitude = !(graphs[i]->byAltitude);
+            graphs[i]->Update();
+            graphs[i]->Fit();
         }
     }
 }

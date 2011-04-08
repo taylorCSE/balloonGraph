@@ -50,6 +50,7 @@ class GraphFrame : public BaseFrame
         void ClearGraphs();
         void FitAll(wxCommandEvent& event);
         void FlipAxis(wxCommandEvent& event);
+        void FlipAltitude(wxCommandEvent& event);
         void UpdateGraph(int num, Graph* graph);
 
         // Functions
@@ -72,6 +73,7 @@ class GraphFrame : public BaseFrame
         enum {
             ID_TEXT = 2000,
             ID_FLIPAXIS,
+            ID_FLIPALTITUDE,
             ID_FITALL
         };
 };
