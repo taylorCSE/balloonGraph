@@ -232,14 +232,16 @@ void StatusFrame::Update() {
             info = wxString::Format(wxT(""
                 "<b>MET Airborne</b>\n<br />"
                 "Battery Voltage: %s\n<br />"
-                "Pressure (HPA): %s\n<br />"
-                "Tempature C: %s\n<br />"
-                "RH%%: %s\n<br />"
+                "Reference Pressure (HPA): %s\n<br />"
+                "Reference Tempature C: %s\n<br />"
+                "Reference RH%%: %s\n<br />"
+                "Reference Dewpoint: %s\n<br />"
                 ),
                 ColorString(DB_asVoltage(analog_data[1])).c_str(),
                 ColorString(DB_asTwoPartPressure(analog_data[2],analog_data[3])).c_str(),
                 ColorString(DB_asTwoPartTemp(analog_data[4],analog_data[5])).c_str(),
-                ColorString(DB_asTwoPartRH(analog_data[6],analog_data[7])).c_str()
+                ColorString(DB_asTwoPartRH(analog_data[6],analog_data[7])).c_str(),
+                ColorString(DB_asReferenceDewpoint(analog_data[4],analog_data[5],analog_data[6],analog_data[7])).c_str()
                 );
         }
     }

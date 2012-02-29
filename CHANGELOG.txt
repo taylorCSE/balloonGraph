@@ -1,4 +1,5 @@
 1.17
+    - Updated the MET Airborne screen
 
 1.16
     - Added option to flip axis on graphs

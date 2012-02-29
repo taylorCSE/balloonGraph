@@ -464,3 +464,12 @@ string DB_asCalculatedDewpoint(string input_a, string input_b) {
     return string(buf);
 }
 
+string DB_asReferenceDewpoint(string input_a, string input_b, string input_c, string input_d) {
+    float temp = atof(DB_asTwoPartTemp(input_a,input_b).c_str());
+    float rh = atof(DB_asTwoPartRH(input_c,input_d).c_str());
+    
+    float output = temp - ((100.0 - rh) / 5.0);
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
