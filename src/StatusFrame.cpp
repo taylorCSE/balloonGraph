@@ -229,6 +229,14 @@ void StatusFrame::Update() {
         if(analog_data.size() < 19) {
             info = info + wxString("Data not available.");
         } else {
+            string test_pressure = DB_asPressure(analog_data[8]);
+            string test_temperature = DB_asTemperature(analog_data[9]);
+            string test_rh = DB_asRH(analog_data[10]);
+            
+            string ref_pressure = DB_asTwoPartPressure(analog_data[2],analog_data[3]);
+            string ref_temperature = DB_asTwoPartTemp(analog_data[4],analog_data[5]);
+            string ref_rh = DB_asTwoPartRH(analog_data[6],analog_data[7]);
+            
             info = wxString::Format(wxT(""
                 "<b>MET Airborne</b>\n<br />"
                 "Battery Voltage: %s\n<br />"
@@ -240,15 +248,22 @@ void StatusFrame::Update() {
                 "Test Pressure (HPA): %s\n<br />"
                 "Test Tempature C: %s\n<br />"
                 "Test RH%%: %s\n<br />"
+                "<b>Error</b>\n<br />"
+                "Pressure Error %%: %s\n<br />"
+                "Tempature Error %%: %s\n<br />"
+                "RH Error %%: %s\n<br />"
                 ),
                 ColorString(DB_asVoltage(analog_data[1])).c_str(),
-                ColorString(DB_asTwoPartPressure(analog_data[2],analog_data[3])).c_str(),
-                ColorString(DB_asTwoPartTemp(analog_data[4],analog_data[5])).c_str(),
-                ColorString(DB_asTwoPartRH(analog_data[6],analog_data[7])).c_str(),
+                ColorString(ref_pressure).c_str(),
+                ColorString(ref_temperature).c_str(),
+                ColorString(ref_rh).c_str(),
                 ColorString(DB_asReferenceDewpoint(analog_data[4],analog_data[5],analog_data[6],analog_data[7])).c_str(),
-                ColorString(DB_asPressure(analog_data[8])).c_str(),
-                ColorString(DB_asTemperature(analog_data[9])).c_str(),
-                ColorString(DB_asRH(analog_data[10])).c_str()
+                ColorString(test_pressure).c_str(),
+                ColorString(test_temperature).c_str(),
+                ColorString(test_rh).c_str(),
+                ColorString(DB_calculateError(test_pressure,ref_pressure)).c_str(),
+                ColorString(DB_calculateError(test_temperature,ref_temperature)).c_str(),
+                ColorString(DB_calculateError(test_rh,ref_rh)).c_str()
                 );
         }
     }

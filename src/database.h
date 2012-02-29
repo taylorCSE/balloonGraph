@@ -51,6 +51,7 @@ string DB_asTwoPartPressure(string input_a, string input_b);
 string DB_asTwoPartTemp(string input_a, string input_b);
 string DB_asTwoPartRH(string input_a, string input_b);
 string DB_asCalculatedDewpoint(string input_a, string input_b);
+string DB_calculateError(string input_a, string input_b);
 string DB_asReferenceDewpoint(string input_a, string input_b, string input_c, string input_d);
 
 #endif
