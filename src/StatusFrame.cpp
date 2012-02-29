@@ -236,12 +236,19 @@ void StatusFrame::Update() {
                 "Reference Tempature C: %s\n<br />"
                 "Reference RH%%: %s\n<br />"
                 "Reference Dewpoint: %s\n<br />"
+                "<b>Test</b>\n<br />"
+                "Test Pressure (HPA): %s\n<br />"
+                "Test Tempature C: %s\n<br />"
+                "Test RH%%: %s\n<br />"
                 ),
                 ColorString(DB_asVoltage(analog_data[1])).c_str(),
                 ColorString(DB_asTwoPartPressure(analog_data[2],analog_data[3])).c_str(),
                 ColorString(DB_asTwoPartTemp(analog_data[4],analog_data[5])).c_str(),
                 ColorString(DB_asTwoPartRH(analog_data[6],analog_data[7])).c_str(),
-                ColorString(DB_asReferenceDewpoint(analog_data[4],analog_data[5],analog_data[6],analog_data[7])).c_str()
+                ColorString(DB_asReferenceDewpoint(analog_data[4],analog_data[5],analog_data[6],analog_data[7])).c_str(),
+                ColorString(DB_asPressure(analog_data[8])).c_str(),
+                ColorString(DB_asTemperature(analog_data[9])).c_str(),
+                ColorString(DB_asRH(analog_data[10])).c_str()
                 );
         }
     }
