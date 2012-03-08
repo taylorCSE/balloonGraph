@@ -8,6 +8,7 @@
 BEGIN_EVENT_TABLE(BaseFrame,wxFrame)
     EVT_MENU(ID_NEWSTATUS, BaseFrame::NewStatusWindow)
     EVT_MENU(ID_NEWGRAPH, BaseFrame::NewGraphWindow)
+    EVT_MENU(ID_NEWSINGLEGRAPH, BaseFrame::NewSingleGraphWindow)
     EVT_MENU(ID_NEWSETTINGS, BaseFrame::NewSettingsWindow)
     EVT_MENU(ID_ABOUT, BaseFrame::NewAboutWindow)
     EVT_TIMER(UPDATE_TIMER, BaseFrame::OnTimer)
@@ -86,6 +87,7 @@ void BaseFrame::CreateMenu(bool show_view,
         
         window_menu->Append(ID_NEWSTATUS, "New Status Window");
         window_menu->Append(ID_NEWGRAPH, "New Graph Window");    
+        window_menu->Append(ID_NEWSINGLEGRAPH, "New Single Graph Window");    
         window_menu->Append(ID_NEWSETTINGS, wxT("Settings"));
     }
     
@@ -136,6 +138,15 @@ void BaseFrame::NewStatusWindow( wxCommandEvent& event ) {
      
 void BaseFrame::NewGraphWindow( wxCommandEvent& event ) {
     wxFrame* frame = NewGraphFrame();
+    frame->Show();     
+}
+
+/** 
+    Launches a new single graph window
+*/
+     
+void BaseFrame::NewSingleGraphWindow( wxCommandEvent& event ) {
+    wxFrame* frame = NewSingleGraphFrame();
     frame->Show();     
 }
 

@@ -25,11 +25,13 @@
 #include "version.h"
 
 class GraphFrame;
+class SingleGraphFrame;
 class StatusFrame;
 class SettingsFrame;
 class AboutFrame;
 
 extern wxFrame* NewGraphFrame();
+extern wxFrame* NewSingleGraphFrame();
 extern wxFrame* NewStatusFrame();
 extern wxFrame* NewSettingsFrame();
 extern wxFrame* NewAboutFrame();
@@ -40,6 +42,7 @@ class BaseFrame : public wxFrame
         BaseFrame();
         void NewStatusWindow(wxCommandEvent& event);
         void NewGraphWindow(wxCommandEvent& event);
+        void NewSingleGraphWindow(wxCommandEvent& event);
         void NewSettingsWindow(wxCommandEvent& event);
         void NewAboutWindow(wxCommandEvent& event);
         virtual ~BaseFrame();
@@ -86,6 +89,7 @@ class BaseFrame : public wxFrame
             ID_NEWSTATUS,
             ID_NEWSETTINGS,
             ID_NEWGRAPH,
+            ID_NEWSINGLEGRAPH,
             ID_ABOUT,
             ID_VSALTITUDE,
             ID_VSTIME,

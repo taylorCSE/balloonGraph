@@ -23,6 +23,8 @@ SingleGraphFrame::SingleGraphFrame(Graph* graph)
     mainSizer = new wxBoxSizer(wxVERTICAL);
     mainPanel->SetSizer(mainSizer);
     
+    if(graph == NULL) graph = new Graph(mainPanel,"Altitude","gps","0","Altitude");
+    
     this->graph = new Graph(mainPanel,
                       graph->name,
                       graph->db_table,
@@ -132,4 +134,8 @@ void SingleGraphFrame::InitialFit(wxTimerEvent& event) {
 
 wxFrame* NewSingleGraphFrame(Graph* graph) {
     return (wxFrame*)(new SingleGraphFrame(graph));
+}
+
+wxFrame* NewSingleGraphFrame() {
+    return (wxFrame*)(new SingleGraphFrame(NULL));
 }
