@@ -229,7 +229,7 @@ void StatusFrame::Update() {
         if(analog_data.size() < 19) {
             info = info + wxString("Data not available.");
         } else {
-            string test_pressure = DB_asPressure(analog_data[8]);
+            string test_pressure = DB_asTestPressure(analog_data[8]);
             string test_temperature = DB_asTemperature(analog_data[9]);
             string test_rh = DB_asRH(analog_data[10]);
             

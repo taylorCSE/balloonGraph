@@ -405,6 +405,12 @@ string DB_asPressure(string input) {
     return string(buf);
 }
 
+string DB_asTestPressure(string input) {
+    float output = ((atoi(input.c_str())*0.0048875-.5)/0.267)*68.9475;
+    char buf[100];
+    sprintf(buf,"%f",output);
+    return string(buf);
+}
 
 string DB_asTemperature(string input) {
     float output = ((atoi(input.c_str())*0.0048875)*100.0)-273.15;
