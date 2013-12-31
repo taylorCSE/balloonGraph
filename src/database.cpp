@@ -337,6 +337,15 @@ Plot DB_getPlotData(string data_column, string flight_id) {
 }
 
 
+/**
+    Test to see if there is a query ready.
+*/
+  
+bool DB_isQueryReady() {
+    if(!DB_conn) return false;
+    if(!DB_result) return false;
+    return true;
+}
 
 /** 
     Various unit conversions
