@@ -5,7 +5,6 @@ This is the status and graphing software for high altitude balloon launches.
 ## Building on Windows
 
 1. You will need to install the following:
-
 - [MinGW + MSYS](http://www.mingw.org/wiki/Getting_Started)
 - [wxWidgets](http://wiki.wxwidgets.org/Downloading_and_installing_wxWidgets)
 
