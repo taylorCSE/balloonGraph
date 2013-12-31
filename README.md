@@ -10,4 +10,4 @@ This is the status and graphing software for high altitude balloon launches.
 
 2. Download this repository either via git or by downloading as a zip and extracting it.
 
-3. You should then be able to open your shell (either bash or cmd), change to the directory where this repository is located, and running `make`.
+3. You should then be able to open your shell (either bash or cmd), change to the directory where this repository is located, and run `make`.
